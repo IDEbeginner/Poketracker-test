@@ -384,6 +384,30 @@ async function loadLocal(u){try{const b=await openIDB(),t=b.transaction(IDB_STOR
 if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
 let isOffline=false;
 
+// Auto-sync when coming back online
+window.addEventListener('online', async () => {
+  if (!currentUser) return;
+  const uid = currentUser.uid;
+  const local = await loadLocal(uid);
+  if (!local || !local.sets) return;
+  try {
+    const snap = await getDoc(doc(db, "collections", uid));
+    let remote = snap.exists() ? snap.data() : {};
+    let remoteSets = remote.sets || {};
+    // Merge: local wins for sets modified offline
+    let merged = { ...remoteSets, ...local.sets };
+    await setDoc(doc(db, "collections", uid), {
+      sets: merged,
+      avatar: local.avatar || remote.avatar || null,
+      updatedAt: new Date().toISOString(),
+      email: currentUser.email || ""
+    });
+    await saveLocal(uid, { sets: merged, avatar: local.avatar || remote.avatar });
+    isOffline = false;
+    console.log("Synced offline changes to Firestore");
+  } catch(e) { console.warn("Sync failed:", e); }
+});
+
 async function loadCollection(uid) {
   try {
     const snap = await getDoc(doc(db, "collections", uid));
