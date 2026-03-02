@@ -549,7 +549,7 @@ function renderApp() {
   // Filter
   const filtered = CARDS.filter(c => {
     if (filterType !== "all" && c.type !== filterType) return false;
-    if (filterRarity !== "all" && c.rarity !== filterRarity) return false;
+    if (filterRarity !== "all" && filterRarity !== "SEALED" && c.rarity !== filterRarity) return false;
     if (filterStatus === "owned" && !owned.has(c.n)) return false;
     if (filterStatus === "missing" && owned.has(c.n)) return false;
     if (searchText) {
@@ -613,13 +613,24 @@ function renderApp() {
       </div>
       <input class="search-input" id="search-input" type="text" placeholder="🔍 Rechercher une carte..." value="${searchText}">
       <div class="rarity-row">
-        ${[{k:"all",l:"Toutes",c:"#94a3b8"},{k:"C",l:"● C",c:"#64748b"},{k:"U",l:"◆ UC",c:"#64748b"},{k:"R",l:"★ R",c:"#c084fc"},{k:"RR",l:"★★ RR",c:"#fbbf24"},{k:"IR",l:"🎨 IR",c:"#da70d6"},{k:"UR",l:"💎 UR",c:"#00bfff"},{k:"SAR",l:"🌟 SAR",c:"#ff6eb4"},{k:"MA",l:"⚔️ MA",c:"#ff4500"},{k:"GOLD",l:"👑 Gold",c:"#ffd700"}].map(r => `
+        ${[{k:"all",l:"Toutes",c:"#94a3b8"},{k:"C",l:"● C",c:"#64748b"},{k:"U",l:"◆ UC",c:"#64748b"},{k:"R",l:"★ R",c:"#c084fc"},{k:"RR",l:"★★ RR",c:"#fbbf24"},{k:"IR",l:"🎨 IR",c:"#da70d6"},{k:"UR",l:"💎 UR",c:"#00bfff"},{k:"SAR",l:"🌟 SAR",c:"#ff6eb4"},{k:"MA",l:"⚔️ MA",c:"#ff4500"},{k:"GOLD",l:"👑 Gold",c:"#ffd700"},{k:"SEALED",l:"📦 Scellés",c:"#f97316"}].map(r => `
           <button class="rarity-btn ${filterRarity === r.k ? 'active' : ''}" data-rarity="${r.k}" style="${filterRarity === r.k ? `color:${r.c};border-color:${r.c}` : ''}">${r.l}</button>
         `).join('')}
       </div>
-      <div class="results-info"><span>${filtered.length} carte${filtered.length > 1 ? 's' : ''}</span></div>
+      ${filterRarity === 'SEALED' ? `<div class="results-info"><span>${setInfo.sealed ? setInfo.sealed.length : 0} scellé${(setInfo.sealed && setInfo.sealed.length > 1) ? 's' : ''}</span></div>` : `<div class="results-info"><span>${filtered.length} carte${filtered.length > 1 ? 's' : ''}</span></div>`}
     </div>
 
+    ${filterRarity === 'SEALED' ? `
+    <div class="card-list" id="card-list">
+      ${(setInfo.sealed && setInfo.sealed.length > 0) ? setInfo.sealed.map(s => {
+        const has = sealedOwned.has(s.id);
+        return `<div class="sealed-row ${has ? 'owned' : ''}" data-sealed="${s.id}">
+          <div class="check ${has ? 'checked' : ''}">${has ? '✓' : ''}</div>
+          <img class="sealed-icon" src="${s.img}" alt="">
+          <span class="sealed-name">${s.name}</span>
+        </div>`;
+      }).join('') : '<div class="empty-state"><span class="empty-icon">📦</span>Aucun scellé pour ce set</div>'}
+    </div>` : `
     <div class="card-list" id="card-list">
       ${filtered.length === 0 ? `<div class="empty-state"><span class="empty-icon">${filterStatus === 'missing' ? '🎉' : '🔍'}</span>${filterStatus === 'missing' ? 'Tout est complet !' : 'Aucune carte trouvée'}</div>` :
         filtered.map(c => {
@@ -638,24 +649,7 @@ function renderApp() {
           </div>`;
         }).join('')
       }
-    </div>
-    ${(setInfo.sealed && setInfo.sealed.length > 0) ? `
-    <div class="card-list" style="padding-top:0">
-      <div class="sealed-section">
-        <div class="sealed-title">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" style="width:18px;height:18px;image-rendering:pixelated">
-          Scellés <span class="sealed-count">${sealedOwned.size}/${setInfo.sealed.length}</span>
-        </div>
-        ${setInfo.sealed.map(s => {
-          const has = sealedOwned.has(s.id);
-          return `<div class="sealed-row ${has ? 'owned' : ''}" data-sealed="${s.id}">
-            <div class="check ${has ? 'checked' : ''}">${has ? '✓' : ''}</div>
-            <img class="sealed-icon" src="${s.img}" alt="">
-            <span class="sealed-name">${s.name}</span>
-          </div>`;
-        }).join('')}
-      </div>
-    </div>` : ''}`;
+    </div>`}`;
   document.getElementById("profile-btn").onclick = () => { menuOpen = !menuOpen; renderApp(); };
   if (menuOpen) {
     document.getElementById("pm-overlay").onclick = () => { menuOpen = false; renderApp(); };
