@@ -130,6 +130,7 @@ button{cursor:pointer}
 .check{width:20px;height:20px;border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:2px solid var(–text4);transition:all .15s;font-size:12px;font-weight:900;color:var(–bg)}
 .check.checked{background:var(–green);border:none}
 .card-num{font-family:‘JetBrains Mono’,monospace;font-size:11px;font-weight:600;color:var(–text3);width:30px;flex-shrink:0;text-align:right}
+.card-thumb{width:32px;height:44px;border-radius:4px;object-fit:cover;background:rgba(255,255,255,0.04);flex-shrink:0}
 .card-icon{font-size:13px;flex-shrink:0}
 .card-name{flex:1;font-size:13px;font-weight:500;color:var(–text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .card-row.owned .card-name{color:var(–text3);font-weight:400;text-decoration:line-through;text-decoration-color:var(–text4)}
@@ -502,6 +503,7 @@ function renderApp() {
           if (isSecret && !isOwned) extraClass += ' secret' + (c.rarity === 'SAR' ? ' sar' : c.rarity === 'GOLD' ? ' gold' : c.rarity === 'MA' ? ' ma' : '');
           return `<div class="card-row ${extraClass}" data-n="${c.n}">
             <div class="check ${isOwned ? 'checked' : ''}">${isOwned ? '✓' : ''}</div>
+            <img class="card-thumb" data-sid="${getSetInfo().tcgdexIds[0]}" data-cn="${c.n}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="lazy" alt="">
             <span class="card-num">${String(c.n).padStart(3,'0')}</span>
             <span class="card-icon">${TYPE_META[c.type]?.icon || ''}</span>
             <span class="card-name">${c.name}</span>
@@ -555,6 +557,31 @@ function renderApp() {
       showCardPreview(n);
     };
   });
+
+  // Lazy load thumbnails with IntersectionObserver
+  const si = getSetInfo();
+  const thumbPaths = si.tcgdexIds.map(sid => {
+    const serie = sid.startsWith('sv') ? 'sv' : 'me';
+    return [`https://assets.tcgdex.net/fr/${serie}/${sid}`, `https://assets.tcgdex.net/en/${serie}/${sid}`];
+  }).flat();
+  
+  const thumbObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        const cn = img.dataset.cn;
+        let idx = 0;
+        function tryNext() {
+          if (idx >= thumbPaths.length) { img.style.display = 'none'; return; }
+          img.src = `${thumbPaths[idx]}/${cn}/low.webp`;
+          img.onerror = () => { idx++; tryNext(); };
+        }
+        tryNext();
+        thumbObserver.unobserve(img);
+      }
+    });
+  }, {rootMargin: '200px'});
+  document.querySelectorAll(".card-thumb").forEach(img => thumbObserver.observe(img));
 }
 
 // ==================== ACCOUNT PAGE ====================
