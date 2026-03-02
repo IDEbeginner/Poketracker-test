@@ -695,10 +695,11 @@ function renderCollectionsPage() {
 
 // ==================== CARD PREVIEW ====================
 function showCardPreview(n) {
-  const card = CARDS.find(c => c.n === n);
+  const card = getCards().find(c => c.n === n);
   if (!card) return;
   const modal = document.getElementById("card-modal");
   const numPad = String(n).padStart(3, '0');
+  const setTcgId = getSetInfo().tcgId.toLowerCase();
   
   modal.style.display = "block";
   modal.innerHTML = `
@@ -716,7 +717,7 @@ function showCardPreview(n) {
   };
   
   // Use TCGdex API to get the correct image URL
-  fetch(`https://api.tcgdex.net/v2/fr/sets/asc/${n}`)
+  fetch(`https://api.tcgdex.net/v2/fr/sets/${setTcgId}/${n}`)
     .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
     .then(data => {
       if (data.image) {
@@ -725,7 +726,7 @@ function showCardPreview(n) {
     })
     .catch(() => {
       // Fallback: try English TCGdex
-      fetch(`https://api.tcgdex.net/v2/en/sets/asc/${n}`)
+      fetch(`https://api.tcgdex.net/v2/en/sets/${setTcgId}/${n}`)
         .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
         .then(data => {
           if (data.image) {
@@ -734,7 +735,7 @@ function showCardPreview(n) {
         })
         .catch(() => {
           // Fallback: try pokemontcg.io
-          fetch(`https://api.pokemontcg.io/v2/cards/asc-${n}`)
+          fetch(`https://api.pokemontcg.io/v2/cards/${setTcgId}-${n}`)
             .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
             .then(data => {
               const imgUrl = data?.data?.images?.large || data?.data?.images?.small;
@@ -766,11 +767,12 @@ function insertImage(url, card, numPad, modal) {
 }
 
 function showFallbackLink(modal) {
+  const setCode = getSetInfo().tcgId.toUpperCase();
   const loadingEl = modal.querySelector("#modal-loading");
   if (loadingEl) loadingEl.innerHTML = `
     <div class="modal-error">
       Image non disponible<br><br>
-      <a href="https://www.pokecardex.com/series/ASC" target="_blank">Voir sur Pokécardex →</a>
+      <a href="https://www.pokecardex.com/series/${setCode}" target="_blank">Voir sur Pokécardex →</a>
     </div>`;
 }
 
