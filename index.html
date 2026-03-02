@@ -5,7 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>PokéTracker — Collections Pokémon TCG</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎴</text></svg>">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PokéTracker">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -311,7 +315,7 @@ function renderAuth() {
   function draw() {
     el.innerHTML = `
       <div class="auth-box">
-        <div style="text-align:center;font-size:32px;margin-bottom:8px">🎴</div>
+        <div style="text-align:center;margin-bottom:8px"><img src="logo.png" style="width:80px;height:80px;border-radius:18px" alt="PokéTracker"></div>
         <h1>PokéTracker</h1>
         <p class="subtitle">Gérez vos collections Pokémon TCG</p>
         <div id="auth-error" class="auth-error"></div>
@@ -458,7 +462,7 @@ function renderApp() {
     <div class="header" style="position:relative">
       <div class="header-top">
         <div>
-          <div class="header-title"><span style="font-size:24px">🎴</span><h1>PokéTracker</h1></div>
+          <div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt=""><h1>PokéTracker</h1></div>
           <div class="header-sub"><img src="${setInfo.logo}" alt="" style="height:16px;vertical-align:middle;margin-right:4px">${setInfo.name} • ${totalCards} cartes</div>
         </div>
         <div class="user-info">
@@ -652,7 +656,7 @@ function renderAccountPage() {
     <div class="header">
       <div class="header-top">
         <div>
-          <div class="header-title"><span style="font-size:24px">🎴</span><h1>PokéTracker</h1></div>
+          <div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt=""><h1>PokéTracker</h1></div>
           <div class="header-sub">Mon compte</div>
         </div>
       </div>
@@ -740,7 +744,7 @@ function renderCollectionsPage() {
     <div class="header">
       <div class="header-top">
         <div>
-          <div class="header-title"><span style="font-size:24px">🎴</span><h1>PokéTracker</h1></div>
+          <div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt=""><h1>PokéTracker</h1></div>
           <div class="header-sub">Mes collections</div>
         </div>
       </div>
