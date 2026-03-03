@@ -64,6 +64,7 @@ button{cursor:pointer}
 .pm-item.danger:hover{background:rgba(248,113,113,0.08)}
 .pm-sep{height:1px;background:var(–border);margin:0}
 .pm-overlay{position:fixed;inset:0;z-index:140}
+
 /* Account page */
 .account-page{max-width:500px;margin:0 auto;padding:20px}
 .account-back{display:flex;align-items:center;gap:6px;color:var(–text3);font-size:13px;font-weight:600;border:none;background:none;cursor:pointer;margin-bottom:20px;font-family:‘Outfit’,sans-serif;padding:6px 0}
@@ -85,16 +86,8 @@ button{cursor:pointer}
 .avatar-opt:hover{border-color:rgba(255,255,255,0.2);transform:scale(1.08)}
 .avatar-opt.selected{border-color:var(–blue);background:rgba(96,165,250,0.15);box-shadow:0 0 12px rgba(96,165,250,0.3)}
 .avatar-opt img{width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
-.sealed-section{margin-top:16px;padding-top:12px;border-top:1px solid var(–border)}
-.sealed-title{font-size:14px;font-weight:700;color:var(–text2);margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.sealed-count{font-size:12px;font-weight:500;color:var(–text3)}
-.sealed-row{display:flex;align-items:center;gap:10px;padding:9px 12px;margin-bottom:3px;border-radius:10px;cursor:pointer;transition:all .15s;user-select:none;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)}
-.sealed-row:hover{transform:translateX(4px)}
-.sealed-row.owned{background:rgba(74,222,128,0.10);border-color:rgba(74,222,128,0.25)}
-.sealed-row .sealed-icon{width:32px;height:32px;border-radius:6px;object-fit:contain;background:rgba(255,255,255,0.04);padding:2px}
-.sealed-row .sealed-name{flex:1;font-size:13px;font-weight:500;color:var(–text)}
-.sealed-row.owned .sealed-name{color:var(–text2);text-decoration:line-through;text-decoration-color:rgba(74,222,128,0.4)}
-.sealed-check{font-size:16px}
+
+/* Friends */
 .friend-card{background:var(–card);border:1px solid var(–border);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:12px}
 .friend-avatar{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
 .friend-avatar img{width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
@@ -117,18 +110,27 @@ button{cursor:pointer}
 .account-msg{font-size:12px;margin-top:8px;min-height:16px}
 .account-msg.success{color:var(–green)}
 .account-msg.error{color:var(–red)}
-/* Collection picker */
-.collection-grid{display:grid;grid-template-columns:1fr;gap:10px}
-.collection-card{background:var(–card);border:1px solid var(–border);border-radius:12px;padding:16px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:14px}
-.collection-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.15)}
-.collection-card.active{border-color:var(–blue);background:rgba(59,130,246,0.06)}
-.collection-card .cc-icon{font-size:28px}
-.collection-card .cc-logo{width:56px;height:56px;object-fit:contain;border-radius:8px;background:rgba(255,255,255,0.06);padding:4px;flex-shrink:0}
-.collection-card .cc-info{flex:1}
-.collection-card .cc-name{font-size:14px;font-weight:700;color:var(–text);margin-bottom:2px}
-.collection-card .cc-sub{font-size:11px;color:var(–text3)}
-.collection-card .cc-badge{font-size:11px;font-weight:700;color:var(–green);background:rgba(74,222,128,0.1);padding:3px 8px;border-radius:6px}
-.collection-card .cc-badge.soon{color:var(–text4);background:rgba(255,255,255,0.04)}
+
+/* Collection picker — series accordion */
+.series-block{background:var(–card);border:1px solid var(–border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.series-block:hover{border-color:rgba(255,255,255,0.12)}
+.series-header{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;user-select:none;transition:background .15s}
+.series-header:hover{background:rgba(255,255,255,0.03)}
+.series-logo{width:40px;height:40px;border-radius:8px;object-fit:contain;background:rgba(255,255,255,0.04);flex-shrink:0}
+.series-info{flex:1;min-width:0}
+.series-name{font-size:14px;font-weight:700;color:var(–text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.series-meta{font-size:11px;color:var(–text3)}
+.series-arrow{color:var(–text3);font-size:14px;transition:transform .2s;flex-shrink:0}
+.series-arrow.open{transform:rotate(90deg)}
+.series-sets{display:none;padding:0 12px 12px}
+.series-sets.open{display:block}
+.set-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;transition:all .15s;border:1px solid transparent;margin-bottom:4px}
+.set-item:hover{background:rgba(255,255,255,0.04);transform:translateX(4px)}
+.set-item.active{border-color:var(–blue);background:rgba(59,130,246,0.08)}
+.set-item .set-logo{width:32px;height:32px;border-radius:6px;object-fit:contain;background:rgba(255,255,255,0.04);flex-shrink:0}
+.set-item .set-name{flex:1;font-size:13px;font-weight:500;color:var(–text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.set-item .set-count{font-size:11px;color:var(–text3);font-family:‘JetBrains Mono’,monospace;flex-shrink:0}
+.set-item .set-badge{font-size:10px;font-weight:700;color:var(–green);background:rgba(74,222,128,0.1);padding:2px 7px;border-radius:5px;flex-shrink:0}
 
 /* Progress */
 .progress-section{max-width:800px;margin:0 auto;padding:16px 20px 8px}
@@ -170,7 +172,7 @@ button{cursor:pointer}
 .card-row.secret.ma{border-color:rgba(255,69,0,0.25)}
 .check{width:20px;height:20px;border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:2px solid var(–text4);transition:all .15s;font-size:12px;font-weight:900;color:var(–bg)}
 .check.checked{background:var(–green);border:none}
-.card-num{font-family:‘JetBrains Mono’,monospace;font-size:11px;font-weight:600;color:var(–text3);width:30px;flex-shrink:0;text-align:right}
+.card-num{font-family:‘JetBrains Mono’,monospace;font-size:11px;font-weight:600;color:var(–text3);width:42px;flex-shrink:0;text-align:right}
 .card-thumb{width:32px;height:44px;border-radius:4px;object-fit:cover;background:rgba(255,255,255,0.04);flex-shrink:0}
 .card-thumb.no-img{display:flex;align-items:center;justify-content:center;font-size:14px;color:var(–text4)}
 .card-icon{font-size:13px;flex-shrink:0}
@@ -181,6 +183,8 @@ button{cursor:pointer}
 .empty-icon{font-size:36px;display:block;margin-bottom:10px}
 .eye-btn{width:28px;height:28px;border-radius:6px;border:none;background:rgba(255,255,255,0.06);color:var(–text3);font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;padding:0}
 .eye-btn:hover{background:rgba(255,255,255,0.12);color:var(–text)}
+
+/* Modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s}
 .modal-box{position:relative;max-width:360px;width:100%;text-align:center}
 .modal-close{position:absolute;top:-40px;right:0;background:rgba(255,255,255,0.1);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:18px;display:flex;align-items:center;justify-content:center;z-index:201}
@@ -199,8 +203,17 @@ button{cursor:pointer}
 .loading{display:flex;align-items:center;justify-content:center;min-height:100vh;font-size:16px;color:var(–text2)}
 .spinner{width:24px;height:24px;border:3px solid var(–text4);border-top-color:var(–blue);border-radius:50%;animation:spin .6s linear infinite;margin-right:12px}
 @keyframes spin{to{transform:rotate(360deg)}}
+.inline-spinner{width:16px;height:16px;border:2px solid var(–text4);border-top-color:var(–blue);border-radius:50%;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px}
 
+/* Sealed rows */
+.sealed-row{display:flex;align-items:center;gap:10px;padding:9px 12px;margin-bottom:3px;border-radius:10px;cursor:pointer;transition:all .15s;user-select:none;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)}
+.sealed-row:hover{transform:translateX(4px)}
+.sealed-row.owned{background:rgba(74,222,128,0.10);border-color:rgba(74,222,128,0.25)}
+.sealed-row .sealed-icon{width:32px;height:32px;border-radius:6px;object-fit:contain;background:rgba(255,255,255,0.04);padding:2px}
+.sealed-row .sealed-name{flex:1;font-size:13px;font-weight:500;color:var(–text)}
+.sealed-row.owned .sealed-name{color:var(–text2);text-decoration:line-through;text-decoration-color:rgba(74,222,128,0.4)}
 </style>
+
 </head>
 <body>
 
@@ -229,268 +242,73 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 
-// ==================== CARD DATA ====================
-const SETS = {
-  "me25": {
-    id: "me25", sealed: [
-      {id:'etb',name:'Elite Trainer Box',img:'https://pokesymbols.com/images/tcg/sets/logos/ascended-heroes.png'},
-      {id:'etb-pc',name:'ETB Pokémon Center',img:'https://pokesymbols.com/images/tcg/sets/logos/ascended-heroes.png'},
-      {id:'coll-erika',name:'Collection Erika',img:'https://pokesymbols.com/images/tcg/sets/logos/ascended-heroes.png'},
-      {id:'coll-larry',name:'Collection Larry',img:'https://pokesymbols.com/images/tcg/sets/logos/ascended-heroes.png'},
-      {id:'tech-charma',name:'Tech Sticker Salamèche',img:'https://pokesymbols.com/images/tcg/sets/logos/ascended-heroes.png'},
-      {id:'tech-fantominus',name:'Tech Sticker Fantominus',img:'https://pokesymbols.com/images/tcg/sets/logos/ascended-heroes.png'},
-      {id:'mini-tin',name:'Mini Tin',img:'https://pokesymbols.com/images/tcg/sets/logos/ascended-heroes.png'},
-      {id:'poster-gardevoir',name:'Poster Méga-Gardevoir',img:'https://pokesymbols.com/images/tcg/sets/logos/ascended-heroes.png'},
-      {id:'poster-lucario',name:'Poster Méga-Lucario',img:'https://pokesymbols.com/images/tcg/sets/logos/ascended-heroes.png'},
-      {id:'bundle',name:'Booster Bundle',img:'https://pokesymbols.com/images/tcg/sets/logos/ascended-heroes.png'},
-    ], name: "ME2.5 — Héros Transcendants", icon: "⚔️", logo: "https://pokesymbols.com/images/tcg/sets/logos/ascended-heroes.png", tcgId: "asc", tcgdexIds: ["me02.5"], mainCount: 217,
-    cards: [
-  {n:1,name:"Mystherbe d'Erika",type:"grass",rarity:"C"},{n:2,name:"Ortide d'Erika",type:"grass",rarity:"U"},{n:3,name:"Rafflesia ex d'Erika",type:"grass",rarity:"RR"},{n:4,name:"Chétiflor d'Erika",type:"grass",rarity:"C"},{n:5,name:"Boustiflor d'Erika",type:"grass",rarity:"U"},{n:6,name:"Empiflor d'Erika",type:"grass",rarity:"U"},{n:7,name:"Saquedeneu d'Erika",type:"grass",rarity:"C"},{n:8,name:"Germignon",type:"grass",rarity:"C"},{n:9,name:"Macronium",type:"grass",rarity:"U"},{n:10,name:"Méga-Méganium ex",type:"grass",rarity:"RR"},{n:11,name:"Chenipotte",type:"grass",rarity:"C"},{n:12,name:"Armulys",type:"grass",rarity:"U"},{n:13,name:"Charmillon",type:"grass",rarity:"U"},{n:14,name:"Blindalys",type:"grass",rarity:"U"},{n:15,name:"Papinox",type:"grass",rarity:"U"},{n:16,name:"Rozbouton",type:"grass",rarity:"C"},{n:17,name:"Larvibule",type:"grass",rarity:"C"},{n:18,name:"Tissenboule de la TR",type:"grass",rarity:"C"},{n:19,name:"Filentrappe de la TR",type:"grass",rarity:"U"},
-  {n:20,name:"Salamèche",type:"fire",rarity:"C"},{n:21,name:"Reptincel",type:"fire",rarity:"U"},{n:22,name:"Méga-Dracaufeu Y ex",type:"fire",rarity:"RR"},{n:23,name:"Limagma de Luth",type:"fire",rarity:"C"},{n:24,name:"Volcaropod de Luth",type:"fire",rarity:"U"},{n:25,name:"Entei",type:"fire",rarity:"R"},{n:26,name:"Ho-Oh ex de Luth",type:"fire",rarity:"RR"},{n:27,name:"Chamallot",type:"fire",rarity:"C"},{n:28,name:"Camérupt",type:"fire",rarity:"U"},{n:29,name:"Gruikui",type:"fire",rarity:"C"},{n:30,name:"Grotichon",type:"fire",rarity:"U"},{n:31,name:"Méga-Roitiflam ex",type:"fire",rarity:"RR"},{n:32,name:"Darumarond de N",type:"fire",rarity:"C"},{n:33,name:"Darumacho de N",type:"fire",rarity:"U"},{n:34,name:"Tritox",type:"fire",rarity:"C"},{n:35,name:"Malamandre",type:"fire",rarity:"U"},{n:36,name:"Flambino",type:"fire",rarity:"C"},{n:37,name:"Lapyro",type:"fire",rarity:"U"},{n:38,name:"Pyrobut ex",type:"fire",rarity:"RR"},
-  {n:39,name:"Psykokwak",type:"water",rarity:"C"},{n:40,name:"Akwakwak",type:"water",rarity:"U"},{n:41,name:"Kaiminus",type:"water",rarity:"C"},{n:42,name:"Crocrodil",type:"water",rarity:"U"},{n:43,name:"Méga-Aligatueur ex",type:"water",rarity:"RR"},{n:44,name:"Farfuret",type:"water",rarity:"C"},{n:45,name:"Dimoret",type:"water",rarity:"U"},{n:46,name:"Stalgamin",type:"water",rarity:"C"},{n:47,name:"Méga-Momartik ex",type:"water",rarity:"RR"},{n:48,name:"Regice ex",type:"water",rarity:"RR"},{n:49,name:"Sorboul de N",type:"water",rarity:"C"},{n:50,name:"Sorbouboule de N",type:"water",rarity:"U"},{n:51,name:"Sorbouboul de N",type:"water",rarity:"U"},{n:52,name:"Frissonille",type:"water",rarity:"C"},{n:53,name:"Blizzeval",type:"water",rarity:"U"},{n:54,name:"Glastrier",type:"water",rarity:"R"},
-  {n:55,name:"Pikachu",type:"electric",rarity:"C"},{n:56,name:"Raichu",type:"electric",rarity:"U"},{n:57,name:"Pikachu ex",type:"electric",rarity:"RR"},{n:58,name:"Voltorbe ex",type:"electric",rarity:"RR"},{n:59,name:"Galvaran",type:"electric",rarity:"C"},{n:60,name:"Lampéroie",type:"electric",rarity:"U"},{n:61,name:"Méga-Ohmassacre ex",type:"electric",rarity:"RR"},{n:62,name:"Limonde",type:"electric",rarity:"C"},{n:63,name:"Hélionceau",type:"electric",rarity:"C"},{n:64,name:"Iguolta",type:"electric",rarity:"U"},{n:65,name:"Chrysapile",type:"electric",rarity:"C"},{n:66,name:"Lucanon",type:"electric",rarity:"U"},{n:67,name:"Tokorico",type:"electric",rarity:"R"},{n:68,name:"Wattapik ex de Nabil",type:"electric",rarity:"RR"},{n:69,name:"Têtampoule de Donna",type:"electric",rarity:"C"},{n:70,name:"Ampibidou ex de Donna",type:"electric",rarity:"RR"},{n:71,name:"Frégatane de Donna",type:"electric",rarity:"C"},{n:72,name:"Fulgulairo de Donna",type:"electric",rarity:"U"},{n:73,name:"Miraidon ex",type:"electric",rarity:"RR"},
-  {n:74,name:"Mélofée",type:"psychic",rarity:"C"},{n:75,name:"Mélodelfe",type:"psychic",rarity:"U"},{n:76,name:"Mélofée ex de Lilie",type:"psychic",rarity:"RR"},{n:77,name:"Noeunoeuf de la TR",type:"psychic",rarity:"C"},{n:78,name:"Noadkoko de la TR",type:"psychic",rarity:"U"},{n:79,name:"Mewtwo ex de la TR",type:"psychic",rarity:"RR"},{n:80,name:"Togepi",type:"psychic",rarity:"C"},{n:81,name:"Togetic",type:"psychic",rarity:"U"},{n:82,name:"Togekiss",type:"psychic",rarity:"R"},{n:83,name:"Marill",type:"psychic",rarity:"C"},{n:84,name:"Azumarill ex",type:"psychic",rarity:"RR"},{n:85,name:"Feuforêve",type:"psychic",rarity:"C"},{n:86,name:"Magirêve",type:"psychic",rarity:"U"},{n:87,name:"Tarsal",type:"psychic",rarity:"C"},{n:88,name:"Kirlia",type:"psychic",rarity:"U"},{n:89,name:"Méga-Gardevoir ex",type:"psychic",rarity:"RR"},{n:90,name:"Polichombr",type:"psychic",rarity:"C"},{n:91,name:"Branette",type:"psychic",rarity:"U"},{n:92,name:"Motisma",type:"psychic",rarity:"R"},{n:93,name:"Sucroquin",type:"psychic",rarity:"C"},{n:94,name:"Cupcanaille",type:"psychic",rarity:"U"},{n:95,name:"Brocélôme de Nabil",type:"psychic",rarity:"C"},{n:96,name:"Desséliande de Nabil",type:"psychic",rarity:"U"},{n:97,name:"Mimiqui de la TR",type:"psychic",rarity:"C"},{n:98,name:"Spectreval",type:"psychic",rarity:"R"},{n:99,name:"Munkidori",type:"psychic",rarity:"R"},
-  {n:100,name:"Taupiqueur de la TR",type:"fighting",rarity:"C"},{n:101,name:"Triopikeur de la TR",type:"fighting",rarity:"U"},{n:102,name:"Kapoera",type:"fighting",rarity:"R"},{n:103,name:"Méditikka",type:"fighting",rarity:"C"},{n:104,name:"Charmina",type:"fighting",rarity:"U"},{n:105,name:"Séléroc",type:"fighting",rarity:"C"},{n:106,name:"Solaroc",type:"fighting",rarity:"C"},{n:107,name:"Regirock ex",type:"fighting",rarity:"RR"},{n:108,name:"Groudon",type:"fighting",rarity:"R"},{n:109,name:"Griknot de Cynthia",type:"fighting",rarity:"C"},{n:110,name:"Carmache de Cynthia",type:"fighting",rarity:"U"},{n:111,name:"Carchacrok ex de Cynthia",type:"fighting",rarity:"RR"},{n:112,name:"Riolu",type:"fighting",rarity:"C"},{n:113,name:"Méga-Lucario ex",type:"fighting",rarity:"RR"},{n:114,name:"Limonde ex",type:"fighting",rarity:"RR"},{n:115,name:"Pandespiègle",type:"fighting",rarity:"C"},{n:116,name:"Méga-Brutalibré ex",type:"fighting",rarity:"RR"},{n:117,name:"Strassie",type:"fighting",rarity:"C"},{n:118,name:"Charbi",type:"fighting",rarity:"C"},{n:119,name:"Wagomine",type:"fighting",rarity:"U"},{n:120,name:"Monthracite",type:"fighting",rarity:"R"},{n:121,name:"Koraidon ex",type:"fighting",rarity:"RR"},{n:122,name:"Okidogi",type:"fighting",rarity:"R"},
-  {n:123,name:"Fantominus",type:"darkness",rarity:"C"},{n:124,name:"Spectrum",type:"darkness",rarity:"U"},{n:125,name:"Méga-Ectoplasma ex",type:"darkness",rarity:"RR"},{n:126,name:"Cornèbre de la TR",type:"darkness",rarity:"C"},{n:127,name:"Corboss de la TR",type:"darkness",rarity:"U"},{n:128,name:"Medhyèna",type:"darkness",rarity:"C"},{n:129,name:"Grahyèna",type:"darkness",rarity:"U"},{n:130,name:"Zigzaton de Galar",type:"darkness",rarity:"C"},{n:131,name:"Linéon de Galar",type:"darkness",rarity:"U"},{n:132,name:"Ixon de Galar",type:"darkness",rarity:"R"},{n:133,name:"Spiritomb de Cynthia",type:"darkness",rarity:"C"},{n:134,name:"Baggiguane",type:"darkness",rarity:"C"},{n:135,name:"Méga-Baggaïd ex",type:"darkness",rarity:"RR"},{n:136,name:"Zorua de N",type:"darkness",rarity:"C"},{n:137,name:"Zoroark ex de N",type:"darkness",rarity:"RR"},{n:138,name:"Vostourno",type:"darkness",rarity:"C"},{n:139,name:"Vaututrice ex",type:"darkness",rarity:"RR"},{n:140,name:"Pandarbare",type:"darkness",rarity:"U"},{n:141,name:"Hoopa",type:"darkness",rarity:"R"},{n:142,name:"Fézandipiti ex",type:"darkness",rarity:"RR"},{n:143,name:"Pêchaminus",type:"darkness",rarity:"R"},
-  {n:144,name:"Mystibule",type:"steel",rarity:"C"},{n:145,name:"Registeel ex",type:"steel",rarity:"RR"},{n:146,name:"Scalpion",type:"steel",rarity:"C"},{n:147,name:"Scalproie",type:"steel",rarity:"U"},{n:148,name:"Scalpereur",type:"steel",rarity:"R"},{n:149,name:"Togedemaru ex",type:"steel",rarity:"RR"},
-  {n:150,name:"Minidraco",type:"dragon",rarity:"C"},{n:151,name:"Draco",type:"dragon",rarity:"U"},{n:152,name:"Méga-Dracolosse ex",type:"dragon",rarity:"RR"},{n:153,name:"Rayquaza",type:"dragon",rarity:"R"},{n:154,name:"Reshiram de N",type:"dragon",rarity:"R"},{n:155,name:"Zekrom de N",type:"dragon",rarity:"R"},{n:156,name:"Sonistrelle",type:"dragon",rarity:"C"},{n:157,name:"Bruyverne",type:"dragon",rarity:"U"},{n:158,name:"Fantyrm",type:"dragon",rarity:"C"},{n:159,name:"Dispareptil",type:"dragon",rarity:"U"},{n:160,name:"Lanssorien ex",type:"dragon",rarity:"RR"},
-  {n:161,name:"Miaouss de la TR",type:"colorless",rarity:"C"},{n:162,name:"Kangourex ex de la TR",type:"colorless",rarity:"RR"},{n:163,name:"Insolourdo de Tonio",type:"colorless",rarity:"C"},{n:164,name:"Deusolourdo ex de Tonio",type:"colorless",rarity:"RR"},{n:165,name:"Skitty",type:"colorless",rarity:"C"},{n:166,name:"Delcatty",type:"colorless",rarity:"U"},{n:167,name:"Mangriff ex",type:"colorless",rarity:"RR"},{n:168,name:"Étourmi de Tonio",type:"colorless",rarity:"C"},{n:169,name:"Étourvol de Tonio",type:"colorless",rarity:"U"},{n:170,name:"Étouraptor de Tonio",type:"colorless",rarity:"R"},{n:171,name:"Motisma Hélice",type:"colorless",rarity:"C"},{n:172,name:"Méga-Nanméouïe ex",type:"colorless",rarity:"RR"},{n:173,name:"Furaiglon de Tonio",type:"colorless",rarity:"C"},{n:174,name:"Gueriaigle de Tonio",type:"colorless",rarity:"U"},{n:175,name:"Dodoala de Tonio",type:"colorless",rarity:"C"},{n:176,name:"Draïeul",type:"colorless",rarity:"R"},{n:177,name:"Nigosier de Nabil",type:"colorless",rarity:"C"},{n:178,name:"Terapagos",type:"colorless",rarity:"R"},{n:179,name:"Terapagos ex",type:"colorless",rarity:"RR"},
-  {n:180,name:"Espièglerie de Margie",type:"trainer",rarity:"U"},{n:181,name:"Ballon Volant",type:"trainer",rarity:"U"},{n:182,name:"Anthéa & Concordia",type:"trainer",rarity:"U"},{n:183,name:"Ordres du Boss",type:"trainer",rarity:"U"},{n:184,name:"Pofin Copain-Copain",type:"trainer",rarity:"C"},{n:185,name:"Canari",type:"trainer",rarity:"C"},{n:186,name:"Rattrape-Riposte",type:"trainer",rarity:"U"},{n:187,name:"Gong de Combat",type:"trainer",rarity:"U"},{n:188,name:"Forêt de Vitalité",type:"trainer",rarity:"U"},{n:189,name:"Trompette en Verre",type:"trainer",rarity:"U"},{n:190,name:"Esprit Combatif d'Iris",type:"trainer",rarity:"U"},{n:191,name:"Balle Lumière",type:"trainer",rarity:"U"},{n:192,name:"Volonté de Lilie",type:"trainer",rarity:"U"},{n:193,name:"Méga Signal",type:"trainer",rarity:"U"},{n:194,name:"Jardin Mystère",type:"trainer",rarity:"U"},{n:195,name:"PP Plus de N",type:"trainer",rarity:"U"},{n:196,name:"Civière Nocturne",type:"trainer",rarity:"C"},{n:197,name:"Mine Nocturne",type:"trainer",rarity:"U"},{n:198,name:"Poké Pad",type:"trainer",rarity:"U"},{n:199,name:"Puissance Premium Pro",type:"trainer",rarity:"U"},{n:200,name:"Surfeur",type:"trainer",rarity:"C"},{n:201,name:"Archer de la TR",type:"trainer",rarity:"U"},{n:202,name:"Ariane de la TR",type:"trainer",rarity:"U"},{n:203,name:"Usine de la TR",type:"trainer",rarity:"U"},{n:204,name:"Giovanni de la TR",type:"trainer",rarity:"U"},{n:205,name:"Super Ball de la TR",type:"trainer",rarity:"U"},{n:206,name:"Hypnotiseur de la TR",type:"trainer",rarity:"U"},{n:207,name:"Petrel de la TR",type:"trainer",rarity:"U"},{n:208,name:"Proton de la TR",type:"trainer",rarity:"U"},{n:209,name:"Émetteur-Récepteur TR",type:"trainer",rarity:"U"},{n:210,name:"Tour de Guet de la TR",type:"trainer",rarity:"U"},{n:211,name:"Écaille Épaisse",type:"trainer",rarity:"U"},{n:212,name:"Démonte-Outil",type:"trainer",rarity:"C"},{n:213,name:"Hyper Ball",type:"trainer",rarity:"C"},{n:214,name:"Bingo",type:"trainer",rarity:"U"},{n:215,name:"Serveuse",type:"trainer",rarity:"C"},
-  {n:216,name:"Énergie Prisme",type:"energy",rarity:"U"},{n:217,name:"Énergie de la TR",type:"energy",rarity:"U"},
-  // SECRET RARES
-  {n:218,name:"Saquedeneu d'Erika ☆",type:"grass",rarity:"IR"},{n:219,name:"Charmillon ☆",type:"grass",rarity:"IR"},{n:220,name:"Papinox ☆",type:"grass",rarity:"IR"},{n:221,name:"Rozbouton ☆",type:"grass",rarity:"IR"},{n:222,name:"Volcaropod de Luth ☆",type:"fire",rarity:"IR"},{n:223,name:"Chamallot ☆",type:"fire",rarity:"IR"},{n:224,name:"Malamandre ☆",type:"fire",rarity:"IR"},{n:225,name:"Flambino ☆",type:"fire",rarity:"IR"},{n:226,name:"Psykokwak ☆",type:"water",rarity:"IR"},{n:227,name:"Stalgamin ☆",type:"water",rarity:"IR"},{n:228,name:"Dimoret ☆",type:"water",rarity:"IR"},{n:229,name:"Iguolta ☆",type:"electric",rarity:"IR"},{n:230,name:"Lucanon ☆",type:"electric",rarity:"IR"},{n:231,name:"Frégatane de Donna ☆",type:"electric",rarity:"IR"},{n:232,name:"Marill ☆",type:"psychic",rarity:"IR"},{n:233,name:"Feuforêve ☆",type:"psychic",rarity:"IR"},{n:234,name:"Branette ☆",type:"psychic",rarity:"IR"},{n:235,name:"Togekiss ☆",type:"psychic",rarity:"IR"},{n:236,name:"Cupcanaille ☆",type:"psychic",rarity:"IR"},{n:237,name:"Desséliande de Nabil ☆",type:"psychic",rarity:"IR"},{n:238,name:"Mimiqui de la TR ☆",type:"psychic",rarity:"IR"},{n:239,name:"Triopikeur de la TR ☆",type:"fighting",rarity:"IR"},{n:240,name:"Kapoera ☆",type:"fighting",rarity:"IR"},{n:241,name:"Charmina ☆",type:"fighting",rarity:"IR"},{n:242,name:"Strassie ☆",type:"fighting",rarity:"IR"},{n:243,name:"Grahyèna ☆",type:"darkness",rarity:"IR"},{n:244,name:"Spiritomb de Cynthia ☆",type:"darkness",rarity:"IR"},{n:245,name:"Ixon de Galar ☆",type:"darkness",rarity:"IR"},{n:246,name:"Mystibule ☆",type:"steel",rarity:"IR"},{n:247,name:"Fantyrm ☆",type:"dragon",rarity:"IR"},{n:248,name:"Dispareptil ☆",type:"dragon",rarity:"IR"},{n:249,name:"Étouraptor de Tonio ☆",type:"colorless",rarity:"IR"},{n:250,name:"Motisma Hélice ☆",type:"colorless",rarity:"IR"},
-  {n:251,name:"Poussacha ex ☆",type:"grass",rarity:"UR"},{n:252,name:"Limonde ex ☆",type:"fighting",rarity:"UR"},{n:253,name:"Méga-Nanméouïe ex ☆",type:"colorless",rarity:"UR"},{n:254,name:"Anthéa & Concordia ☆",type:"trainer",rarity:"UR"},{n:255,name:"Entraînement Karaté ☆",type:"trainer",rarity:"UR"},{n:256,name:"Ordres du Boss ☆",type:"trainer",rarity:"UR"},{n:257,name:"Canari ☆",type:"trainer",rarity:"UR"},{n:258,name:"Tchéren ☆",type:"trainer",rarity:"UR"},{n:259,name:"Rattrape-Riposte ☆",type:"trainer",rarity:"UR"},{n:260,name:"Trompette en Verre ☆",type:"trainer",rarity:"UR"},{n:261,name:"Tour Brouillage ☆",type:"trainer",rarity:"UR"},{n:262,name:"PP Plus de N ☆",type:"trainer",rarity:"UR"},{n:263,name:"Émetteur-Récepteur TR ☆",type:"trainer",rarity:"UR"},{n:264,name:"Hyper Ball ☆",type:"trainer",rarity:"UR"},
-  {n:265,name:"Méga-Momartik ex SAR",type:"water",rarity:"SAR"},{n:266,name:"Méga-Ohmassacre ex SAR",type:"electric",rarity:"SAR"},{n:267,name:"Méga-Diancie ex SAR",type:"fighting",rarity:"SAR"},{n:268,name:"Méga-Brutalibré ex SAR",type:"fighting",rarity:"SAR"},{n:269,name:"Méga-Ectoplasma ex SAR",type:"darkness",rarity:"SAR"},{n:270,name:"Méga-Baggaïd ex SAR",type:"darkness",rarity:"SAR"},{n:271,name:"Méga-Dracolosse ex SAR",type:"dragon",rarity:"SAR"},{n:272,name:"Méga-Méganium ex SAR",type:"grass",rarity:"SAR"},{n:273,name:"Méga-Roitiflam ex SAR",type:"fire",rarity:"SAR"},{n:274,name:"Méga-Aligatueur ex SAR",type:"water",rarity:"SAR"},{n:275,name:"Méga-Momartik ex SAR ✦",type:"water",rarity:"SAR"},{n:276,name:"Pikachu ex SAR",type:"electric",rarity:"SAR"},{n:277,name:"Pikachu ex SAR ✦",type:"electric",rarity:"SAR"},{n:278,name:"Méga-Ohmassacre ex SAR ✦",type:"electric",rarity:"SAR"},{n:279,name:"Ampibidou ex Donna SAR",type:"electric",rarity:"SAR"},{n:280,name:"Mélofée ex Lilie SAR",type:"psychic",rarity:"SAR"},{n:281,name:"Mewtwo ex TR SAR",type:"psychic",rarity:"SAR"},{n:282,name:"Méga-Diancie ex SAR ✦",type:"fighting",rarity:"SAR"},{n:283,name:"Méga-Brutalibré ex SAR ✦",type:"fighting",rarity:"SAR"},{n:284,name:"Méga-Ectoplasma ex SAR ✦",type:"darkness",rarity:"SAR"},{n:285,name:"Méga-Baggaïd ex SAR ✦",type:"darkness",rarity:"SAR"},{n:286,name:"Zoroark ex de N SAR",type:"darkness",rarity:"SAR"},{n:287,name:"Angoliath ex Rosemary SAR",type:"darkness",rarity:"SAR"},{n:288,name:"Fézandipiti ex SAR",type:"darkness",rarity:"SAR"},{n:289,name:"Métalosse ex Pierre SAR",type:"steel",rarity:"SAR"},{n:290,name:"Méga-Dracolosse ex SAR ✦",type:"dragon",rarity:"SAR"},
-  {n:291,name:"Canari MA",type:"trainer",rarity:"MA"},{n:292,name:"Esprit Combatif d'Iris MA",type:"trainer",rarity:"MA"},{n:293,name:"Surfeur MA",type:"trainer",rarity:"MA"},
-  {n:294,name:"Méga-Dracaufeu Y ex GOLD",type:"fire",rarity:"GOLD"},{n:295,name:"Méga-Dracolosse ex GOLD",type:"dragon",rarity:"GOLD"},
-]
-  },
-  "ev85": {
-    id: "ev85", sealed: [
-      {id:'etb',name:'Elite Trainer Box',img:'https://pokesymbols.com/images/tcg/sets/logos/prismatic-evolutions.png'},
-      {id:'etb-pc',name:'ETB Pokémon Center',img:'https://pokesymbols.com/images/tcg/sets/logos/prismatic-evolutions.png'},
-      {id:'mini-tin',name:'Mini Tin',img:'https://pokesymbols.com/images/tcg/sets/logos/prismatic-evolutions.png'},
-      {id:'binder',name:'Binder Collection',img:'https://pokesymbols.com/images/tcg/sets/logos/prismatic-evolutions.png'},
-      {id:'surprise',name:'Surprise Box',img:'https://pokesymbols.com/images/tcg/sets/logos/prismatic-evolutions.png'},
-      {id:'accessory',name:'Accessory Pouch',img:'https://pokesymbols.com/images/tcg/sets/logos/prismatic-evolutions.png'},
-      {id:'super-premium',name:'Super Premium Collection',img:'https://pokesymbols.com/images/tcg/sets/logos/prismatic-evolutions.png'},
-    ], name: "EV8.5 — Évolutions Prismatiques", icon: "🌟", logo: "https://pokesymbols.com/images/tcg/sets/logos/prismatic-evolutions.png", tcgId: "PRE", tcgdexIds: ["sv08.5","sv085","PRE"], mainCount: 131,
-    cards: [
-{n:1,name:"Noeunoeuf",type:"grass",rarity:"C"},{n:2,name:"Noadkoko",type:"grass",rarity:"U"},{n:3,name:"Scarabrute",type:"grass",rarity:"U"},{n:4,name:"Rozbouton",type:"grass",rarity:"C"},{n:5,name:"Phyllali",type:"grass",rarity:"U"},{n:6,name:"Phyllali ex",type:"grass",rarity:"RR"},{n:7,name:"Doudouvet",type:"grass",rarity:"C"},{n:8,name:"Farfaduvet",type:"grass",rarity:"U"},{n:9,name:"Verpom",type:"grass",rarity:"C"},{n:10,name:"Dipplin",type:"grass",rarity:"U"},{n:11,name:"Hydrapple ex",type:"grass",rarity:"RR"},{n:12,name:"Ogerpon ex M. Turquoise",type:"grass",rarity:"RR"},
-{n:13,name:"Pyroli",type:"fire",rarity:"U"},{n:14,name:"Pyroli ex",type:"fire",rarity:"RR"},{n:15,name:"Hélionceau",type:"fire",rarity:"C"},{n:16,name:"Némélios",type:"fire",rarity:"U"},{n:17,name:"Ogerpon ex M. Fourneau",type:"fire",rarity:"RR"},
-{n:18,name:"Ramoloss",type:"water",rarity:"C"},{n:19,name:"Roigada",type:"water",rarity:"U"},{n:20,name:"Poissirène",type:"water",rarity:"C"},{n:21,name:"Poissoroy",type:"water",rarity:"U"},{n:22,name:"Aquali",type:"water",rarity:"U"},{n:23,name:"Aquali ex",type:"water",rarity:"RR"},{n:24,name:"Suicune",type:"water",rarity:"R"},{n:25,name:"Givrali",type:"water",rarity:"U"},{n:26,name:"Givrali ex",type:"water",rarity:"RR"},{n:27,name:"Ogerpon ex M. Fontaine",type:"water",rarity:"RR"},
-{n:28,name:"Pikachu ex",type:"electric",rarity:"RR"},{n:29,name:"Voltali",type:"electric",rarity:"U"},{n:30,name:"Voltali ex",type:"electric",rarity:"RR"},{n:31,name:"Poing-de-Fer ex",type:"electric",rarity:"RR"},{n:32,name:"Épine-de-Fer ex",type:"electric",rarity:"RR"},
-{n:33,name:"Mentali",type:"psychic",rarity:"U"},{n:34,name:"Mentali ex",type:"psychic",rarity:"RR"},{n:35,name:"Skelénox",type:"psychic",rarity:"C"},{n:36,name:"Téraclope",type:"psychic",rarity:"U"},{n:37,name:"Noctunoir",type:"psychic",rarity:"R"},{n:38,name:"Fluvetin",type:"psychic",rarity:"C"},{n:39,name:"Cocotine",type:"psychic",rarity:"U"},{n:40,name:"Nymphali",type:"psychic",rarity:"U"},{n:41,name:"Nymphali ex",type:"psychic",rarity:"RR"},{n:42,name:"Frissonille",type:"psychic",rarity:"U"},{n:43,name:"Flotte-Mane",type:"psychic",rarity:"U"},{n:44,name:"Munkidori",type:"psychic",rarity:"R"},{n:45,name:"Fézandipiti",type:"psychic",rarity:"R"},{n:46,name:"Roc-de-Fer",type:"psychic",rarity:"U"},
-{n:47,name:"Embrylex",type:"fighting",rarity:"C"},{n:48,name:"Ymphect",type:"fighting",rarity:"U"},{n:49,name:"Groudon",type:"fighting",rarity:"R"},{n:50,name:"Riolu",type:"fighting",rarity:"C"},{n:51,name:"Lucario ex",type:"fighting",rarity:"RR"},{n:52,name:"Hippopotas",type:"fighting",rarity:"C"},{n:53,name:"Hippodocus",type:"fighting",rarity:"U"},{n:54,name:"Ursaluna Lune Vermeille",type:"fighting",rarity:"R"},{n:55,name:"Fort-Ivoire",type:"fighting",rarity:"U"},{n:56,name:"Éboulement-de-Fer ex",type:"fighting",rarity:"RR"},{n:57,name:"Okidogi",type:"fighting",rarity:"R"},{n:58,name:"Ogerpon ex M. Roc",type:"fighting",rarity:"RR"},
-{n:59,name:"Noctali",type:"darkness",rarity:"U"},{n:60,name:"Noctali ex",type:"darkness",rarity:"RR"},{n:61,name:"Farfuret",type:"darkness",rarity:"C"},{n:62,name:"Malosse",type:"darkness",rarity:"C"},{n:63,name:"Démolosse",type:"darkness",rarity:"U"},{n:64,name:"Tyranocif ex",type:"darkness",rarity:"RR"},{n:65,name:"Rugit-Lune",type:"darkness",rarity:"U"},
-{n:66,name:"Archéomire",type:"steel",rarity:"C"},{n:67,name:"Archéodong",type:"steel",rarity:"U"},{n:68,name:"Heatran",type:"steel",rarity:"R"},{n:69,name:"Duralugon",type:"steel",rarity:"U"},{n:70,name:"Archélagon",type:"steel",rarity:"R"},
-{n:71,name:"Fantyrm",type:"dragon",rarity:"C"},{n:72,name:"Dispareptil",type:"dragon",rarity:"U"},{n:73,name:"Lanssorien ex",type:"dragon",rarity:"RR"},
-{n:74,name:"Évoli",type:"colorless",rarity:"C"},{n:75,name:"Évoli ex",type:"colorless",rarity:"RR"},{n:76,name:"Ronflex ex",type:"colorless",rarity:"RR"},{n:77,name:"Hoothoot",type:"colorless",rarity:"C"},{n:78,name:"Noarfang",type:"colorless",rarity:"U"},{n:79,name:"Insolourdo",type:"colorless",rarity:"C"},{n:80,name:"Deusolourdo",type:"colorless",rarity:"U"},{n:81,name:"Écrémeuh",type:"colorless",rarity:"U"},{n:82,name:"Lugia ex",type:"colorless",rarity:"RR"},{n:83,name:"Laporeille",type:"colorless",rarity:"C"},{n:84,name:"Lockpin",type:"colorless",rarity:"U"},{n:85,name:"Motisma Hélice",type:"colorless",rarity:"C"},{n:86,name:"Regigigas",type:"colorless",rarity:"R"},{n:87,name:"Shaymin",type:"colorless",rarity:"R"},{n:88,name:"Couafarel",type:"colorless",rarity:"U"},{n:89,name:"Brutalibré",type:"colorless",rarity:"U"},{n:90,name:"Sonistrelle",type:"colorless",rarity:"C"},{n:91,name:"Bruyverne ex",type:"colorless",rarity:"RR"},{n:92,name:"Terapagos ex",type:"colorless",rarity:"RR"},
-{n:93,name:"Amarys",type:"trainer",rarity:"U"},{n:94,name:"Profondeurs Zone Zéro",type:"trainer",rarity:"U"},{n:95,name:"Mochi Entravant",type:"trainer",rarity:"U"},{n:96,name:"Entraînement Karaté (1)",type:"trainer",rarity:"U"},{n:97,name:"Entraînement Karaté (2)",type:"trainer",rarity:"U"},{n:98,name:"Entraînement Karaté (3)",type:"trainer",rarity:"U"},{n:99,name:"Entraînement Karaté (4)",type:"trainer",rarity:"U"},{n:100,name:"Roncea",type:"trainer",rarity:"U"},{n:101,name:"Pofin Copain-Copain",type:"trainer",rarity:"C"},{n:102,name:"Set Chasseur d'Insectes",type:"trainer",rarity:"U"},{n:103,name:"Carmine",type:"trainer",rarity:"U"},{n:104,name:"Déchiffrage Cryptomaniac",type:"trainer",rarity:"U"},{n:105,name:"Crispin",type:"trainer",rarity:"U"},{n:106,name:"Vase en Terre",type:"trainer",rarity:"U"},{n:107,name:"Guide de l'Explorateur",type:"trainer",rarity:"U"},{n:108,name:"Terrain de Festival",type:"trainer",rarity:"U"},{n:109,name:"Amis de Paldea",type:"trainer",rarity:"U"},{n:110,name:"Trompette en Verre",type:"trainer",rarity:"U"},{n:111,name:"Baie Parma",type:"trainer",rarity:"U"},{n:112,name:"Art Secret de Jeannine",type:"trainer",rarity:"U"},{n:113,name:"Kieran",type:"trainer",rarity:"U"},{n:114,name:"Lacey",type:"trainer",rarity:"U"},{n:115,name:"Talent de Lovis",type:"trainer",rarity:"U"},{n:116,name:"Méga Canne",type:"trainer",rarity:"U"},{n:117,name:"Ceinture Maximum",type:"trainer",rarity:"U"},{n:118,name:"Masque de l'Ogre",type:"trainer",rarity:"U"},{n:119,name:"Attrape-Prime",type:"trainer",rarity:"U"},{n:120,name:"Vitalité Prof. Sada",type:"trainer",rarity:"U"},{n:121,name:"Scenario Prof. Turo",type:"trainer",rarity:"U"},{n:122,name:"Recherches Prof. Chen",type:"trainer",rarity:"U"},{n:123,name:"Recherches Prof. Orme",type:"trainer",rarity:"U"},{n:124,name:"Recherches Prof. Sorbier",type:"trainer",rarity:"U"},{n:125,name:"Recherches Prof. Platane",type:"trainer",rarity:"U"},{n:126,name:"Planche de Sauvetage",type:"trainer",rarity:"U"},{n:127,name:"Bâton Roto",type:"trainer",rarity:"U"},{n:128,name:"Aspir'Cyclone",type:"trainer",rarity:"U"},{n:129,name:"Cristal Scintillant",type:"trainer",rarity:"U"},{n:130,name:"Techno Radar",type:"trainer",rarity:"U"},{n:131,name:"Traqueur de Trésors",type:"trainer",rarity:"U"},
-// SECRET RARES
-{n:132,name:"Amarys ☆",type:"trainer",rarity:"UR"},{n:133,name:"Atticus ☆",type:"trainer",rarity:"UR"},{n:134,name:"Atticus ☆☆",type:"trainer",rarity:"UR"},{n:135,name:"Colza ☆",type:"trainer",rarity:"UR"},{n:136,name:"Eri ☆",type:"trainer",rarity:"UR"},{n:137,name:"Amis de Paldea ☆",type:"trainer",rarity:"UR"},{n:138,name:"Giacomo ☆",type:"trainer",rarity:"UR"},{n:139,name:"Talent de Lovis ☆",type:"trainer",rarity:"UR"},{n:140,name:"Mela ☆",type:"trainer",rarity:"UR"},{n:141,name:"Ortega ☆",type:"trainer",rarity:"UR"},{n:142,name:"Raifort ☆",type:"trainer",rarity:"UR"},{n:143,name:"Tyme ☆",type:"trainer",rarity:"UR"},
-{n:144,name:"Phyllali ex SAR",type:"grass",rarity:"SAR"},{n:145,name:"Ogerpon ex Turquoise SAR",type:"grass",rarity:"SAR"},{n:146,name:"Pyroli ex SAR",type:"fire",rarity:"SAR"},{n:147,name:"Cérulédge ex SAR",type:"fire",rarity:"SAR"},{n:148,name:"Ogerpon ex Fourneau SAR",type:"fire",rarity:"SAR"},{n:149,name:"Aquali ex SAR",type:"water",rarity:"SAR"},{n:150,name:"Givrali ex SAR",type:"water",rarity:"SAR"},{n:151,name:"Palafin ex SAR",type:"water",rarity:"SAR"},{n:152,name:"Ogerpon ex Fontaine SAR",type:"water",rarity:"SAR"},{n:153,name:"Voltali ex SAR",type:"electric",rarity:"SAR"},{n:154,name:"Poing-de-Fer ex SAR",type:"electric",rarity:"SAR"},{n:155,name:"Mentali ex SAR",type:"psychic",rarity:"SAR"},{n:156,name:"Nymphali ex SAR",type:"psychic",rarity:"SAR"},{n:157,name:"Garde-de-Fer ex SAR",type:"psychic",rarity:"SAR"},{n:158,name:"Couronne-de-Fer ex SAR",type:"psychic",rarity:"SAR"},{n:159,name:"Éboulement-de-Fer ex SAR",type:"fighting",rarity:"SAR"},{n:160,name:"Ogerpon ex Roc SAR",type:"fighting",rarity:"SAR"},{n:161,name:"Noctali ex SAR",type:"darkness",rarity:"SAR"},{n:162,name:"Rugit-Lune ex SAR",type:"darkness",rarity:"SAR"},{n:163,name:"Pêchaminus ex SAR",type:"darkness",rarity:"SAR"},{n:164,name:"Gholdengo ex SAR",type:"steel",rarity:"SAR"},{n:165,name:"Lanssorien ex SAR",type:"dragon",rarity:"SAR"},{n:166,name:"Foudre-Tonnerre ex SAR",type:"dragon",rarity:"SAR"},{n:167,name:"Évoli ex SAR",type:"colorless",rarity:"SAR"},{n:168,name:"Ursaluna L.V. ex SAR",type:"colorless",rarity:"SAR"},{n:169,name:"Terapagos ex SAR",type:"colorless",rarity:"SAR"},
-{n:170,name:"Amarys SAR",type:"trainer",rarity:"SAR"},{n:171,name:"Crispin SAR",type:"trainer",rarity:"SAR"},{n:172,name:"Drayton SAR",type:"trainer",rarity:"SAR"},{n:173,name:"Art Secret Jeannine SAR",type:"trainer",rarity:"SAR"},{n:174,name:"Kieran SAR",type:"trainer",rarity:"SAR"},{n:175,name:"Lacey SAR",type:"trainer",rarity:"SAR"},
-{n:176,name:"Feuilles-de-Fer ex GOLD",type:"grass",rarity:"GOLD"},{n:177,name:"Ogerpon ex Turquoise GOLD",type:"grass",rarity:"GOLD"},{n:178,name:"Flot-de-Marche ex GOLD",type:"water",rarity:"GOLD"},{n:179,name:"Pikachu ex GOLD",type:"electric",rarity:"GOLD"},{n:180,name:"Terapagos ex GOLD",type:"colorless",rarity:"GOLD"}
-  ]
-  },
-  "me15": {
-    id: "me15", sealed: [
-      {id:'etb',name:'Elite Trainer Box',img:'https://pokesymbols.com/images/tcg/sets/logos/phantasmal-flames.png'},
-      {id:'etb-pc',name:'ETB Pokémon Center',img:'https://pokesymbols.com/images/tcg/sets/logos/phantasmal-flames.png'},
-      {id:'bundle',name:'Booster Bundle',img:'https://pokesymbols.com/images/tcg/sets/logos/phantasmal-flames.png'},
-      {id:'display',name:'Display 36 Boosters',img:'https://pokesymbols.com/images/tcg/sets/logos/phantasmal-flames.png'},
-      {id:'blister-1',name:'Blister 1 Booster',img:'https://pokesymbols.com/images/tcg/sets/logos/phantasmal-flames.png'},
-      {id:'blister-3',name:'Blister 3 Boosters',img:'https://pokesymbols.com/images/tcg/sets/logos/phantasmal-flames.png'},
-    ], name: "ME1.5 — Flammes Fantasmagoriques", icon: "👻", logo: "https://pokesymbols.com/images/tcg/sets/logos/phantasmal-flames.png", tcgId: "PFL", tcgdexIds: ["me02","me015","PFL"], mainCount: 94,
-    cards: [
-{n:1,name:"Mystherbe",type:"grass",rarity:"C"},{n:2,name:"Ortide",type:"grass",rarity:"U"},{n:3,name:"Rafflesia",type:"grass",rarity:"R"},{n:4,name:"Méga-Scarhino ex",type:"grass",rarity:"RR"},{n:5,name:"Nénupiot",type:"grass",rarity:"C"},{n:6,name:"Lombre",type:"grass",rarity:"U"},{n:7,name:"Ludicolo",type:"grass",rarity:"R"},{n:8,name:"Genesect",type:"grass",rarity:"R"},{n:9,name:"Lilliterelle",type:"grass",rarity:"C"},{n:10,name:"Gambex",type:"grass",rarity:"U"},
-{n:11,name:"Salamèche",type:"fire",rarity:"C"},{n:12,name:"Reptincel",type:"fire",rarity:"U"},{n:13,name:"Méga-Dracaufeu X ex",type:"fire",rarity:"RR"},{n:14,name:"Sulfura",type:"fire",rarity:"R"},{n:15,name:"Darumarond",type:"fire",rarity:"C"},{n:16,name:"Darumacho",type:"fire",rarity:"U"},{n:17,name:"Reshiram",type:"fire",rarity:"R"},{n:18,name:"Plumeline ex",type:"fire",rarity:"RR"},{n:19,name:"Charbambin",type:"fire",rarity:"C"},{n:20,name:"Cérulédge",type:"fire",rarity:"U"},
-{n:21,name:"Otaria",type:"water",rarity:"C"},{n:22,name:"Lamantine",type:"water",rarity:"U"},{n:23,name:"Marcacrin",type:"water",rarity:"C"},{n:24,name:"Cochignon",type:"water",rarity:"U"},{n:25,name:"Mammochon",type:"water",rarity:"R"},{n:26,name:"Suicune",type:"water",rarity:"R"},{n:27,name:"Tiplouf",type:"water",rarity:"C"},{n:28,name:"Prinplouf",type:"water",rarity:"U"},
-{n:29,name:"Motisma ex",type:"electric",rarity:"RR"},{n:30,name:"Voltoutou",type:"electric",rarity:"C"},{n:31,name:"Fulgudog",type:"electric",rarity:"U"},{n:32,name:"Pohm",type:"electric",rarity:"C"},{n:33,name:"Pohmotte",type:"electric",rarity:"U"},{n:34,name:"Pohmarmotte",type:"electric",rarity:"R"},
-{n:35,name:"Feuforêve",type:"psychic",rarity:"C"},{n:36,name:"Magirêve ex",type:"psychic",rarity:"RR"},{n:37,name:"Snubbull",type:"psychic",rarity:"C"},{n:38,name:"Granbull",type:"psychic",rarity:"U"},{n:39,name:"Cresselia",type:"psychic",rarity:"R"},{n:40,name:"Meloetta",type:"psychic",rarity:"R"},{n:41,name:"Méga-Diancie ex",type:"psychic",rarity:"RR"},{n:42,name:"Mimiqui",type:"psychic",rarity:"R"},{n:43,name:"Crèmy",type:"psychic",rarity:"C"},{n:44,name:"Charmilly",type:"psychic",rarity:"U"},{n:45,name:"Zacian",type:"psychic",rarity:"R"},
-{n:46,name:"Broquette",type:"fighting",rarity:"C"},{n:47,name:"Roucoups-Spectacle",type:"fighting",rarity:"U"},{n:48,name:"Tauros de Paldea",type:"fighting",rarity:"R"},{n:49,name:"Scorplane",type:"fighting",rarity:"C"},{n:50,name:"Scorvol",type:"fighting",rarity:"U"},{n:51,name:"Kraknoix",type:"fighting",rarity:"C"},{n:52,name:"Vibraninf",type:"fighting",rarity:"U"},{n:53,name:"Libégon",type:"fighting",rarity:"R"},
-{n:54,name:"Fantominus",type:"darkness",rarity:"C"},{n:55,name:"Spectrum",type:"darkness",rarity:"U"},{n:56,name:"Méga-Ectoplasma ex",type:"darkness",rarity:"RR"},{n:57,name:"Cornèbre",type:"darkness",rarity:"C"},{n:58,name:"Corboss",type:"darkness",rarity:"U"},{n:59,name:"Ténéfix",type:"darkness",rarity:"R"},{n:60,name:"Carvanha",type:"darkness",rarity:"C"},{n:61,name:"Méga-Sharpedo ex",type:"darkness",rarity:"RR"},{n:62,name:"Séviper",type:"darkness",rarity:"U"},{n:63,name:"Absol",type:"darkness",rarity:"R"},{n:64,name:"Mascaïman",type:"darkness",rarity:"C"},{n:65,name:"Escroco",type:"darkness",rarity:"U"},{n:66,name:"Crocorible",type:"darkness",rarity:"R"},{n:67,name:"Toxizap",type:"darkness",rarity:"C"},{n:68,name:"Salarsen",type:"darkness",rarity:"U"},{n:69,name:"Éthernatos",type:"darkness",rarity:"R"},
-{n:70,name:"Pingoléon ex",type:"steel",rarity:"RR"},{n:71,name:"Archéomire",type:"steel",rarity:"C"},{n:72,name:"Archéodong",type:"steel",rarity:"U"},{n:73,name:"Togedemaru",type:"steel",rarity:"R"},{n:74,name:"Duralugon",type:"steel",rarity:"U"},{n:75,name:"Archélagon",type:"steel",rarity:"R"},
-{n:76,name:"Rondoudou",type:"colorless",rarity:"C"},{n:77,name:"Grodoudou",type:"colorless",rarity:"U"},{n:78,name:"Capumain",type:"colorless",rarity:"C"},{n:79,name:"Capidextre",type:"colorless",rarity:"U"},{n:80,name:"Queulorior",type:"colorless",rarity:"R"},{n:81,name:"Zigzaton",type:"colorless",rarity:"C"},{n:82,name:"Linéon",type:"colorless",rarity:"U"},{n:83,name:"Laporeille",type:"colorless",rarity:"C"},{n:84,name:"Méga-Lockpin ex",type:"colorless",rarity:"RR"},
-{n:85,name:"Cage de Combat",type:"trainer",rarity:"U"},{n:86,name:"Chalumeau",type:"trainer",rarity:"U"},{n:87,name:"Aurore",type:"trainer",rarity:"U"},{n:88,name:"Vallée Vertigineuse",type:"trainer",rarity:"U"},{n:89,name:"Cracheur de Feu",type:"trainer",rarity:"U"},{n:90,name:"Stratagème d'Anis",type:"trainer",rarity:"U"},{n:91,name:"Jumbo Ice Cream",type:"trainer",rarity:"U"},{n:92,name:"Casque Punk",type:"trainer",rarity:"U"},{n:93,name:"Amulette Sacrée",type:"trainer",rarity:"U"},{n:94,name:"Patché Merveilleux",type:"trainer",rarity:"U"},
-// SECRET RARES
-{n:95,name:"Ludicolo ☆",type:"grass",rarity:"IR"},{n:96,name:"Lilliterelle ☆",type:"grass",rarity:"IR"},{n:97,name:"Lamantine ☆",type:"water",rarity:"IR"},{n:98,name:"Tiplouf ☆",type:"water",rarity:"IR"},{n:99,name:"Voltoutou ☆",type:"electric",rarity:"IR"},{n:100,name:"Zacian ☆",type:"psychic",rarity:"IR"},{n:101,name:"Libégon ☆",type:"fighting",rarity:"IR"},{n:102,name:"Axoloto de Paldea ☆",type:"fighting",rarity:"IR"},{n:103,name:"Salarsen ☆",type:"darkness",rarity:"IR"},{n:104,name:"Togedemaru ☆",type:"steel",rarity:"IR"},{n:105,name:"Grodoudou ☆",type:"colorless",rarity:"IR"},{n:106,name:"Miaouss ☆",type:"colorless",rarity:"IR"},{n:107,name:"Capidextre ☆",type:"colorless",rarity:"IR"},
-{n:108,name:"Méga-Scarhino ex ☆",type:"grass",rarity:"UR"},{n:109,name:"Méga-Dracaufeu X ex ☆",type:"fire",rarity:"UR"},{n:110,name:"Plumeline ex ☆",type:"fire",rarity:"UR"},{n:111,name:"Motisma ex ☆",type:"electric",rarity:"UR"},{n:112,name:"Magirêve ex ☆",type:"psychic",rarity:"UR"},{n:113,name:"Méga-Sharpedo ex ☆",type:"darkness",rarity:"UR"},{n:114,name:"Pingoléon ex ☆",type:"steel",rarity:"UR"},{n:115,name:"Méga-Lockpin ex ☆",type:"colorless",rarity:"UR"},
-{n:116,name:"Cage de Combat ☆",type:"trainer",rarity:"UR"},{n:117,name:"Chalumeau ☆",type:"trainer",rarity:"UR"},{n:118,name:"Aurore ☆",type:"trainer",rarity:"UR"},{n:119,name:"Cracheur de Feu ☆",type:"trainer",rarity:"UR"},{n:120,name:"Stratagème d'Anis ☆",type:"trainer",rarity:"UR"},{n:121,name:"Casque Punk ☆",type:"trainer",rarity:"UR"},{n:122,name:"Amulette Sacrée ☆",type:"trainer",rarity:"UR"},{n:123,name:"Switch ☆",type:"trainer",rarity:"UR"},{n:124,name:"Énergie Ignition",type:"energy",rarity:"UR"},
-{n:125,name:"Méga-Dracaufeu X ex SAR",type:"fire",rarity:"SAR"},{n:126,name:"Motisma ex SAR",type:"electric",rarity:"SAR"},{n:127,name:"Méga-Sharpedo ex SAR",type:"darkness",rarity:"SAR"},{n:128,name:"Méga-Lockpin ex SAR",type:"colorless",rarity:"SAR"},
-{n:129,name:"Aurore SAR",type:"trainer",rarity:"SAR"},
-{n:130,name:"Méga-Dracaufeu X ex GOLD",type:"fire",rarity:"GOLD"}
-  ]
-  },
-  "me2": {
-    id: "me2", sealed: [
-      {id:'etb',name:'Elite Trainer Box',img:'https://pokesymbols.com/images/tcg/sets/logos/mega-evolution.png'},
-      {id:'etb-pc',name:'ETB Pokémon Center',img:'https://pokesymbols.com/images/tcg/sets/logos/mega-evolution.png'},
-      {id:'display',name:'Display 36 Boosters',img:'https://pokesymbols.com/images/tcg/sets/logos/mega-evolution.png'},
-      {id:'bundle',name:'Booster Bundle',img:'https://pokesymbols.com/images/tcg/sets/logos/mega-evolution.png'},
-      {id:'blister-1',name:'Blister 1 Booster',img:'https://pokesymbols.com/images/tcg/sets/logos/mega-evolution.png'},
-      {id:'blister-3',name:'Blister 3 Boosters',img:'https://pokesymbols.com/images/tcg/sets/logos/mega-evolution.png'},
-    ], name: "ME2 — Méga-Évolution", icon: "⚡", logo: "https://pokesymbols.com/images/tcg/sets/logos/mega-evolution.png", tcgId: "MEG", tcgdexIds: ["me01","me1","MEG"], mainCount: 132,
-    cards: [
-{n:1,name:"Bulbizarre",type:"grass",rarity:"C"},{n:2,name:"Herbizarre",type:"grass",rarity:"U"},{n:3,name:"Méga-Florizarre ex",type:"grass",rarity:"RR"},{n:4,name:"Noeunoeuf",type:"grass",rarity:"C"},{n:5,name:"Noadkoko",type:"grass",rarity:"U"},{n:6,name:"Saquedeneu",type:"grass",rarity:"C"},{n:7,name:"Bouldeneu",type:"grass",rarity:"U"},{n:8,name:"Germignon",type:"grass",rarity:"C"},{n:9,name:"Macronium",type:"grass",rarity:"U"},{n:10,name:"Méganium",type:"grass",rarity:"R"},{n:11,name:"Caratroc",type:"grass",rarity:"R"},{n:12,name:"Celebi",type:"grass",rarity:"R"},{n:13,name:"Grainipiot",type:"grass",rarity:"C"},{n:14,name:"Pifeuil",type:"grass",rarity:"U"},{n:15,name:"Tengalice",type:"grass",rarity:"R"},{n:16,name:"Ningale",type:"grass",rarity:"C"},{n:17,name:"Ninjask",type:"grass",rarity:"U"},{n:18,name:"Sancoki",type:"grass",rarity:"R"},
-{n:19,name:"Goupix",type:"fire",rarity:"C"},{n:20,name:"Feunard",type:"fire",rarity:"U"},{n:21,name:"Chamallot",type:"fire",rarity:"C"},{n:22,name:"Méga-Camérupt ex",type:"fire",rarity:"RR"},{n:23,name:"Hélionceau",type:"fire",rarity:"C"},{n:24,name:"Némélios",type:"fire",rarity:"U"},{n:25,name:"Volcanion",type:"fire",rarity:"R"},{n:26,name:"Flambino",type:"fire",rarity:"C"},{n:27,name:"Lapyro",type:"fire",rarity:"U"},{n:28,name:"Pyrobut",type:"fire",rarity:"R"},{n:29,name:"Grillepattes",type:"fire",rarity:"C"},{n:30,name:"Scolocendre",type:"fire",rarity:"U"},{n:31,name:"Chi-Yu",type:"fire",rarity:"R"},
-{n:32,name:"Démanta",type:"water",rarity:"U"},{n:33,name:"Écrapince",type:"water",rarity:"C"},{n:34,name:"Kyogre",type:"water",rarity:"R"},{n:35,name:"Blizzi",type:"water",rarity:"C"},{n:36,name:"Méga-Blizzaroi ex",type:"water",rarity:"RR"},{n:37,name:"Flingouste",type:"water",rarity:"C"},{n:38,name:"Gamblast",type:"water",rarity:"U"},{n:39,name:"Larméléon",type:"water",rarity:"C"},{n:40,name:"Arrozard",type:"water",rarity:"U"},{n:41,name:"Lézargus",type:"water",rarity:"R"},{n:42,name:"Frissonille",type:"water",rarity:"C"},{n:43,name:"Beldeneige",type:"water",rarity:"U"},{n:44,name:"Bekaglaçon",type:"water",rarity:"R"},
-{n:45,name:"Magnéti",type:"electric",rarity:"C"},{n:46,name:"Magnéton",type:"electric",rarity:"U"},{n:47,name:"Magnézone",type:"electric",rarity:"R"},{n:48,name:"Raikou",type:"electric",rarity:"R"},{n:49,name:"Dynavolt",type:"electric",rarity:"C"},{n:50,name:"Méga-Élecsprint ex",type:"electric",rarity:"RR"},{n:51,name:"Pachirisu",type:"electric",rarity:"R"},{n:52,name:"Galvaran",type:"electric",rarity:"C"},{n:53,name:"Iguolta",type:"electric",rarity:"U"},
-{n:54,name:"Abra",type:"psychic",rarity:"C"},{n:55,name:"Kadabra",type:"psychic",rarity:"U"},{n:56,name:"Alakazam",type:"psychic",rarity:"R"},{n:57,name:"Lippoutou",type:"psychic",rarity:"U"},{n:58,name:"Tarsal",type:"psychic",rarity:"C"},{n:59,name:"Kirlia",type:"psychic",rarity:"U"},{n:60,name:"Méga-Gardevoir ex",type:"psychic",rarity:"RR"},{n:61,name:"Munja",type:"psychic",rarity:"R"},{n:62,name:"Spoink",type:"psychic",rarity:"C"},{n:63,name:"Groret",type:"psychic",rarity:"U"},{n:64,name:"Xerneas",type:"psychic",rarity:"R"},{n:65,name:"Toutombe",type:"psychic",rarity:"C"},{n:66,name:"Tomberro",type:"psychic",rarity:"U"},{n:67,name:"Mordudor",type:"psychic",rarity:"R"},
-{n:68,name:"Sabelette",type:"fighting",rarity:"C"},{n:69,name:"Sablaireau",type:"fighting",rarity:"U"},{n:70,name:"Onix",type:"fighting",rarity:"U"},{n:71,name:"Debugant",type:"fighting",rarity:"C"},{n:72,name:"Makuhita",type:"fighting",rarity:"C"},{n:73,name:"Hariyama",type:"fighting",rarity:"U"},{n:74,name:"Séléroc",type:"fighting",rarity:"R"},{n:75,name:"Solaroc",type:"fighting",rarity:"R"},{n:76,name:"Riolu",type:"fighting",rarity:"C"},{n:77,name:"Méga-Lucario ex",type:"fighting",rarity:"RR"},{n:78,name:"Cradopaud",type:"fighting",rarity:"C"},{n:79,name:"Coatox",type:"fighting",rarity:"U"},{n:80,name:"Marshadow",type:"fighting",rarity:"R"},{n:81,name:"Dolman",type:"fighting",rarity:"R"},{n:82,name:"Salort",type:"fighting",rarity:"C"},{n:83,name:"Toutite",type:"fighting",rarity:"U"},{n:84,name:"Théffroi",type:"fighting",rarity:"R"},
-{n:85,name:"Colhomard",type:"darkness",rarity:"U"},{n:86,name:"Méga-Absol ex",type:"darkness",rarity:"RR"},{n:87,name:"Spiritomb",type:"darkness",rarity:"R"},{n:88,name:"Yveltal",type:"darkness",rarity:"R"},{n:89,name:"Goupilou",type:"darkness",rarity:"C"},{n:90,name:"Roublenard",type:"darkness",rarity:"U"},{n:91,name:"Graffiti",type:"darkness",rarity:"C"},{n:92,name:"Tagguerda",type:"darkness",rarity:"U"},
-{n:93,name:"Steelix",type:"steel",rarity:"R"},{n:94,name:"Méga-Mysdibule ex",type:"steel",rarity:"RR"},{n:95,name:"Dialga",type:"steel",rarity:"R"},{n:96,name:"Bricaille",type:"steel",rarity:"C"},{n:97,name:"Brionne",type:"steel",rarity:"U"},{n:98,name:"Forgerette",type:"steel",rarity:"R"},{n:99,name:"Gholdengo",type:"steel",rarity:"R"},
-{n:100,name:"Méga-Latias ex",type:"dragon",rarity:"RR"},{n:101,name:"Latios",type:"dragon",rarity:"R"},
-{n:102,name:"Piafabec",type:"colorless",rarity:"C"},{n:103,name:"Rapasdepic",type:"colorless",rarity:"U"},{n:104,name:"Méga-Kangourex ex",type:"colorless",rarity:"RR"},{n:105,name:"Cadoizo",type:"colorless",rarity:"R"},{n:106,name:"Écrémeuh",type:"colorless",rarity:"U"},{n:107,name:"Laporeille",type:"colorless",rarity:"C"},{n:108,name:"Lockpin",type:"colorless",rarity:"U"},{n:109,name:"Manglouton",type:"colorless",rarity:"C"},{n:110,name:"Argouste",type:"colorless",rarity:"U"},{n:111,name:"Nounourson",type:"colorless",rarity:"C"},{n:112,name:"Chelours",type:"colorless",rarity:"U"},
-{n:113,name:"Espièglerie de Margie",type:"trainer",rarity:"U"},{n:114,name:"Ordres du Boss [Ghetsis]",type:"trainer",rarity:"U"},{n:115,name:"Permutateur d'Énergie",type:"trainer",rarity:"U"},{n:116,name:"Gong de Combat",type:"trainer",rarity:"U"},{n:117,name:"Forêt de Vitalité",type:"trainer",rarity:"U"},{n:118,name:"Bouclier de Fer",type:"trainer",rarity:"U"},{n:119,name:"Volonté de Lilie",type:"trainer",rarity:"U"},{n:120,name:"Stratégie Cmdt Lefèvre",type:"trainer",rarity:"U"},{n:121,name:"Méga Signal",type:"trainer",rarity:"U"},{n:122,name:"Jardin Mystère",type:"trainer",rarity:"U"},{n:123,name:"Infirmière Pokémon",type:"trainer",rarity:"U"},{n:124,name:"Puissance Premium Pro",type:"trainer",rarity:"U"},{n:125,name:"Super Bonbon",type:"trainer",rarity:"U"},{n:126,name:"Repoussoir",type:"trainer",rarity:"U"},{n:127,name:"Ruines Risquées",type:"trainer",rarity:"U"},{n:128,name:"Chrono-Montre",type:"trainer",rarity:"U"},{n:129,name:"Plage de Surf",type:"trainer",rarity:"U"},{n:130,name:"Switch",type:"trainer",rarity:"C"},{n:131,name:"Hyper Ball",type:"trainer",rarity:"C"},{n:132,name:"Bingo",type:"trainer",rarity:"U"},
-// SECRET RARES
-{n:133,name:"Bulbizarre ☆",type:"grass",rarity:"IR"},{n:134,name:"Herbizarre ☆",type:"grass",rarity:"IR"},{n:135,name:"Noadkoko ☆",type:"grass",rarity:"IR"},{n:136,name:"Caratroc ☆",type:"grass",rarity:"IR"},{n:137,name:"Ninjask ☆",type:"grass",rarity:"IR"},{n:138,name:"Goupix ☆",type:"fire",rarity:"IR"},{n:139,name:"Hélionceau ☆",type:"fire",rarity:"IR"},{n:140,name:"Blizzi ☆",type:"water",rarity:"IR"},{n:141,name:"Gamblast ☆",type:"water",rarity:"IR"},{n:142,name:"Lézargus ☆",type:"water",rarity:"IR"},{n:143,name:"Galvaran ☆",type:"electric",rarity:"IR"},{n:144,name:"Munja ☆",type:"psychic",rarity:"IR"},{n:145,name:"Tomberro ☆",type:"psychic",rarity:"IR"},{n:146,name:"Marshadow ☆",type:"fighting",rarity:"IR"},{n:147,name:"Théffroi ☆",type:"fighting",rarity:"IR"},{n:148,name:"Spiritomb ☆",type:"darkness",rarity:"IR"},{n:149,name:"Graffiti ☆",type:"darkness",rarity:"IR"},{n:150,name:"Steelix ☆",type:"steel",rarity:"IR"},{n:151,name:"Piafabec ☆",type:"colorless",rarity:"IR"},{n:152,name:"Cadoizo ☆",type:"colorless",rarity:"IR"},{n:153,name:"Argouste ☆",type:"colorless",rarity:"IR"},{n:154,name:"Nounourson ☆",type:"colorless",rarity:"IR"},
-{n:155,name:"Méga-Florizarre ex ☆",type:"grass",rarity:"UR"},{n:156,name:"Méga-Camérupt ex ☆",type:"fire",rarity:"UR"},{n:157,name:"Méga-Blizzaroi ex ☆",type:"water",rarity:"UR"},{n:158,name:"Méga-Élecsprint ex ☆",type:"electric",rarity:"UR"},{n:159,name:"Méga-Gardevoir ex ☆",type:"psychic",rarity:"UR"},{n:160,name:"Méga-Lucario ex ☆",type:"fighting",rarity:"UR"},{n:161,name:"Méga-Absol ex ☆",type:"darkness",rarity:"UR"},{n:162,name:"Méga-Mysdibule ex ☆",type:"steel",rarity:"UR"},{n:163,name:"Méga-Latias ex ☆",type:"dragon",rarity:"UR"},{n:164,name:"Méga-Kangourex ex ☆",type:"colorless",rarity:"UR"},
-{n:165,name:"Espièglerie de Margie ☆",type:"trainer",rarity:"UR"},{n:166,name:"Ballon Volant ☆",type:"trainer",rarity:"UR"},{n:167,name:"Pofin Copain-Copain ☆",type:"trainer",rarity:"UR"},{n:168,name:"Gong de Combat ☆",type:"trainer",rarity:"UR"},{n:169,name:"Volonté de Lilie ☆",type:"trainer",rarity:"UR"},{n:170,name:"Stratégie Cmdt Lefèvre ☆",type:"trainer",rarity:"UR"},{n:171,name:"Méga Signal ☆",type:"trainer",rarity:"UR"},{n:172,name:"Jardin Mystère ☆",type:"trainer",rarity:"UR"},{n:173,name:"Civière Nocturne ☆",type:"trainer",rarity:"UR"},{n:174,name:"Puissance Premium Pro ☆",type:"trainer",rarity:"UR"},{n:175,name:"Super Bonbon ☆",type:"trainer",rarity:"UR"},{n:176,name:"Bingo ☆",type:"trainer",rarity:"UR"},
-{n:177,name:"Méga-Florizarre ex SAR",type:"grass",rarity:"SAR"},{n:178,name:"Méga-Gardevoir ex SAR",type:"psychic",rarity:"SAR"},{n:179,name:"Méga-Lucario ex SAR",type:"fighting",rarity:"SAR"},{n:180,name:"Méga-Absol ex SAR",type:"darkness",rarity:"SAR"},{n:181,name:"Méga-Latias ex SAR",type:"dragon",rarity:"SAR"},{n:182,name:"Méga-Kangourex ex SAR",type:"colorless",rarity:"SAR"},
-{n:183,name:"Espièglerie de Margie SAR",type:"trainer",rarity:"SAR"},{n:184,name:"Volonté de Lilie SAR",type:"trainer",rarity:"SAR"},{n:185,name:"Stratégie Cmdt Lefèvre SAR",type:"trainer",rarity:"SAR"},{n:186,name:"Bingo SAR",type:"trainer",rarity:"SAR"},
-{n:187,name:"Méga-Gardevoir ex GOLD",type:"psychic",rarity:"GOLD"},{n:188,name:"Méga-Lucario ex GOLD",type:"fighting",rarity:"GOLD"}
-  ]
-  }
-  ,"sv151": {
-    id: "sv151", sealed: [
-      {id:"etb",name:"Elite Trainer Box",img:"https://pokesymbols.com/images/tcg/sets/logos/151.png"},
-      {id:"etb-pc",name:"ETB Pokemon Center",img:"https://pokesymbols.com/images/tcg/sets/logos/151.png"},
-      {id:"upc",name:"Ultra Premium Collection",img:"https://pokesymbols.com/images/tcg/sets/logos/151.png"},
-      {id:"bundle",name:"Booster Bundle",img:"https://pokesymbols.com/images/tcg/sets/logos/151.png"},
-      {id:"binder",name:"Binder Collection",img:"https://pokesymbols.com/images/tcg/sets/logos/151.png"},
-      {id:"poster-mew",name:"Poster Collection Mew",img:"https://pokesymbols.com/images/tcg/sets/logos/151.png"},
-      {id:"poster-mewtwo",name:"Poster Collection Mewtwo",img:"https://pokesymbols.com/images/tcg/sets/logos/151.png"},
-      {id:"mini-tin",name:"Mini Tin",img:"https://pokesymbols.com/images/tcg/sets/logos/151.png"},
-      {id:"blister-1",name:"Blister 1 Booster",img:"https://pokesymbols.com/images/tcg/sets/logos/151.png"},
-    ], name: "SV3.5 — 151", icon: "", logo: "https://pokesymbols.com/images/tcg/sets/logos/151.png", tcgId: "mew", tcgdexIds: ["sv03.5"], mainCount: 165,
-    cards: [
-  {n:1,name:"Bulbizarre",type:"grass",rarity:"C"},{n:2,name:"Herbizarre",type:"grass",rarity:"U"},{n:3,name:"Florizarre ex",type:"grass",rarity:"RR"},{n:4,name:"Salameche",type:"fire",rarity:"C"},{n:5,name:"Reptincel",type:"fire",rarity:"U"},{n:6,name:"Dracaufeu ex",type:"fire",rarity:"RR"},{n:7,name:"Carapuce",type:"water",rarity:"C"},{n:8,name:"Carabaffe",type:"water",rarity:"U"},{n:9,name:"Tortank ex",type:"water",rarity:"RR"},{n:10,name:"Chenipan",type:"grass",rarity:"C"},{n:11,name:"Chrysacier",type:"grass",rarity:"U"},{n:12,name:"Papilusion",type:"grass",rarity:"C"},{n:13,name:"Aspicot",type:"grass",rarity:"C"},{n:14,name:"Coconfort",type:"grass",rarity:"U"},{n:15,name:"Dardargnan",type:"grass",rarity:"C"},{n:16,name:"Roucool",type:"normal",rarity:"C"},{n:17,name:"Roucoups",type:"normal",rarity:"U"},{n:18,name:"Roucarnage",type:"normal",rarity:"R"},{n:19,name:"Rattata",type:"normal",rarity:"C"},{n:20,name:"Rattatac",type:"normal",rarity:"U"},{n:21,name:"Piafabec",type:"normal",rarity:"C"},{n:22,name:"Rapasdepic",type:"normal",rarity:"U"},{n:23,name:"Abo",type:"dark",rarity:"C"},{n:24,name:"Arbok ex",type:"dark",rarity:"RR"},{n:25,name:"Pikachu",type:"electric",rarity:"C"},{n:26,name:"Raichu",type:"electric",rarity:"U"},{n:27,name:"Sabelette",type:"fighting",rarity:"C"},{n:28,name:"Sablaireau",type:"fighting",rarity:"R"},{n:29,name:"Nidoran F",type:"dark",rarity:"C"},{n:30,name:"Nidorina",type:"dark",rarity:"U"},{n:31,name:"Nidoqueen",type:"dark",rarity:"R"},{n:32,name:"Nidoran M",type:"dark",rarity:"C"},{n:33,name:"Nidorino",type:"dark",rarity:"U"},{n:34,name:"Nidoking",type:"dark",rarity:"R"},{n:35,name:"Melofee",type:"psychic",rarity:"C"},{n:36,name:"Melodelfe",type:"psychic",rarity:"U"},{n:37,name:"Goupix",type:"fire",rarity:"C"},{n:38,name:"Feunard ex",type:"fire",rarity:"RR"},{n:39,name:"Rondoudou",type:"normal",rarity:"C"},{n:40,name:"Grodoudou ex",type:"normal",rarity:"RR"},{n:41,name:"Nosferapti",type:"dark",rarity:"C"},{n:42,name:"Nosferalto",type:"dark",rarity:"U"},{n:43,name:"Mystherbe",type:"grass",rarity:"C"},{n:44,name:"Ortide",type:"grass",rarity:"U"},{n:45,name:"Rafflesia",type:"grass",rarity:"R"},{n:46,name:"Paras",type:"grass",rarity:"C"},{n:47,name:"Parasect",type:"grass",rarity:"U"},{n:48,name:"Mimitoss",type:"grass",rarity:"C"},{n:49,name:"Aeromite",type:"grass",rarity:"U"},{n:50,name:"Taupiqueur",type:"fighting",rarity:"C"},{n:51,name:"Triopikeur",type:"fighting",rarity:"U"},{n:52,name:"Miaouss",type:"normal",rarity:"C"},{n:53,name:"Persian",type:"normal",rarity:"R"},{n:54,name:"Psykokwak",type:"water",rarity:"C"},{n:55,name:"Akwakwak",type:"water",rarity:"U"},{n:56,name:"Ferosinge",type:"fighting",rarity:"C"},{n:57,name:"Colossinge",type:"fighting",rarity:"R"},{n:58,name:"Caninos",type:"fire",rarity:"C"},{n:59,name:"Arcanin",type:"fire",rarity:"R"},{n:60,name:"Ptitard",type:"water",rarity:"C"},{n:61,name:"Tetarte",type:"water",rarity:"U"},{n:62,name:"Tartard",type:"water",rarity:"R"},{n:63,name:"Abra",type:"psychic",rarity:"C"},{n:64,name:"Kadabra",type:"psychic",rarity:"U"},{n:65,name:"Alakazam ex",type:"psychic",rarity:"RR"},{n:66,name:"Machoc",type:"fighting",rarity:"C"},{n:67,name:"Machopeur",type:"fighting",rarity:"U"},{n:68,name:"Mackogneur",type:"fighting",rarity:"R"},{n:69,name:"Chetiflor",type:"grass",rarity:"C"},{n:70,name:"Boustiflor",type:"grass",rarity:"U"},{n:71,name:"Empiflor",type:"grass",rarity:"R"},{n:72,name:"Tentacool",type:"water",rarity:"C"},{n:73,name:"Tentacruel",type:"water",rarity:"U"},{n:74,name:"Racaillou",type:"fighting",rarity:"C"},{n:75,name:"Gravalanch",type:"fighting",rarity:"U"},{n:76,name:"Grolem ex",type:"fighting",rarity:"RR"},{n:77,name:"Ponyta",type:"fire",rarity:"C"},{n:78,name:"Galopa",type:"fire",rarity:"U"},{n:79,name:"Ramoloss",type:"water",rarity:"C"},{n:80,name:"Flagadoss",type:"water",rarity:"R"},{n:81,name:"Magneti",type:"electric",rarity:"C"},{n:82,name:"Magneton",type:"electric",rarity:"U"},{n:83,name:"Canarticho",type:"normal",rarity:"C"},{n:84,name:"Doduo",type:"normal",rarity:"C"},{n:85,name:"Dodrio",type:"normal",rarity:"R"},{n:86,name:"Otaria",type:"water",rarity:"C"},{n:87,name:"Lamantine",type:"water",rarity:"U"},{n:88,name:"Tadmorv",type:"dark",rarity:"C"},{n:89,name:"Grotadmorv",type:"dark",rarity:"R"},{n:90,name:"Kokiyas",type:"water",rarity:"C"},{n:91,name:"Crustabri",type:"water",rarity:"R"},{n:92,name:"Fantominus",type:"psychic",rarity:"C"},{n:93,name:"Spectrum",type:"psychic",rarity:"U"},{n:94,name:"Ectoplasma",type:"psychic",rarity:"R"},{n:95,name:"Onix",type:"fighting",rarity:"C"},{n:96,name:"Soporifik",type:"psychic",rarity:"U"},{n:97,name:"Hypnomade",type:"psychic",rarity:"R"},{n:98,name:"Krabby",type:"water",rarity:"C"},{n:99,name:"Krabboss",type:"water",rarity:"R"},{n:100,name:"Voltorbe",type:"electric",rarity:"C"},{n:101,name:"Electrode",type:"electric",rarity:"R"},{n:102,name:"Noeunoeuf",type:"grass",rarity:"C"},{n:103,name:"Noadkoko",type:"grass",rarity:"R"},{n:104,name:"Osselait",type:"fighting",rarity:"C"},{n:105,name:"Ossatueur",type:"fighting",rarity:"R"},{n:106,name:"Kicklee",type:"fighting",rarity:"C"},{n:107,name:"Tygnon",type:"fighting",rarity:"C"},{n:108,name:"Excelangue",type:"normal",rarity:"C"},{n:109,name:"Smogo",type:"dark",rarity:"C"},{n:110,name:"Smogogo",type:"dark",rarity:"U"},{n:111,name:"Rhinocorne",type:"fighting",rarity:"C"},{n:112,name:"Rhinoferos",type:"fighting",rarity:"R"},{n:113,name:"Leveinard",type:"normal",rarity:"C"},{n:114,name:"Saquedeneu",type:"grass",rarity:"C"},{n:115,name:"Kangourex ex",type:"normal",rarity:"RR"},{n:116,name:"Hypotrempe",type:"water",rarity:"C"},{n:117,name:"Hypocean",type:"water",rarity:"U"},{n:118,name:"Poissirene",type:"water",rarity:"C"},{n:119,name:"Poissoroy",type:"water",rarity:"U"},{n:120,name:"Stari",type:"water",rarity:"C"},{n:121,name:"Staross",type:"water",rarity:"R"},{n:122,name:"M. Mime",type:"psychic",rarity:"C"},{n:123,name:"Insecateur",type:"grass",rarity:"C"},{n:124,name:"Lippoutou ex",type:"psychic",rarity:"RR"},{n:125,name:"Elektek",type:"electric",rarity:"C"},{n:126,name:"Magmar",type:"fire",rarity:"C"},{n:127,name:"Scarabrute",type:"grass",rarity:"C"},{n:128,name:"Tauros",type:"normal",rarity:"R"},{n:129,name:"Magicarpe",type:"water",rarity:"C"},{n:130,name:"Leviator",type:"water",rarity:"R"},{n:131,name:"Lokhlass",type:"water",rarity:"R"},{n:132,name:"Metamorph",type:"normal",rarity:"C"},{n:133,name:"Evoli",type:"normal",rarity:"C"},{n:134,name:"Aquali",type:"water",rarity:"C"},{n:135,name:"Voltali",type:"electric",rarity:"U"},{n:136,name:"Pyroli",type:"fire",rarity:"U"},{n:137,name:"Porygon",type:"normal",rarity:"C"},{n:138,name:"Amonita",type:"water",rarity:"C"},{n:139,name:"Amonistar",type:"water",rarity:"R"},{n:140,name:"Kabuto",type:"fighting",rarity:"C"},{n:141,name:"Kabutops",type:"fighting",rarity:"R"},{n:142,name:"Ptera",type:"normal",rarity:"R"},{n:143,name:"Ronflex",type:"normal",rarity:"RR"},{n:144,name:"Artikodin",type:"water",rarity:"R"},{n:145,name:"Electhor ex",type:"electric",rarity:"RR"},{n:146,name:"Sulfura",type:"fire",rarity:"R"},{n:147,name:"Minidraco",type:"dragon",rarity:"C"},{n:148,name:"Draco",type:"dragon",rarity:"U"},{n:149,name:"Dracolosse",type:"dragon",rarity:"R"},{n:150,name:"Mewtwo",type:"psychic",rarity:"R"},{n:151,name:"Mew ex",type:"psychic",rarity:"RR"},{n:152,name:"Fossile Dôme Antique",type:"normal",rarity:"U"},{n:153,name:"Fossile Hélice Antique",type:"normal",rarity:"U"},{n:154,name:"Vieil Ambre Antique",type:"normal",rarity:"U"},{n:155,name:"Maxi Ballon",type:"normal",rarity:"U"},{n:156,name:"Transfert de Leo",type:"normal",rarity:"U"},{n:157,name:"Piste Cyclable",type:"normal",rarity:"U"},{n:158,name:"Aide de Nina",type:"normal",rarity:"U"},{n:159,name:"Sticker Énergie",type:"normal",rarity:"U"},{n:160,name:"Invitation d'Erika",type:"normal",rarity:"U"},{n:161,name:"Charisme de Giovanni",type:"normal",rarity:"U"},{n:162,name:"Chopeur",type:"normal",rarity:"U"},{n:163,name:"Restes",type:"normal",rarity:"U"},{n:164,name:"Lunettes Protectrices",type:"normal",rarity:"U"},{n:165,name:"Bandeau Rigide",type:"normal",rarity:"U"},{n:166,name:"Bulbizarre",type:"grass",rarity:"IR"},{n:167,name:"Herbizarre",type:"grass",rarity:"IR"},{n:168,name:"Salameche",type:"fire",rarity:"IR"},{n:169,name:"Reptincel",type:"fire",rarity:"IR"},{n:170,name:"Carapuce",type:"water",rarity:"IR"},{n:171,name:"Carabaffe",type:"water",rarity:"IR"},{n:172,name:"Chenipan",type:"grass",rarity:"IR"},{n:173,name:"Pikachu",type:"electric",rarity:"IR"},{n:174,name:"Nidoking",type:"dark",rarity:"IR"},{n:175,name:"Psykokwak",type:"water",rarity:"IR"},{n:176,name:"Tetarte",type:"water",rarity:"IR"},{n:177,name:"Machopeur",type:"fighting",rarity:"IR"},{n:178,name:"Saquedeneu",type:"grass",rarity:"IR"},{n:179,name:"M. Mime",type:"psychic",rarity:"IR"},{n:180,name:"Amonita",type:"water",rarity:"IR"},{n:181,name:"Draco",type:"dragon",rarity:"IR"},{n:182,name:"Florizarre ex",type:"grass",rarity:"UR"},{n:183,name:"Dracaufeu ex",type:"fire",rarity:"UR"},{n:184,name:"Tortank ex",type:"water",rarity:"UR"},{n:185,name:"Arbok ex",type:"dark",rarity:"UR"},{n:186,name:"Feunard ex",type:"fire",rarity:"UR"},{n:187,name:"Grodoudou ex",type:"normal",rarity:"UR"},{n:188,name:"Alakazam ex",type:"psychic",rarity:"UR"},{n:189,name:"Grolem ex",type:"fighting",rarity:"UR"},{n:190,name:"Kangourex ex",type:"normal",rarity:"UR"},{n:191,name:"Lippoutou ex",type:"psychic",rarity:"UR"},{n:192,name:"Electhor ex",type:"electric",rarity:"UR"},{n:193,name:"Mew ex",type:"psychic",rarity:"UR"},{n:194,name:"Transfert de Leo",type:"normal",rarity:"UR"},{n:195,name:"Aide de Nina",type:"normal",rarity:"UR"},{n:196,name:"Invitation d'Erika",type:"normal",rarity:"UR"},{n:197,name:"Charisme de Giovanni",type:"normal",rarity:"UR"},{n:198,name:"Florizarre ex",type:"grass",rarity:"SAR"},{n:199,name:"Dracaufeu ex",type:"fire",rarity:"SAR"},{n:200,name:"Tortank ex",type:"water",rarity:"SAR"},{n:201,name:"Alakazam ex",type:"psychic",rarity:"SAR"},{n:202,name:"Electhor ex",type:"electric",rarity:"SAR"},{n:203,name:"Invitation d'Erika",type:"normal",rarity:"SAR"},{n:204,name:"Charisme de Giovanni",type:"normal",rarity:"SAR"},{n:205,name:"Mew ex",type:"psychic",rarity:"GOLD"},{n:206,name:"Switch",type:"normal",rarity:"GOLD"},{n:207,name:"Énergie Psy de base",type:"psychic",rarity:"GOLD"}
-  ]
-  }
-  ,"base1": {
-    id: "base1", sealed: [
-      {id:"starter-2p",name:"Starter 2 Joueurs",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"},
-      {id:"booster-dracaufeu",name:"Booster Dracaufeu",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"},
-      {id:"booster-tortank",name:"Booster Tortank",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"},
-      {id:"booster-florizarre",name:"Booster Florizarre",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"},
-    ], name: "Set de Base — Édition 1", icon: "🏆", logo: "base1-logo.jpg", tcgId: "base1", tcgdexIds: ["base1"], mainCount: 102,
-    cards: [
-  // Holo Rares
-  {n:1,name:"Alakazam",type:"psychic",rarity:"R"},
-  {n:2,name:"Tortank",type:"water",rarity:"R"},
-  {n:3,name:"Leveinard",type:"colorless",rarity:"R"},
-  {n:4,name:"Dracaufeu",type:"fire",rarity:"R"},
-  {n:5,name:"Mélofée",type:"colorless",rarity:"R"},
-  {n:6,name:"Léviator",type:"water",rarity:"R"},
-  {n:7,name:"Tygnon",type:"fighting",rarity:"R"},
-  {n:8,name:"Mackogneur",type:"fighting",rarity:"R"},
-  {n:9,name:"Magnéton",type:"electric",rarity:"R"},
-  {n:10,name:"Mewtwo",type:"psychic",rarity:"R"},
-  {n:11,name:"Nidoking",type:"grass",rarity:"R"},
-  {n:12,name:"Feunard",type:"fire",rarity:"R"},
-  {n:13,name:"Tartard",type:"water",rarity:"R"},
-  {n:14,name:"Raichu",type:"electric",rarity:"R"},
-  {n:15,name:"Florizarre",type:"grass",rarity:"R"},
-  {n:16,name:"Électhor",type:"electric",rarity:"R"},
-  // Rares non-holo
-  {n:17,name:"Dardargnan",type:"grass",rarity:"R"},
-  {n:18,name:"Draco",type:"colorless",rarity:"R"},
-  {n:19,name:"Triopikeur",type:"fighting",rarity:"R"},
-  {n:20,name:"Élektek",type:"electric",rarity:"R"},
-  {n:21,name:"Électrode",type:"electric",rarity:"R"},
-  {n:22,name:"Roucoups",type:"colorless",rarity:"R"},
-  {n:23,name:"Arcanin",type:"fire",rarity:"R"},
-  {n:24,name:"Reptincel",type:"fire",rarity:"R"},
-  {n:25,name:"Lamantine",type:"water",rarity:"R"},
-  {n:26,name:"Minidraco",type:"colorless",rarity:"R"},
-  {n:27,name:"Canarticho",type:"colorless",rarity:"R"},
-  {n:28,name:"Caninos",type:"fire",rarity:"R"},
-  {n:29,name:"Spectrum",type:"psychic",rarity:"R"},
-  {n:30,name:"Herbizarre",type:"grass",rarity:"R"},
-  {n:31,name:"Lippoutou",type:"psychic",rarity:"R"},
-  {n:32,name:"Kadabra",type:"psychic",rarity:"R"},
-  // Uncommons
-  {n:33,name:"Coconfort",type:"grass",rarity:"U"},
-  {n:34,name:"Machopeur",type:"fighting",rarity:"U"},
-  {n:35,name:"Magicarpe",type:"water",rarity:"U"},
-  {n:36,name:"Magmar",type:"fire",rarity:"U"},
-  {n:37,name:"Nidorino",type:"grass",rarity:"U"},
-  {n:38,name:"Têtarte",type:"water",rarity:"U"},
-  {n:39,name:"Porygon",type:"colorless",rarity:"U"},
-  {n:40,name:"Rattatac",type:"colorless",rarity:"U"},
-  {n:41,name:"Otaria",type:"water",rarity:"U"},
-  {n:42,name:"Carabaffe",type:"water",rarity:"U"},
-  {n:43,name:"Énergie",type:"trainer",rarity:"U"},
-  // Commons
-  {n:44,name:"Bulbizarre",type:"grass",rarity:"C"},
-  {n:45,name:"Chenipan",type:"grass",rarity:"C"},
-  {n:46,name:"Salamèche",type:"fire",rarity:"C"},
-  {n:47,name:"Taupiqueur",type:"fighting",rarity:"C"},
-  {n:48,name:"Doduo",type:"colorless",rarity:"C"},
-  {n:49,name:"Noeunoeuf",type:"grass",rarity:"C"},
-  {n:50,name:"Racaillou",type:"fighting",rarity:"C"},
-  {n:51,name:"Smogo",type:"grass",rarity:"C"},
-  {n:52,name:"Machoc",type:"fighting",rarity:"C"},
-  {n:53,name:"Magnéti",type:"electric",rarity:"C"},
-  {n:54,name:"Chrysacier",type:"grass",rarity:"C"},
-  {n:55,name:"Nidoran♂",type:"grass",rarity:"C"},
-  {n:56,name:"Onix",type:"fighting",rarity:"C"},
-  {n:57,name:"Pikachu",type:"electric",rarity:"C"},
-  {n:58,name:"Ponyta",type:"fire",rarity:"C"},
-  {n:59,name:"Rattata",type:"colorless",rarity:"C"},
-  {n:60,name:"Sabelette",type:"fighting",rarity:"C"},
-  {n:61,name:"Carapuce",type:"water",rarity:"C"},
-  {n:62,name:"Stari",type:"water",rarity:"C"},
-  {n:63,name:"Saquedeneu",type:"grass",rarity:"C"},
-  {n:64,name:"Voltorbe",type:"electric",rarity:"C"},
-  {n:65,name:"Aspicot",type:"grass",rarity:"C"},
-  {n:66,name:"Fantominus",type:"psychic",rarity:"C"},
-  {n:67,name:"Smogogo",type:"grass",rarity:"C"},
-  {n:68,name:"Gravalanch",type:"fighting",rarity:"C"},
-  {n:69,name:"Férosinge",type:"fighting",rarity:"C"},
-  {n:70,name:"Rondoudou",type:"colorless",rarity:"C"},
-  {n:71,name:"Abra",type:"psychic",rarity:"C"},
-  {n:72,name:"Soporifik",type:"psychic",rarity:"C"},
-  {n:73,name:"Miaouss",type:"colorless",rarity:"C"},
-  {n:74,name:"Mimitoss",type:"grass",rarity:"C"},
-  {n:75,name:"Aéromite",type:"grass",rarity:"C"},
-  {n:76,name:"Nosférapti",type:"grass",rarity:"C"},
-  {n:77,name:"Nidoran♀",type:"grass",rarity:"C"},
-  {n:78,name:"Poissirène",type:"water",rarity:"C"},
-  {n:79,name:"Poissoroy",type:"water",rarity:"C"},
-  {n:80,name:"Tadmorv",type:"grass",rarity:"C"},
-  {n:81,name:"Mystherbe",type:"grass",rarity:"C"},
-  {n:82,name:"Paras",type:"grass",rarity:"C"},
-  {n:83,name:"Ptitard",type:"water",rarity:"C"},
-  {n:84,name:"Ramoloss",type:"psychic",rarity:"C"},
-  {n:85,name:"Staross",type:"water",rarity:"C"},
-  {n:86,name:"Chétiflor",type:"grass",rarity:"C"},
-  // Trainers
-  {n:87,name:"Professeur Chen",type:"trainer",rarity:"U"},
-  {n:88,name:"Éleveur de Pokémon",type:"trainer",rarity:"R"},
-  {n:89,name:"Guérison",type:"trainer",rarity:"U"},
-  {n:90,name:"Échange de Pokémon",type:"trainer",rarity:"R"},
-  {n:91,name:"Super Bonbon",type:"trainer",rarity:"R"},
-  {n:92,name:"Cherche de Pokémon",type:"trainer",rarity:"R"},
-  {n:93,name:"Pokédex",type:"trainer",rarity:"U"},
-  {n:94,name:"Récupération d'Énergie",type:"trainer",rarity:"U"},
-  {n:95,name:"Retrait d'Énergie",type:"trainer",rarity:"R"},
-  {n:96,name:"Super Retrait d'Énergie",type:"trainer",rarity:"R"},
-  {n:97,name:"Bill",type:"trainer",rarity:"C"},
-  {n:98,name:"Sosie",type:"trainer",rarity:"R"},
-  {n:99,name:"Potion",type:"trainer",rarity:"C"},
-  {n:100,name:"Super Potion",type:"trainer",rarity:"U"},
-  {n:101,name:"Switch",type:"trainer",rarity:"C"},
-  {n:102,name:"Rafale de Vent",type:"trainer",rarity:"U"},
-  ]
-  }
-};
+// ==================== TCGdex API LAYER ====================
+const TCGDEX_BASE = "https://api.tcgdex.net/v2/fr";
+const apiCache = {};
 
-const TYPE_META = {grass:{icon:"🌿"},fire:{icon:"🔥"},water:{icon:"💧"},electric:{icon:"⚡"},psychic:{icon:"🔮"},fighting:{icon:"👊"},darkness:{icon:"🌑"},steel:{icon:"⚙️"},dragon:{icon:"🐉"},colorless:{icon:"⭐"},trainer:{icon:"🎒"},energy:{icon:"✨"},normal:{icon:"⭐"}};
-const RARITY_SYM = {C:"●",U:"◆",R:"★",RR:"★★",IR:"🎨",UR:"💎",SAR:"🌟",MA:"⚔️",GOLD:"👑"};
-const RARITY_COLOR = {C:"#475569",U:"#475569",R:"#c084fc",RR:"#fbbf24",IR:"#da70d6",UR:"#00bfff",SAR:"#ff6eb4",MA:"#ff4500",GOLD:"#ffd700"};
+async function apiFetch(path) {
+  if (apiCache[path]) return apiCache[path];
+  const r = await fetch(`${TCGDEX_BASE}${path}`);
+  if (!r.ok) throw new Error(`API ${r.status}`);
+  const data = await r.json();
+  apiCache[path] = data;
+  return data;
+}
+
+// Load all series (with their sets)
+async function loadAllSeries() {
+  const series = await apiFetch("/series");
+  // series is an array of {id, name, logo, sets:[...]}
+  // But the /series endpoint returns minimal info. We need sets detail per series.
+  // Actually /v2/fr/series returns [{id, name, logo}] and we need /v2/fr/series/{id} for sets.
+  // Let's load sets for each serie lazily. For now, return the list.
+  return series;
+}
+
+// Load sets for a specific serie
+async function loadSerieDetail(serieId) {
+  return await apiFetch(`/series/${serieId}`);
+}
+
+// Load full set detail (with cards)
+async function loadSetDetail(setId) {
+  return await apiFetch(`/sets/${setId}`);
+}
+
+// ==================== TYPE & RARITY META ====================
+const TYPE_META = {grass:{icon:"🌿"},fire:{icon:"🔥"},water:{icon:"💧"},electric:{icon:"⚡"},psychic:{icon:"🔮"},fighting:{icon:"👊"},darkness:{icon:"🌑"},steel:{icon:"⚙️"},dragon:{icon:"🐉"},colorless:{icon:"⭐"},normal:{icon:"⭐"},fairy:{icon:"🧚"},metal:{icon:"⚙️"},trainer:{icon:"🎒"},energy:{icon:"✨"}};
+const RARITY_SYM = {"Commune":"●","Common":"●","Peu Commune":"◆","Uncommon":"◆","Rare":"★","Ultra Rare":"💎","Illustration Rare":"🎨","Special Art Rare":"🌟","Hyper Rare":"👑","Secret Rare":"👑","Art Rare":"🎨","Amazing Rare":"⭐","ACE SPEC Rare":"🔥","Double Rare":"★★","Shiny Rare":"✨","Shiny Ultra Rare":"✨💎","Crown Rare":"👑"};
+const RARITY_COLOR = {"Commune":"#475569","Common":"#475569","Peu Commune":"#475569","Uncommon":"#475569","Rare":"#c084fc","Ultra Rare":"#00bfff","Illustration Rare":"#da70d6","Special Art Rare":"#ff6eb4","Hyper Rare":"#ffd700","Secret Rare":"#ffd700","Art Rare":"#da70d6","Amazing Rare":"#fbbf24","ACE SPEC Rare":"#ff4500","Double Rare":"#fbbf24","Shiny Rare":"#22d3ee","Shiny Ultra Rare":"#22d3ee","Crown Rare":"#ffd700"};
+
+function getTypeIcon(types, category) {
+  if (category === "Trainer" || category === "Dresseur") return "🎒";
+  if (category === "Energy" || category === "Énergie") return "✨";
+  if (!types || types.length === 0) return "⭐";
+  const t = types[0].toLowerCase();
+  return TYPE_META[t]?.icon || "⭐";
+}
+
+function getTypeName(types, category) {
+  if (category === "Trainer" || category === "Dresseur") return "trainer";
+  if (category === "Energy" || category === "Énergie") return "energy";
+  if (!types || types.length === 0) return "colorless";
+  return types[0].toLowerCase();
+}
+
+function getRarityShort(r) {
+  if (!r) return "?";
+  return RARITY_SYM[r] || r.substring(0, 3);
+}
+function getRarityColor(r) {
+  if (!r) return "#475569";
+  return RARITY_COLOR[r] || "#475569";
+}
+
+function isSecretRare(r) {
+  if (!r) return false;
+  const upper = r.toLowerCase();
+  return upper.includes("ultra") || upper.includes("illustration") || upper.includes("special art") || upper.includes("hyper") || upper.includes("secret") || upper.includes("art rare") || upper.includes("amazing") || upper.includes("shiny") || upper.includes("crown");
+}
 
 // ==================== STATE ====================
 let currentUser = null;
@@ -505,22 +323,48 @@ let filterStatus = "missing";
 let filterRarity = "all";
 let searchText = "";
 let saveTimeout = null;
-let currentView = "tracker";
+let currentView = "tracker"; // tracker | collections | account | friends | friend-collection
 let menuOpen = false;
-let activeSet = "me25";
 
-function getCards() { return SETS[activeSet].cards; }
-function getSetInfo() { return SETS[activeSet]; }
+// Active set info (loaded from API)
+let activeSetId = null; // e.g. "sv08.5"
+let activeSetData = null; // full set data from TCGdex
+let activeSetCards = []; // processed card list
+
+// Series catalog
+let allSeries = [];
+let seriesDetailsCache = {};
+let openSeries = new Set();
+let collectionsSearchText = "";
+let collectionsLoading = false;
+
+let userAvatar = null;
+
+// ==================== CARD PROCESSING ====================
+function processSetCards(setData) {
+  if (!setData || !setData.cards) return [];
+  return setData.cards.map(c => ({
+    localId: c.localId || c.id,
+    n: c.localId || c.id,
+    name: c.name || "???",
+    type: getTypeName(c.types, c.category),
+    typeIcon: getTypeIcon(c.types, c.category),
+    rarity: c.rarity || "Commune",
+    image: c.image || null,
+    category: c.category || "",
+    isSecret: isSecretRare(c.rarity)
+  }));
+}
 
 // ==================== AUTH ====================
 function renderAuth() {
   let isLogin = true;
   const el = document.getElementById("auth-screen");
-  
+
   function draw() {
     el.innerHTML = `
       <div class="auth-box">
-        <div style="text-align:center;margin-bottom:8px"><img src="logo.png" style="width:80px;height:80px;border-radius:18px" alt="PokéTracker"></div>
+        <div style="text-align:center;margin-bottom:8px"><img src="logo.png" style="width:80px;height:80px;border-radius:18px" alt="PokéTracker" onerror="this.style.display='none'"></div>
         <h1>PokéTracker</h1>
         <p class="subtitle">Gérez vos collections Pokémon TCG</p>
         <div id="auth-error" class="auth-error"></div>
@@ -532,20 +376,15 @@ function renderAuth() {
         <button class="auth-btn google" id="auth-google">🔵 Continuer avec Google</button>
         <div class="auth-toggle">${isLogin ? "Pas de compte ?" : "Déjà un compte ?"} <span id="auth-switch">${isLogin ? "S'inscrire" : "Se connecter"}</span></div>
       </div>`;
-    
+
     document.getElementById("auth-switch").onclick = () => { isLogin = !isLogin; draw(); };
     if (isLogin) {
       document.getElementById("auth-forgot").onclick = async () => {
         const email = document.getElementById("auth-email").value.trim();
         const errEl = document.getElementById("auth-error");
         if (!email) { errEl.style.color = '#f59e0b'; errEl.textContent = "Entre ton email d'abord"; return; }
-        try {
-          await sendPasswordResetEmail(auth, email);
-          errEl.style.color = '#4ade80'; errEl.textContent = "Email de réinitialisation envoyé !";
-        } catch(e) {
-          const msgs = {"auth/invalid-email":"Email invalide","auth/user-not-found":"Aucun compte avec cet email","auth/too-many-requests":"Trop de tentatives, réessaie plus tard"};
-          errEl.style.color = ''; errEl.textContent = msgs[e.code] || e.message;
-        }
+        try { await sendPasswordResetEmail(auth, email); errEl.style.color = '#4ade80'; errEl.textContent = "Email de réinitialisation envoyé !"; }
+        catch(e) { const msgs = {"auth/invalid-email":"Email invalide","auth/user-not-found":"Aucun compte avec cet email","auth/too-many-requests":"Trop de tentatives"}; errEl.style.color = ''; errEl.textContent = msgs[e.code] || e.message; }
       };
     }
     document.getElementById("auth-submit").onclick = async () => {
@@ -554,37 +393,23 @@ function renderAuth() {
       const errEl = document.getElementById("auth-error");
       if (!email || !pass) { errEl.textContent = "Remplis tous les champs"; return; }
       if (!isLogin && pass.length < 6) { errEl.textContent = "6 caractères minimum"; return; }
-      try {
-        errEl.textContent = "";
-        if (isLogin) await signInWithEmailAndPassword(auth, email, pass);
-        else await createUserWithEmailAndPassword(auth, email, pass);
-      } catch (e) {
-        const msgs = {"auth/invalid-credential":"Email ou mot de passe incorrect","auth/email-already-in-use":"Cet email est déjà utilisé","auth/weak-password":"Mot de passe trop faible","auth/invalid-email":"Email invalide","auth/too-many-requests":"Trop de tentatives, réessaie plus tard"};
-        errEl.textContent = msgs[e.code] || e.message;
-      }
+      try { errEl.textContent = ""; if (isLogin) await signInWithEmailAndPassword(auth, email, pass); else await createUserWithEmailAndPassword(auth, email, pass); }
+      catch (e) { const msgs = {"auth/invalid-credential":"Email ou mot de passe incorrect","auth/email-already-in-use":"Cet email est déjà utilisé","auth/weak-password":"Mot de passe trop faible","auth/invalid-email":"Email invalide","auth/too-many-requests":"Trop de tentatives"}; errEl.textContent = msgs[e.code] || e.message; }
     };
-    document.getElementById("auth-google").onclick = async () => {
-      try { await signInWithPopup(auth, googleProvider); }
-      catch (e) { document.getElementById("auth-error").textContent = e.message; }
-    };
-    // Enter key
-    el.querySelectorAll(".auth-input").forEach(inp => {
-      inp.onkeydown = (e) => { if (e.key === "Enter") document.getElementById("auth-submit").click(); };
-    });
+    document.getElementById("auth-google").onclick = async () => { try { await signInWithPopup(auth, googleProvider); } catch (e) { document.getElementById("auth-error").textContent = e.message; } };
+    el.querySelectorAll(".auth-input").forEach(inp => { inp.onkeydown = (e) => { if (e.key === "Enter") document.getElementById("auth-submit").click(); }; });
   }
   draw();
 }
 
 // ==================== FIRESTORE ====================
-// OFFLINE (IndexedDB + SW)
 const IDB_NAME='poketracker-offline',IDB_STORE='collections';
 function openIDB(){return new Promise((r,j)=>{const q=indexedDB.open(IDB_NAME,1);q.onupgradeneeded=()=>q.result.createObjectStore(IDB_STORE);q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)})}
 async function saveLocal(u,d){try{const b=await openIDB(),t=b.transaction(IDB_STORE,'readwrite');t.objectStore(IDB_STORE).put(d,u);await new Promise((r,j)=>{t.oncomplete=r;t.onerror=j})}catch(e){}}
 async function loadLocal(u){try{const b=await openIDB(),t=b.transaction(IDB_STORE,'readonly'),q=t.objectStore(IDB_STORE).get(u);return new Promise((r,j)=>{q.onsuccess=()=>r(q.result||null);q.onerror=j})}catch(e){return null}}
 if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
-let isOffline=false;
+let isOffline = false;
 
-// Auto-sync when coming back online
 window.addEventListener('online', async () => {
   if (!currentUser) return;
   const uid = currentUser.uid;
@@ -594,18 +419,11 @@ window.addEventListener('online', async () => {
     const snap = await getDoc(doc(db, "collections", uid));
     let remote = snap.exists() ? snap.data() : {};
     let remoteSets = remote.sets || {};
-    // Merge: local wins for sets modified offline
     let merged = { ...remoteSets, ...local.sets };
-    await setDoc(doc(db, "collections", uid), {
-      sets: merged,
-      avatar: local.avatar || remote.avatar || null,
-      updatedAt: new Date().toISOString(),
-      email: currentUser.email || ""
-    });
+    await setDoc(doc(db, "collections", uid), { sets: merged, avatar: local.avatar || remote.avatar || null, updatedAt: new Date().toISOString(), email: currentUser.email || "" });
     await saveLocal(uid, { sets: merged, avatar: local.avatar || remote.avatar });
     isOffline = false;
-    console.log("Synced offline changes to Firestore");
-  } catch(e) { console.warn("Sync failed:", e); }
+  } catch(e) {}
 });
 
 async function loadCollection(uid) {
@@ -613,21 +431,22 @@ async function loadCollection(uid) {
     const snap = await getDoc(doc(db, "collections", uid));
     if (snap.exists()) {
       const data = snap.data();
-      if (data.sets && data.sets[activeSet]) {
-        owned = new Set(data.sets[activeSet]);
-      } else if (data.cards && activeSet === "me25") {
-        owned = new Set(data.cards);
-      } else {
-        owned = new Set();
-      }
+      if (activeSetId && data.sets && data.sets[activeSetId]) {
+        owned = new Set(data.sets[activeSetId]);
+      } else { owned = new Set(); }
       if (data.avatar) userAvatar = data.avatar;
-      if (data.sealed && data.sealed[activeSet]) sealedOwned = new Set(data.sealed[activeSet]); else sealedOwned = new Set();
-      isOffline=false; await saveLocal(uid,data);
-    } else { owned=new Set(); }
+      if (data.sealed && activeSetId && data.sealed[activeSetId]) sealedOwned = new Set(data.sealed[activeSetId]); else sealedOwned = new Set();
+      isOffline = false;
+      await saveLocal(uid, data);
+    } else { owned = new Set(); sealedOwned = new Set(); }
   } catch(e) {
-    console.warn("Offline mode"); isOffline=true;
-    const local=await loadLocal(uid);
-    if(local){if(local.sets&&local.sets[activeSet])owned=new Set(local.sets[activeSet]);else if(local.cards&&activeSet==="me25")owned=new Set(local.cards);else owned=new Set();if(local.avatar)userAvatar=local.avatar;if(local.sealed&&local.sealed[activeSet])sealedOwned=new Set(local.sealed[activeSet]);else sealedOwned=new Set();}else{owned=new Set();}
+    isOffline = true;
+    const local = await loadLocal(uid);
+    if (local) {
+      if (activeSetId && local.sets && local.sets[activeSetId]) owned = new Set(local.sets[activeSetId]); else owned = new Set();
+      if (local.avatar) userAvatar = local.avatar;
+      if (local.sealed && activeSetId && local.sealed[activeSetId]) sealedOwned = new Set(local.sealed[activeSetId]); else sealedOwned = new Set();
+    } else { owned = new Set(); sealedOwned = new Set(); }
   }
 }
 
@@ -638,19 +457,13 @@ async function saveCollection(uid) {
     const snap2 = await getDoc(doc(db, "collections", uid));
     let existingData = snap2.exists() ? snap2.data() : {};
     let sets = existingData.sets || {};
-    if (existingData.cards && !sets.me25) sets.me25 = existingData.cards;
-    sets[activeSet] = [...owned];
+    if (activeSetId) sets[activeSetId] = [...owned];
     let sealedAll = existingData.sealed || {};
-    sealedAll[activeSet] = [...sealedOwned];
-    await setDoc(doc(db, "collections", uid), {
-      sets: sets,
-      sealed: sealedAll,
-      updatedAt: new Date().toISOString(),
-      email: currentUser.email || ""
-    });
-    await saveLocal(uid,{sets,sealed:sealedAll,avatar:userAvatar});
+    if (activeSetId) sealedAll[activeSetId] = [...sealedOwned];
+    await setDoc(doc(db, "collections", uid), { sets, sealed: sealedAll, updatedAt: new Date().toISOString(), email: currentUser.email || "" });
+    await saveLocal(uid, { sets, sealed: sealedAll, avatar: userAvatar });
   } catch(e) {
-    console.error("Save err:",e);try{const lc=await loadLocal(uid);let ls=(lc&&lc.sets)?lc.sets:{};ls[activeSet]=[...owned];let sl2=(lc&&lc.sealed)?lc.sealed:{};sl2[activeSet]=[...sealedOwned];await saveLocal(uid,{sets:ls,sealed:sl2,avatar:userAvatar})}catch(e2){}
+    try { const lc = await loadLocal(uid); let ls = (lc && lc.sets) ? lc.sets : {}; if (activeSetId) ls[activeSetId] = [...owned]; let sl2 = (lc && lc.sealed) ? lc.sealed : {}; if (activeSetId) sl2[activeSetId] = [...sealedOwned]; await saveLocal(uid, { sets: ls, sealed: sl2, avatar: userAvatar }); } catch(e2) {}
   }
   setTimeout(() => { indicator.style.display = "none"; }, 800);
 }
@@ -660,9 +473,7 @@ function debouncedSave() {
   saveTimeout = setTimeout(() => saveCollection(currentUser.uid), 1200);
 }
 
-// ==================== RENDER APP ====================
-let userAvatar = null;
-
+// ==================== AVATARS ====================
 const AVATARS = [
   {id:'pikachu',pid:25},{id:'dracaufeu',pid:6},{id:'mewtwo',pid:150},{id:'evoli',pid:133},
   {id:'dracolosse',pid:149},{id:'leviator',pid:130},{id:'ronflex',pid:143},{id:'lucario',pid:448},
@@ -671,30 +482,29 @@ const AVATARS = [
   {id:'absol',pid:359},{id:'rayquaza',pid:384}
 ];
 function getAvatarUrl(pid) { return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pid}.png`; }
+function getInitials(user) { if (user.displayName) return user.displayName.substring(0,2).toUpperCase(); if (user.email) return user.email.substring(0,2).toUpperCase(); return "?"; }
+function renderProfileBtn() { if (userAvatar) return `<img src="${getAvatarUrl(userAvatar)}" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated">`; return getInitials(currentUser); }
 
-function getInitials(user) {
-  if (user.displayName) return user.displayName.substring(0,2).toUpperCase();
-  if (user.email) return user.email.substring(0,2).toUpperCase();
-  return "?";
-}
-
-function renderProfileBtn() {
-  if (userAvatar) return `<img src="${getAvatarUrl(userAvatar)}" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated">`;
-  return getInitials(currentUser);
-}
-
+// ==================== MAIN RENDER ====================
 function renderApp() {
   if (currentView === "account") { renderAccountPage(); return; }
   if (currentView === "friends") { renderFriendsPage(); return; }
   if (currentView === "friend-collection") { renderFriendCollectionPage(); return; }
   if (currentView === "collections") { renderCollectionsPage(); return; }
-  
-  const CARDS = getCards();
-  const setInfo = getSetInfo();
+
+  // Tracker view
+  if (!activeSetId || !activeSetData) {
+    // No set selected — show collections
+    currentView = "collections";
+    renderCollectionsPage();
+    return;
+  }
+
+  const CARDS = activeSetCards;
   const totalCards = CARDS.length;
-  const haveCount = owned.size;
+  const haveCount = CARDS.filter(c => owned.has(c.n)).length;
   const missingCount = totalCards - haveCount;
-  const pct = Math.round((haveCount / totalCards) * 100);
+  const pct = totalCards > 0 ? Math.round((haveCount / totalCards) * 100) : 0;
 
   // Type stats
   const byType = {};
@@ -704,10 +514,13 @@ function renderApp() {
     if (owned.has(c.n)) byType[c.type].have++;
   });
 
+  // Unique rarities in this set
+  const setRarities = [...new Set(CARDS.map(c => c.rarity))];
+
   // Filter
   const filtered = CARDS.filter(c => {
     if (filterType !== "all" && c.type !== filterType) return false;
-    if (filterRarity !== "all" && filterRarity !== "SEALED" && c.rarity !== filterRarity) return false;
+    if (filterRarity !== "all" && c.rarity !== filterRarity) return false;
     if (filterStatus === "owned" && !owned.has(c.n)) return false;
     if (filterStatus === "missing" && owned.has(c.n)) return false;
     if (searchText) {
@@ -718,33 +531,21 @@ function renderApp() {
   });
 
   const gradientFill = pct === 100 ? "linear-gradient(90deg,#4ade80,#22d3ee)" : "linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899)";
+  const setLogo = activeSetData.logo ? activeSetData.logo + "/low.webp" : "";
+  const setName = activeSetData.name || activeSetId;
 
   document.getElementById("app-screen").innerHTML = `
     <div class="header" style="position:relative">
       <div class="header-top">
         <div>
-          <div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt=""><h1>PokéTracker</h1></div>
-          <div class="header-sub"><img src="${setInfo.logo}" alt="" style="height:16px;vertical-align:middle;margin-right:4px">${setInfo.name} • ${totalCards} cartes</div>
+          <div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt="" onerror="this.style.display='none'"><h1>PokéTracker</h1></div>
+          <div class="header-sub">${setLogo ? `<img src="${setLogo}" alt="" style="height:16px;vertical-align:middle;margin-right:4px" onerror="this.style.display='none'">` : ''}${setName} • ${totalCards} cartes</div>
         </div>
         <div class="user-info">
           <button class="profile-btn" id="profile-btn">${renderProfileBtn()}</button>
         </div>
       </div>
-      ${menuOpen ? `
-        <div class="pm-overlay" id="pm-overlay"></div>
-        <div class="profile-menu" id="profile-menu">
-          <div class="pm-header">
-            <div class="pm-avatar">${renderProfileBtn()}</div>
-            <div class="pm-name">${currentUser.displayName || "Dresseur"}</div>
-            <div class="pm-email">${currentUser.email || ""}</div>
-          </div>
-          <button class="pm-item" id="pm-account"><span class="pm-icon"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/town-map.png" style="width:20px;height:20px;image-rendering:pixelated"></span>Mon compte</button>
-          <button class="pm-item" id="pm-collections"><span class="pm-icon"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" style="width:20px;height:20px;image-rendering:pixelated"></span>Collections</button>
-          <button class="pm-item" id="pm-friends"><span class="pm-icon"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/friend-ball.png" style="width:20px;height:20px;image-rendering:pixelated"></span>Amis${friendRequests.length > 0 ? ' <span style="background:#ef4444;color:#fff;font-size:10px;font-weight:700;border-radius:50%;width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;margin-left:4px">'+friendRequests.length+'</span>' : ''}</button>
-          <div class="pm-sep"></div>
-          <button class="pm-item danger" id="pm-logout"><span class="pm-icon"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/escape-rope.png" style="width:20px;height:20px;image-rendering:pixelated"></span>Se déconnecter</button>
-        </div>
-      ` : ''}
+      ${menuOpen ? renderMenu() : ''}
     </div>
 
     <div class="progress-section">
@@ -757,7 +558,7 @@ function renderApp() {
 
     <div class="type-chips">
       ${Object.entries(byType).map(([t, s]) => `
-        <div class="type-chip ${filterType === t ? 'active' : ''}" data-type="${t}" style="${filterType === t ? `color:${RARITY_COLOR.RR};border-color:${RARITY_COLOR.RR}50` : ''}">
+        <div class="type-chip ${filterType === t ? 'active' : ''}" data-type="${t}" style="${filterType === t ? `color:${RARITY_COLOR['Rare']};border-color:${RARITY_COLOR['Rare']}50` : ''}">
           <span style="font-size:10px">${TYPE_META[t]?.icon || ''}</span>
           <span class="chip-count">${s.have}/${s.total}</span>
         </div>
@@ -772,167 +573,387 @@ function renderApp() {
       </div>
       <input class="search-input" id="search-input" type="text" placeholder="🔍 Rechercher une carte..." value="${searchText}">
       <div class="rarity-row">
-        ${[{k:"all",l:"Toutes",c:"#94a3b8"},{k:"C",l:"● C",c:"#64748b"},{k:"U",l:"◆ UC",c:"#64748b"},{k:"R",l:"★ R",c:"#c084fc"},{k:"RR",l:"★★ RR",c:"#fbbf24"},{k:"IR",l:"🎨 IR",c:"#da70d6"},{k:"UR",l:"💎 UR",c:"#00bfff"},{k:"SAR",l:"🌟 SAR",c:"#ff6eb4"},{k:"MA",l:"⚔️ MA",c:"#ff4500"},{k:"GOLD",l:"👑 Gold",c:"#ffd700"},{k:"SEALED",l:"📦 Scellés",c:"#f97316"}].map(r => `
-          <button class="rarity-btn ${filterRarity === r.k ? 'active' : ''}" data-rarity="${r.k}" style="${filterRarity === r.k ? `color:${r.c};border-color:${r.c}` : ''}">${r.l}</button>
+        <button class="rarity-btn ${filterRarity === 'all' ? 'active' : ''}" data-rarity="all" style="${filterRarity === 'all' ? 'color:#94a3b8;border-color:#94a3b8' : ''}">Toutes</button>
+        ${setRarities.map(r => `
+          <button class="rarity-btn ${filterRarity === r ? 'active' : ''}" data-rarity="${r}" style="${filterRarity === r ? `color:${getRarityColor(r)};border-color:${getRarityColor(r)}` : ''}">${getRarityShort(r)} ${r}</button>
         `).join('')}
       </div>
-      ${filterRarity === 'SEALED' ? `<div class="results-info"><span>${setInfo.sealed ? setInfo.sealed.length : 0} scellé${(setInfo.sealed && setInfo.sealed.length > 1) ? 's' : ''}</span></div>` : `<div class="results-info"><span>${filtered.length} carte${filtered.length > 1 ? 's' : ''}</span></div>`}
+      <div class="results-info"><span>${filtered.length} carte${filtered.length > 1 ? 's' : ''}</span></div>
     </div>
 
-    ${filterRarity === 'SEALED' ? `
-    <div class="card-list" id="card-list">
-      ${(setInfo.sealed && setInfo.sealed.length > 0) ? setInfo.sealed.map(s => {
-        const has = sealedOwned.has(s.id);
-        return `<div class="sealed-row ${has ? 'owned' : ''}" data-sealed="${s.id}">
-          <div class="check ${has ? 'checked' : ''}">${has ? '✓' : ''}</div>
-          <img class="sealed-icon" src="${s.img}" alt="">
-          <span class="sealed-name">${s.name}</span>
-        </div>`;
-      }).join('') : '<div class="empty-state"><span class="empty-icon">📦</span>Aucun scellé pour ce set</div>'}
-    </div>` : `
     <div class="card-list" id="card-list">
       ${filtered.length === 0 ? `<div class="empty-state"><span class="empty-icon">${filterStatus === 'missing' ? '🎉' : '🔍'}</span>${filterStatus === 'missing' ? 'Tout est complet !' : 'Aucune carte trouvée'}</div>` :
         filtered.map(c => {
           const isOwned = owned.has(c.n);
-          const isSecret = c.n > setInfo.mainCount;
           let extraClass = isOwned ? 'owned' : 'missing';
-          if (isSecret && !isOwned) extraClass += ' secret' + (c.rarity === 'SAR' ? ' sar' : c.rarity === 'GOLD' ? ' gold' : c.rarity === 'MA' ? ' ma' : '');
+          if (c.isSecret && !isOwned) extraClass += ' secret';
+          const thumbUrl = c.image ? c.image + "/low.webp" : "";
           return `<div class="card-row ${extraClass}" data-n="${c.n}">
             <div class="check ${isOwned ? 'checked' : ''}">${isOwned ? '✓' : ''}</div>
-            <img class="card-thumb" data-sid="${getSetInfo().tcgdexIds[0]}" data-cn="${c.n}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="lazy" alt="">
-            <span class="card-num">${String(c.n).padStart(3,'0')}</span>
-            <span class="card-icon">${TYPE_META[c.type]?.icon || ''}</span>
+            ${thumbUrl ? `<img class="card-thumb" src="${thumbUrl}" loading="lazy" alt="" onerror="this.style.display='none'">` : ''}
+            <span class="card-num">${c.n}</span>
+            <span class="card-icon">${c.typeIcon}</span>
             <span class="card-name">${c.name}</span>
-            <span class="card-rarity" style="color:${RARITY_COLOR[c.rarity] || '#475569'}">${RARITY_SYM[c.rarity] || ''}</span>
+            <span class="card-rarity" style="color:${getRarityColor(c.rarity)}">${getRarityShort(c.rarity)}</span>
             <button class="eye-btn" data-preview="${c.n}" title="Aperçu">👁️</button>
           </div>`;
-        }).join('')
-      }
-    </div>`}`;
-  document.getElementById("profile-btn").onclick = () => { menuOpen = !menuOpen; renderApp(); };
-  if (menuOpen) {
-    document.getElementById("pm-overlay").onclick = () => { menuOpen = false; renderApp(); };
-    document.getElementById("pm-account").onclick = () => { menuOpen = false; currentView = "account"; renderApp(); };
-    document.getElementById("pm-collections").onclick = () => { menuOpen = false; currentView = "collections"; renderApp(); };
-    document.getElementById("pm-friends").onclick = () => { menuOpen = false; currentView = "friends"; renderApp(); };
-    document.getElementById("pm-logout").onclick = () => { menuOpen = false; signOut(auth); };
-  }
-  
+        }).join('')}
+    </div>`;
+
+  bindMenuEvents();
+
   document.getElementById("search-input").oninput = (e) => {
     searchText = e.target.value;
     renderApp();
     document.getElementById("search-input").focus();
   };
-
-  document.querySelectorAll(".filter-btn").forEach(b => {
-    b.onclick = () => { filterStatus = b.dataset.status; renderApp(); };
-  });
-  document.querySelectorAll(".rarity-btn").forEach(b => {
-    b.onclick = () => { filterRarity = filterRarity === b.dataset.rarity ? "all" : b.dataset.rarity; renderApp(); };
-  });
-  document.querySelectorAll(".type-chip").forEach(b => {
-    b.onclick = () => { filterType = filterType === b.dataset.type ? "all" : b.dataset.type; renderApp(); };
-  });
+  document.querySelectorAll(".filter-btn").forEach(b => { b.onclick = () => { filterStatus = b.dataset.status; renderApp(); }; });
+  document.querySelectorAll(".rarity-btn").forEach(b => { b.onclick = () => { filterRarity = filterRarity === b.dataset.rarity ? "all" : b.dataset.rarity; renderApp(); }; });
+  document.querySelectorAll(".type-chip").forEach(b => { b.onclick = () => { filterType = filterType === b.dataset.type ? "all" : b.dataset.type; renderApp(); }; });
 
   document.querySelectorAll(".card-row").forEach(row => {
     row.onclick = (e) => {
       if (e.target.closest('.eye-btn')) return;
-      const n = parseInt(row.dataset.n);
+      const n = row.dataset.n;
       if (owned.has(n)) owned.delete(n); else owned.add(n);
       debouncedSave();
       renderApp();
     };
   });
 
-  // Sealed row click handlers
-  document.querySelectorAll(".sealed-row").forEach(row => {
-    row.onclick = () => {
-      const sid = row.dataset.sealed;
-      if (sealedOwned.has(sid)) sealedOwned.delete(sid); else sealedOwned.add(sid);
-      debouncedSave();
-      renderApp();
-    };
-  });
-
-  // Eye preview buttons
   document.querySelectorAll(".eye-btn").forEach(btn => {
-    btn.onclick = (e) => {
-      e.stopPropagation();
-      const n = parseInt(btn.dataset.preview);
-      showCardPreview(n);
-    };
+    btn.onclick = (e) => { e.stopPropagation(); showCardPreview(btn.dataset.preview); };
   });
-
-  // Lazy load thumbnails
-  const si = getSetInfo();
-  
-  if (!window._thumbMapPromise || window._thumbMapSet !== si.id) {
-    window._thumbMapSet = si.id;
-    window._thumbMapPromise = (async () => {
-      for (const sid of si.tcgdexIds) {
-        for (const lang of ['fr','en']) {
-          try {
-            const r = await fetch(`https://api.tcgdex.net/v2/${lang}/sets/${sid}`);
-            if (!r.ok) continue;
-            const data = await r.json();
-            if (data.cards && data.cards.length > 10) {
-              const map = {};
-              data.cards.forEach(c => {
-                if (!c.image) return;
-                map[c.localId] = c.image;
-                const num = parseInt(c.localId);
-                if (!isNaN(num)) map[String(num)] = c.image;
-              });
-              console.log(`TCGdex: ${sid}/${lang} → ${Object.keys(map).length} entries, sample:`, Object.keys(map).slice(0,8));
-              return { type:'api', map, sid, lang };
-            }
-          } catch(e) { continue; }
-        }
-      }
-      return { type:'direct' };
-    })();
-  }
-
-  const thumbObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        const cn = img.dataset.cn;
-        thumbObserver.unobserve(img);
-        window._thumbMapPromise.then(result => {
-          let urls = [];
-          if (result.type === 'api' && result.map[cn]) {
-            const b = result.map[cn];
-            urls = [b+"/low.webp", b+"/low.png", b+"/high.webp", b+"/high.png"];
-          }
-          // Always add direct asset URLs as fallback
-          for (const sid of si.tcgdexIds) {
-            const serie = sid.startsWith('sv') ? 'sv' : 'me';
-            for (const lang of ['fr','en']) {
-              for (const fmt of ['low.webp','low.png','high.webp','high.png']) {
-                urls.push(`https://assets.tcgdex.net/${lang}/${serie}/${sid}/${cn}/${fmt}`);
-              }
-            }
-          }
-          let idx = 0;
-          function tryNext() {
-            if (idx >= urls.length) { img.style.display='none'; return; }
-            img.src = urls[idx];
-            img.onerror = () => { idx++; tryNext(); };
-          }
-          tryNext();
-        });
-      }
-    });
-  }, {rootMargin: '300px'});
-  document.querySelectorAll(".card-thumb").forEach(img => thumbObserver.observe(img));
 }
 
+// ==================== MENU ====================
+function renderMenu() {
+  return `
+    <div class="pm-overlay" id="pm-overlay"></div>
+    <div class="profile-menu" id="profile-menu">
+      <div class="pm-header">
+        <div class="pm-avatar">${renderProfileBtn()}</div>
+        <div class="pm-name">${currentUser.displayName || "Dresseur"}</div>
+        <div class="pm-email">${currentUser.email || ""}</div>
+      </div>
+      <button class="pm-item" id="pm-account"><span class="pm-icon">🗺️</span>Mon compte</button>
+      <button class="pm-item" id="pm-collections"><span class="pm-icon">🎴</span>Collections</button>
+      <button class="pm-item" id="pm-friends"><span class="pm-icon">👥</span>Amis${friendRequests.length > 0 ? ' <span style="background:#ef4444;color:#fff;font-size:10px;font-weight:700;border-radius:50%;width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;margin-left:4px">'+friendRequests.length+'</span>' : ''}</button>
+      <div class="pm-sep"></div>
+      <button class="pm-item danger" id="pm-logout"><span class="pm-icon">🪢</span>Se déconnecter</button>
+    </div>`;
+}
+
+function bindMenuEvents() {
+  const profileBtn = document.getElementById("profile-btn");
+  if (profileBtn) profileBtn.onclick = () => { menuOpen = !menuOpen; renderApp(); };
+  if (menuOpen) {
+    const overlay = document.getElementById("pm-overlay");
+    if (overlay) overlay.onclick = () => { menuOpen = false; renderApp(); };
+    document.getElementById("pm-account")?.addEventListener("click", () => { menuOpen = false; currentView = "account"; renderApp(); });
+    document.getElementById("pm-collections")?.addEventListener("click", () => { menuOpen = false; currentView = "collections"; renderApp(); });
+    document.getElementById("pm-friends")?.addEventListener("click", () => { menuOpen = false; currentView = "friends"; renderApp(); });
+    document.getElementById("pm-logout")?.addEventListener("click", () => { menuOpen = false; signOut(auth); });
+  }
+}
+
+// ==================== COLLECTIONS PAGE (DYNAMIC) ====================
+async function renderCollectionsPage() {
+  const appEl = document.getElementById("app-screen");
+
+  // If series not loaded yet, show loading and fetch
+  if (allSeries.length === 0) {
+    appEl.innerHTML = `
+      <div class="header"><div class="header-top"><div><div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt="" onerror="this.style.display='none'"><h1>PokéTracker</h1></div><div class="header-sub">Chargement des collections...</div></div>
+      <div class="user-info"><button class="profile-btn" id="profile-btn">${renderProfileBtn()}</button></div></div>${menuOpen ? renderMenu() : ''}</div>
+      <div class="account-page"><div class="empty-state"><div class="inline-spinner"></div> Chargement des séries depuis TCGdex...</div></div>`;
+    bindMenuEvents();
+    try {
+      allSeries = await loadAllSeries();
+      // Reverse so newest series first
+      allSeries = allSeries.reverse();
+    } catch(e) {
+      appEl.innerHTML = `<div class="account-page" style="padding-top:80px"><div class="empty-state"><span class="empty-icon">❌</span>Erreur de chargement TCGdex<br><br><button class="auth-btn primary" style="max-width:200px;margin:0 auto" onclick="location.reload()">Réessayer</button></div></div>`;
+      return;
+    }
+    renderCollectionsPage();
+    return;
+  }
+
+  // Filter series by search
+  const q = collectionsSearchText.toLowerCase();
+  const filteredSeries = q ? allSeries.filter(s => s.name.toLowerCase().includes(q) || s.id.toLowerCase().includes(q)) : allSeries;
+
+  appEl.innerHTML = `
+    <div class="header" style="position:relative"><div class="header-top"><div><div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt="" onerror="this.style.display='none'"><h1>PokéTracker</h1></div><div class="header-sub">Toutes les collections</div></div>
+    <div class="user-info"><button class="profile-btn" id="profile-btn">${renderProfileBtn()}</button></div></div>${menuOpen ? renderMenu() : ''}</div>
+    <div class="account-page">
+      ${activeSetId ? '<button class="account-back" id="back-tracker">← Retour au tracker</button>' : ''}
+      <input class="search-input" id="collections-search" type="text" placeholder="🔍 Rechercher une série ou un set..." value="${collectionsSearchText}" style="margin-bottom:16px">
+      <div id="series-list">
+        ${filteredSeries.map(s => {
+          const isOpen = openSeries.has(s.id);
+          const detail = seriesDetailsCache[s.id];
+          const logoUrl = s.logo ? s.logo + "/low.webp" : "";
+          return `
+          <div class="series-block" data-series="${s.id}">
+            <div class="series-header" data-toggle="${s.id}">
+              ${logoUrl ? `<img class="series-logo" src="${logoUrl}" alt="" onerror="this.style.display='none'">` : '<div class="series-logo" style="display:flex;align-items:center;justify-content:center;font-size:20px">🎴</div>'}
+              <div class="series-info">
+                <div class="series-name">${s.name}</div>
+                <div class="series-meta">${detail ? detail.sets?.length + ' sets' : 'Cliquer pour voir les sets'}</div>
+              </div>
+              <span class="series-arrow ${isOpen ? 'open' : ''}">▶</span>
+            </div>
+            <div class="series-sets ${isOpen ? 'open' : ''}" id="sets-${s.id}">
+              ${isOpen && detail ? renderSetsList(detail) : (isOpen ? '<div style="padding:12px;color:var(--text3);font-size:12px"><div class="inline-spinner"></div> Chargement...</div>' : '')}
+            </div>
+          </div>`;
+        }).join('')}
+        ${filteredSeries.length === 0 ? '<div class="empty-state"><span class="empty-icon">🔍</span>Aucune série trouvée</div>' : ''}
+      </div>
+    </div>`;
+
+  bindMenuEvents();
+
+  // Back to tracker
+  document.getElementById("back-tracker")?.addEventListener("click", () => { currentView = "tracker"; renderApp(); });
+
+  // Search
+  document.getElementById("collections-search").oninput = (e) => {
+    collectionsSearchText = e.target.value;
+    renderCollectionsPage();
+    document.getElementById("collections-search")?.focus();
+  };
+
+  // Series toggles
+  document.querySelectorAll("[data-toggle]").forEach(el => {
+    el.onclick = async () => {
+      const sid = el.dataset.toggle;
+      if (openSeries.has(sid)) {
+        openSeries.delete(sid);
+        renderCollectionsPage();
+      } else {
+        openSeries.add(sid);
+        if (!seriesDetailsCache[sid]) {
+          renderCollectionsPage(); // Show loading state
+          try {
+            seriesDetailsCache[sid] = await loadSerieDetail(sid);
+          } catch(e) {
+            seriesDetailsCache[sid] = { sets: [] };
+          }
+        }
+        renderCollectionsPage();
+      }
+      document.getElementById("collections-search")?.focus();
+    };
+  });
+
+  // Set clicks
+  document.querySelectorAll("[data-select-set]").forEach(el => {
+    el.onclick = () => selectSet(el.dataset.selectSet);
+  });
+}
+
+function renderSetsList(serieDetail) {
+  if (!serieDetail || !serieDetail.sets || serieDetail.sets.length === 0) {
+    return '<div style="padding:8px 12px;color:var(--text4);font-size:12px">Aucun set disponible</div>';
+  }
+  return serieDetail.sets.map(s => {
+    const logoUrl = s.logo ? s.logo + "/low.webp" : "";
+    const isActive = activeSetId === s.id;
+    const cardCount = s.cardCount?.total || s.total || "?";
+    return `
+      <div class="set-item ${isActive ? 'active' : ''}" data-select-set="${s.id}">
+        ${logoUrl ? `<img class="set-logo" src="${logoUrl}" alt="" onerror="this.style.display='none'">` : '<div class="set-logo" style="display:flex;align-items:center;justify-content:center;font-size:14px">📦</div>'}
+        <span class="set-name">${s.name}</span>
+        <span class="set-count">${cardCount}</span>
+        ${isActive ? '<span class="set-badge">✓ Actif</span>' : ''}
+      </div>`;
+  }).join('');
+}
+
+async function selectSet(setId) {
+  activeSetId = setId;
+  filterType = "all"; filterStatus = "missing"; filterRarity = "all"; searchText = "";
+
+  // Show loading
+  const appEl = document.getElementById("app-screen");
+  appEl.innerHTML = `<div class="header"><div class="header-top"><div><div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt="" onerror="this.style.display='none'"><h1>PokéTracker</h1></div><div class="header-sub">Chargement de ${setId}...</div></div></div></div>
+    <div class="account-page"><div class="empty-state"><div class="inline-spinner"></div> Chargement des cartes...</div></div>`;
+
+  try {
+    activeSetData = await loadSetDetail(setId);
+    activeSetCards = processSetCards(activeSetData);
+  } catch(e) {
+    appEl.innerHTML = `<div class="account-page" style="padding-top:80px"><div class="empty-state"><span class="empty-icon">❌</span>Erreur de chargement du set "${setId}"<br><br><button class="account-back" id="back-coll">← Retour aux collections</button></div></div>`;
+    document.getElementById("back-coll")?.addEventListener("click", () => { currentView = "collections"; renderApp(); });
+    return;
+  }
+
+  // Load user's collection for this set
+  await loadCollection(currentUser.uid);
+  currentView = "tracker";
+  renderApp();
+}
+
+// ==================== CARD PREVIEW ====================
+function showCardPreview(localId) {
+  const card = activeSetCards.find(c => c.n === localId || c.n == localId);
+  if (!card) return;
+  const modal = document.getElementById("card-modal");
+  modal.style.display = "block";
+
+  const highUrl = card.image ? card.image + "/high.webp" : null;
+  const highPng = card.image ? card.image + "/high.png" : null;
+
+  modal.innerHTML = `
+    <div class="modal-overlay" id="modal-overlay">
+      <div class="modal-box">
+        <button class="modal-close" id="modal-close">✕</button>
+        ${highUrl ? '' : '<div class="modal-loading">Image non disponible</div>'}
+        <div class="modal-info">${card.n} — ${card.name}</div>
+      </div>
+    </div>`;
+
+  if (highUrl) {
+    const box = modal.querySelector(".modal-box");
+    const info = modal.querySelector(".modal-info");
+    const img = new Image();
+    // Show loading first
+    const loadDiv = document.createElement("div");
+    loadDiv.className = "modal-loading";
+    loadDiv.textContent = "⏳ Chargement...";
+    box.insertBefore(loadDiv, info);
+
+    img.onload = () => {
+      loadDiv.remove();
+      const imgEl = document.createElement("img");
+      imgEl.src = img.src;
+      imgEl.className = "modal-img";
+      box.insertBefore(imgEl, info);
+    };
+    img.onerror = () => {
+      // Try PNG fallback
+      if (highPng) {
+        const img2 = new Image();
+        img2.onload = () => {
+          loadDiv.remove();
+          const imgEl = document.createElement("img");
+          imgEl.src = img2.src;
+          imgEl.className = "modal-img";
+          box.insertBefore(imgEl, info);
+        };
+        img2.onerror = () => { loadDiv.textContent = "Image non disponible"; };
+        img2.src = highPng;
+      } else {
+        loadDiv.textContent = "Image non disponible";
+      }
+    };
+    img.src = highUrl;
+  }
+
+  document.getElementById("modal-close").onclick = closeModal;
+  document.getElementById("modal-overlay").onclick = (e) => { if (e.target.id === "modal-overlay") closeModal(); };
+}
+
+function closeModal() {
+  const modal = document.getElementById("card-modal");
+  modal.style.display = "none";
+  modal.innerHTML = "";
+}
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
 // ==================== ACCOUNT PAGE ====================
+function renderAccountPage() {
+  const displayName = currentUser.displayName || "";
+  const email = currentUser.email || "";
+  const isGoogle = currentUser.providerData?.[0]?.providerId === "google.com";
+
+  document.getElementById("app-screen").innerHTML = `
+    <div class="header"><div class="header-top"><div><div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt="" onerror="this.style.display='none'"><h1>PokéTracker</h1></div><div class="header-sub">Mon compte</div></div></div></div>
+    <div class="account-page">
+      <button class="account-back" id="back-btn">← Retour</button>
+      <div class="account-section">
+        <h3>🗺️ Profil</h3>
+        <div class="account-label">Avatar</div>
+        <div class="avatar-grid" id="avatar-grid"></div>
+        <div class="account-msg" id="msg-avatar"></div>
+        <div class="account-label" style="margin-top:12px">Pseudo</div>
+        <input class="account-input" id="input-name" type="text" placeholder="Mon pseudo" value="${displayName}">
+        <button class="account-save" id="save-name">Enregistrer</button>
+        <div class="account-msg" id="msg-name"></div>
+      </div>
+      <div class="account-section">
+        <h3>📧 Email</h3>
+        <div class="account-label">Adresse email</div>
+        <div class="account-value">${email}</div>
+        ${isGoogle ? '<div style="font-size:11px;color:var(--text4);margin-top:6px">Connecté via Google</div>' : ''}
+      </div>
+      ${!isGoogle ? `
+      <div class="account-section">
+        <h3>🔒 Mot de passe</h3>
+        <div class="account-label">Mot de passe actuel</div>
+        <input class="account-input" id="input-old-pass" type="password" placeholder="Mot de passe actuel">
+        <div class="account-label">Nouveau mot de passe</div>
+        <input class="account-input" id="input-new-pass" type="password" placeholder="Nouveau (6 car. min)">
+        <button class="account-save" id="save-pass">Changer le mot de passe</button>
+        <div class="account-msg" id="msg-pass"></div>
+      </div>` : ''}
+      <div class="account-section" style="border-color:rgba(248,113,113,0.15)">
+        <h3>⚠️ Zone dangereuse</h3>
+        <button class="pm-item danger" id="btn-logout-account" style="padding:8px 0">🪢 Se déconnecter</button>
+      </div>
+    </div>`;
+
+  document.getElementById("back-btn").onclick = () => { currentView = activeSetId ? "tracker" : "collections"; renderApp(); };
+  document.getElementById("btn-logout-account").onclick = () => signOut(auth);
+
+  const avatarGrid = document.getElementById("avatar-grid");
+  avatarGrid.innerHTML = AVATARS.map(a => `<div class="avatar-opt ${userAvatar == a.pid ? 'selected' : ''}" data-pid="${a.pid}"><img src="${getAvatarUrl(a.pid)}" alt="${a.id}" loading="lazy"></div>`).join('');
+  avatarGrid.querySelectorAll('.avatar-opt').forEach(el => {
+    el.onclick = async () => {
+      const pid = Number(el.dataset.pid); userAvatar = pid;
+      avatarGrid.querySelectorAll('.avatar-opt').forEach(e => e.classList.remove('selected')); el.classList.add('selected');
+      const msg = document.getElementById("msg-avatar");
+      try { await setDoc(doc(db, "collections", currentUser.uid), { avatar: pid }, { merge: true }); await updateUserProfile(); msg.className = "account-msg success"; msg.textContent = "✓ Avatar mis à jour !"; setTimeout(() => { msg.textContent = ""; }, 2000); }
+      catch(e) { msg.className = "account-msg error"; msg.textContent = e.message; }
+    };
+  });
+
+  document.getElementById("save-name").onclick = async () => {
+    const name = document.getElementById("input-name").value.trim();
+    const msg = document.getElementById("msg-name");
+    if (!name) { msg.className = "account-msg error"; msg.textContent = "Le pseudo ne peut pas être vide"; return; }
+    try { await updateProfile(currentUser, { displayName: name }); await updateUserProfile(); msg.className = "account-msg success"; msg.textContent = "✓ Pseudo mis à jour !"; setTimeout(() => { msg.textContent = ""; }, 2000); }
+    catch(e) { msg.className = "account-msg error"; msg.textContent = e.message; }
+  };
+
+  if (!isGoogle) {
+    document.getElementById("save-pass").onclick = async () => {
+      const oldPass = document.getElementById("input-old-pass").value;
+      const newPass = document.getElementById("input-new-pass").value;
+      const msg = document.getElementById("msg-pass");
+      if (!oldPass || !newPass) { msg.className = "account-msg error"; msg.textContent = "Remplis les deux champs"; return; }
+      if (newPass.length < 6) { msg.className = "account-msg error"; msg.textContent = "6 caractères minimum"; return; }
+      try {
+        const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
+        await reauthenticateWithCredential(currentUser, credential);
+        await updatePassword(currentUser, newPass);
+        msg.className = "account-msg success"; msg.textContent = "✓ Mot de passe mis à jour !";
+        document.getElementById("input-old-pass").value = ""; document.getElementById("input-new-pass").value = "";
+        setTimeout(() => { msg.textContent = ""; }, 2000);
+      } catch(e) {
+        const msgs = {"auth/wrong-password":"Mot de passe actuel incorrect","auth/invalid-credential":"Mot de passe actuel incorrect","auth/too-many-requests":"Trop de tentatives"};
+        msg.className = "account-msg error"; msg.textContent = msgs[e.code] || e.message;
+      }
+    };
+  }
+}
+
 // ==================== FRIENDS SYSTEM ====================
 function generateFriendCode() {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let code = '';
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; let code = '';
   for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
   return code;
 }
@@ -941,29 +962,14 @@ async function ensureFriendCode() {
   if (!currentUser) return;
   try {
     const snap = await getDoc(doc(db, "users", currentUser.uid));
-    if (snap.exists() && snap.data().friendCode) {
-      myFriendCode = snap.data().friendCode;
-    } else {
-      myFriendCode = generateFriendCode();
-      await setDoc(doc(db, "users", currentUser.uid), {
-        friendCode: myFriendCode,
-        displayName: currentUser.displayName || "Dresseur",
-        avatar: userAvatar,
-        email: currentUser.email || ""
-      }, { merge: true });
-    }
-  } catch (e) { console.warn("Friend code error:", e); }
+    if (snap.exists() && snap.data().friendCode) { myFriendCode = snap.data().friendCode; }
+    else { myFriendCode = generateFriendCode(); await setDoc(doc(db, "users", currentUser.uid), { friendCode: myFriendCode, displayName: currentUser.displayName || "Dresseur", avatar: userAvatar, email: currentUser.email || "" }, { merge: true }); }
+  } catch (e) {}
 }
 
 async function updateUserProfile() {
   if (!currentUser) return;
-  try {
-    await setDoc(doc(db, "users", currentUser.uid), {
-      displayName: currentUser.displayName || "Dresseur",
-      avatar: userAvatar,
-      email: currentUser.email || ""
-    }, { merge: true });
-  } catch (e) {}
+  try { await setDoc(doc(db, "users", currentUser.uid), { displayName: currentUser.displayName || "Dresseur", avatar: userAvatar, email: currentUser.email || "" }, { merge: true }); } catch (e) {}
 }
 
 async function loadFriends() {
@@ -973,28 +979,21 @@ async function loadFriends() {
     const snap = await getDocs(q1);
     friendsList = [];
     for (const d of snap.docs) {
-      const data = d.data();
-      const otherUid = data.users.find(u => u !== currentUser.uid);
-      if (otherUid) {
-        const uSnap = await getDoc(doc(db, "users", otherUid));
-        const uData = uSnap.exists() ? uSnap.data() : {};
-        friendsList.push({ docId: d.id, uid: otherUid, name: uData.displayName || "Dresseur", avatar: uData.avatar || null, code: uData.friendCode || "" });
-      }
+      const data = d.data(); const otherUid = data.users.find(u => u !== currentUser.uid);
+      if (otherUid) { const uSnap = await getDoc(doc(db, "users", otherUid)); const uData = uSnap.exists() ? uSnap.data() : {}; friendsList.push({ docId: d.id, uid: otherUid, name: uData.displayName || "Dresseur", avatar: uData.avatar || null, code: uData.friendCode || "" }); }
     }
     const q2 = query(collection(db, "friendRequests"), where("to", "==", currentUser.uid), where("status", "==", "pending"));
     const snap2 = await getDocs(q2);
     friendRequests = [];
     for (const d of snap2.docs) {
-      const data = d.data();
-      const uSnap = await getDoc(doc(db, "users", data.from));
-      const uData = uSnap.exists() ? uSnap.data() : {};
+      const data = d.data(); const uSnap = await getDoc(doc(db, "users", data.from)); const uData = uSnap.exists() ? uSnap.data() : {};
       friendRequests.push({ docId: d.id, fromUid: data.from, name: uData.displayName || "Dresseur", avatar: uData.avatar || null, code: uData.friendCode || "" });
     }
-  } catch (e) { console.warn("Load friends error:", e); }
+  } catch (e) {}
 }
 
 async function sendFriendRequest(code) {
-  if (!currentUser) return "Non connect\u00e9";
+  if (!currentUser) return "Non connecté";
   code = code.trim().toUpperCase();
   if (code === myFriendCode) return "C'est votre propre code !";
   if (code.length < 4) return "Code invalide";
@@ -1005,10 +1004,10 @@ async function sendFriendRequest(code) {
     const targetUid = snap.docs[0].id;
     const q2 = query(collection(db, "friends"), where("users", "array-contains", currentUser.uid));
     const fSnap = await getDocs(q2);
-    for (const d of fSnap.docs) { if (d.data().users.includes(targetUid)) return "D\u00e9j\u00e0 amis !"; }
+    for (const d of fSnap.docs) { if (d.data().users.includes(targetUid)) return "Déjà amis !"; }
     const q3 = query(collection(db, "friendRequests"), where("from", "==", currentUser.uid), where("to", "==", targetUid), where("status", "==", "pending"));
     const rSnap = await getDocs(q3);
-    if (!rSnap.empty) return "Demande d\u00e9j\u00e0 envoy\u00e9e !";
+    if (!rSnap.empty) return "Demande déjà envoyée !";
     await addDoc(collection(db, "friendRequests"), { from: currentUser.uid, to: targetUid, status: "pending", createdAt: new Date().toISOString() });
     return "ok";
   } catch (e) { return "Erreur: " + e.message; }
@@ -1025,24 +1024,11 @@ async function rejectFriendRequest(reqDocId) {
   await loadFriends();
 }
 
-async function removeFriend(friendDocId) {
-  await deleteDoc(doc(db, "friends", friendDocId));
-  await loadFriends();
-}
-
 function renderFriendsPage() {
-  const ITEMS = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items";
   document.getElementById("app-screen").innerHTML = `
-    <div class="header">
-      <div class="header-top">
-        <div>
-          <div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt=""><h1>Pok\u00e9Tracker</h1></div>
-          <div class="header-sub">Amis</div>
-        </div>
-      </div>
-    </div>
+    <div class="header"><div class="header-top"><div><div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt="" onerror="this.style.display='none'"><h1>PokéTracker</h1></div><div class="header-sub">Amis</div></div></div></div>
     <div class="account-page">
-      <button class="account-back" id="back-btn">\u2190 Retour au tracker</button>
+      <button class="account-back" id="back-btn">← Retour</button>
       <div class="friend-code-box">
         <div class="friend-code-label">Mon code ami</div>
         <div class="friend-code-display">${myFriendCode}</div>
@@ -1054,52 +1040,34 @@ function renderFriendsPage() {
       </div>
       <div class="account-msg" id="msg-friend"></div>
       ${friendRequests.length > 0 ? `
-        <div class="friend-section-title"><img src="${ITEMS}/friend-ball.png" style="width:16px;height:16px;image-rendering:pixelated"> Demandes re\u00e7ues <span style="background:#ef4444;color:#fff;font-size:10px;font-weight:700;border-radius:50%;min-width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;padding:0 4px">${friendRequests.length}</span></div>
+        <div class="friend-section-title">📨 Demandes reçues <span style="background:#ef4444;color:#fff;font-size:10px;font-weight:700;border-radius:50%;min-width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;padding:0 4px">${friendRequests.length}</span></div>
         ${friendRequests.map(r => `
           <div class="friend-card">
-            <div class="friend-avatar">${r.avatar ? '<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + r.avatar + '.png">' : '<span style="font-size:18px">\ud83d\udc64</span>'}</div>
-            <div class="friend-info">
-              <div class="friend-name">${r.name}</div>
-              <div class="friend-code-small">#${r.code}</div>
-            </div>
+            <div class="friend-avatar">${r.avatar ? '<img src="'+getAvatarUrl(r.avatar)+'">' : '<span style="font-size:18px">👤</span>'}</div>
+            <div class="friend-info"><div class="friend-name">${r.name}</div><div class="friend-code-small">#${r.code}</div></div>
             <button class="friend-btn accept" data-accept="${r.docId}" data-from="${r.fromUid}">Accepter</button>
             <button class="friend-btn reject" data-reject="${r.docId}">Refuser</button>
-          </div>
-        `).join('')}
-      ` : ''}
-      <div class="friend-section-title"><img src="${ITEMS}/friend-ball.png" style="width:16px;height:16px;image-rendering:pixelated"> Mes amis (${friendsList.length})</div>
+          </div>`).join('')}` : ''}
+      <div class="friend-section-title">👥 Mes amis (${friendsList.length})</div>
       ${friendsList.length === 0 ? '<div class="friend-empty">Aucun ami pour le moment.<br>Partagez votre code pour commencer !</div>' :
         friendsList.map(f => `
           <div class="friend-card">
-            <div class="friend-avatar">${f.avatar ? '<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + f.avatar + '.png">' : '<span style="font-size:18px">\ud83d\udc64</span>'}</div>
-            <div class="friend-info">
-              <div class="friend-name">${f.name}</div>
-              <div class="friend-code-small">#${f.code}</div>
-            </div>
+            <div class="friend-avatar">${f.avatar ? '<img src="'+getAvatarUrl(f.avatar)+'">' : '<span style="font-size:18px">👤</span>'}</div>
+            <div class="friend-info"><div class="friend-name">${f.name}</div><div class="friend-code-small">#${f.code}</div></div>
             <button class="friend-btn view" data-view-uid="${f.uid}" data-view-name="${f.name}" data-view-avatar="${f.avatar || ''}">Voir</button>
-          </div>
-        `).join('')}
+          </div>`).join('')}
     </div>`;
-  document.getElementById("back-btn").onclick = () => { currentView = "tracker"; renderApp(); };
+
+  document.getElementById("back-btn").onclick = () => { currentView = activeSetId ? "tracker" : "collections"; renderApp(); };
   document.getElementById("copy-code").onclick = () => {
-    navigator.clipboard.writeText(myFriendCode).then(() => {
-      const btn = document.getElementById("copy-code");
-      btn.textContent = "Copi\u00e9 !";
-      setTimeout(() => { btn.textContent = "Copier"; }, 1500);
-    });
+    navigator.clipboard.writeText(myFriendCode).then(() => { const btn = document.getElementById("copy-code"); btn.textContent = "Copié !"; setTimeout(() => { btn.textContent = "Copier"; }, 1500); });
   };
   document.getElementById("add-friend-btn").onclick = async () => {
     const input = document.getElementById("add-friend-input");
     const msg = document.getElementById("msg-friend");
     const result = await sendFriendRequest(input.value);
-    if (result === "ok") {
-      msg.style.color = "#4ade80";
-      msg.textContent = "Demande envoy\u00e9e !";
-      input.value = "";
-    } else {
-      msg.style.color = "#f59e0b";
-      msg.textContent = result;
-    }
+    if (result === "ok") { msg.style.color = "#4ade80"; msg.textContent = "Demande envoyée !"; input.value = ""; }
+    else { msg.style.color = "#f59e0b"; msg.textContent = result; }
     setTimeout(() => { msg.textContent = ""; }, 3000);
   };
   document.querySelectorAll("[data-accept]").forEach(btn => {
@@ -1117,372 +1085,82 @@ function renderFriendsPage() {
   });
 }
 
-let friendViewSet = null;
+// ==================== FRIEND COLLECTION VIEW ====================
+let friendViewSetId = null;
 let friendData_cache = {};
 
 async function renderFriendCollectionPage() {
   if (!viewingFriend) { currentView = "friends"; renderApp(); return; }
-  // Load friend data once
   if (!friendData_cache[viewingFriend.uid]) {
-    try {
-      const snap = await getDoc(doc(db, "collections", viewingFriend.uid));
-      if (snap.exists()) friendData_cache[viewingFriend.uid] = snap.data();
-      else friendData_cache[viewingFriend.uid] = {};
-    } catch (e) { friendData_cache[viewingFriend.uid] = {}; }
+    try { const snap = await getDoc(doc(db, "collections", viewingFriend.uid)); friendData_cache[viewingFriend.uid] = snap.exists() ? snap.data() : {}; }
+    catch (e) { friendData_cache[viewingFriend.uid] = {}; }
   }
   const friendData = friendData_cache[viewingFriend.uid];
   const friendSets = friendData.sets || {};
-  const friendSealed = friendData.sealed || {};
 
-  if (friendViewSet && SETS[friendViewSet]) {
-    // DETAIL VIEW: show cards for selected set
-    const si = SETS[friendViewSet];
-    const fOwned = new Set(friendSets[friendViewSet] || []);
-    const fSealedSet = new Set(friendSealed[friendViewSet] || []);
-    const mainTotal = si.mainCount;
-    const have = si.cards.filter(c => c.n <= mainTotal && fOwned.has(c.n)).length;
-    const pct = mainTotal > 0 ? Math.round(have / mainTotal * 100) : 0;
+  if (friendViewSetId) {
+    // Detail view — load from API
+    let setData;
+    try { setData = await loadSetDetail(friendViewSetId); } catch(e) { setData = null; }
+    if (!setData || !setData.cards) {
+      document.getElementById("app-screen").innerHTML = `<div class="account-page" style="padding-top:80px"><div class="empty-state">❌ Impossible de charger ce set</div><button class="account-back" id="back-btn">← Retour</button></div>`;
+      document.getElementById("back-btn").onclick = () => { friendViewSetId = null; renderFriendCollectionPage(); };
+      return;
+    }
+    const cards = processSetCards(setData);
+    const fOwned = new Set(friendSets[friendViewSetId] || []);
+    const total = cards.length;
+    const have = cards.filter(c => fOwned.has(c.n)).length;
+    const pct = total > 0 ? Math.round(have / total * 100) : 0;
     const gradientFill = pct === 100 ? "linear-gradient(90deg,#4ade80,#22d3ee)" : "linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899)";
+    const setLogo = setData.logo ? setData.logo + "/low.webp" : "";
+
     document.getElementById("app-screen").innerHTML = `
-      <div class="header">
-        <div class="header-top">
-          <div>
-            <div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt=""><h1>Pok\u00e9Tracker</h1></div>
-            <div class="header-sub"><img src="${si.logo}" style="height:16px;vertical-align:middle;margin-right:4px">${viewingFriend.name} \u2022 ${si.name}</div>
-          </div>
-        </div>
-      </div>
+      <div class="header"><div class="header-top"><div><div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt="" onerror="this.style.display='none'"><h1>PokéTracker</h1></div>
+      <div class="header-sub">${setLogo ? `<img src="${setLogo}" style="height:16px;vertical-align:middle;margin-right:4px" onerror="this.style.display='none'">` : ''}${viewingFriend.name} • ${setData.name}</div></div></div></div>
       <div class="progress-section">
-        <div class="progress-top">
-          <span class="progress-pct">${pct}%</span>
-          <span class="progress-count">${have}/${mainTotal}</span>
-        </div>
+        <div class="progress-top"><span class="progress-pct">${pct}%</span><span class="progress-count">${have}/${total}</span></div>
         <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${gradientFill}"></div></div>
       </div>
-      <div class="account-page" style="padding-top:0">
-        <button class="account-back" id="back-btn">\u2190 Retour</button>
-      </div>
-      <div class="card-list" id="card-list">
-        ${si.cards.map(c => {
+      <div class="account-page" style="padding-top:0"><button class="account-back" id="back-btn">← Retour</button></div>
+      <div class="card-list">
+        ${cards.map(c => {
           const isOwned = fOwned.has(c.n);
-          const isSecret = c.n > mainTotal;
-          let extraClass = isOwned ? 'owned' : 'missing';
-          if (isSecret && !isOwned) extraClass += ' secret';
-          return '<div class="card-row ' + extraClass + '" style="pointer-events:none">' +
-            '<div class="check ' + (isOwned ? 'checked' : '') + '">' + (isOwned ? '\u2713' : '') + '</div>' +
-            '<span class="card-num">' + String(c.n).padStart(3, '0') + '</span>' +
-            '<span class="card-icon">' + (TYPE_META[c.type] ? TYPE_META[c.type].icon : '') + '</span>' +
-            '<span class="card-name">' + c.name + '</span>' +
-            '<span class="card-rarity" style="color:' + (RARITY_COLOR[c.rarity] || '#475569') + '">' + (RARITY_SYM[c.rarity] || '') + '</span>' +
-            '</div>';
-        }).join('')}
-      </div>
-      ${(si.sealed && si.sealed.length > 0) ? '<div class="card-list" style="padding-top:0"><div class="sealed-section"><div class="friend-section-title" style="margin-top:0">\ud83d\udce6 Scell\u00e9s</div>' +
-        si.sealed.map(s => {
-          const has = fSealedSet.has(s.id);
-          return '<div class="sealed-row ' + (has ? 'owned' : '') + '" style="pointer-events:none"><div class="check ' + (has ? 'checked' : '') + '">' + (has ? '\u2713' : '') + '</div><img class="sealed-icon" src="' + s.img + '" alt=""><span class="sealed-name">' + s.name + '</span></div>';
-        }).join('') + '</div></div>' : ''}`;
-    document.getElementById("back-btn").onclick = () => { friendViewSet = null; renderFriendCollectionPage(); };
-  } else {
-    // OVERVIEW: list all sets
-    document.getElementById("app-screen").innerHTML = `
-      <div class="header">
-        <div class="header-top">
-          <div>
-            <div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt=""><h1>Pok\u00e9Tracker</h1></div>
-            <div class="header-sub">Collection de ${viewingFriend.name}</div>
-          </div>
-        </div>
-      </div>
-      <div class="account-page">
-        <button class="account-back" id="back-btn">\u2190 Retour aux amis</button>
-        ${Object.keys(SETS).map(sid => {
-          const si = SETS[sid];
-          const fCards = friendSets[sid] || [];
-          const fOwned = new Set(fCards);
-          const mainTotal = si.mainCount;
-          const have = si.cards.filter(c => c.n <= mainTotal && fOwned.has(c.n)).length;
-          const pct = mainTotal > 0 ? Math.round(have / mainTotal * 100) : 0;
-          const secretTotal = si.cards.filter(c => c.n > mainTotal).length;
-          const secretHave = si.cards.filter(c => c.n > mainTotal && fOwned.has(c.n)).length;
-          const fSealedArr = friendSealed[sid] || [];
-          const fSealedSet = new Set(fSealedArr);
-          const sealedTotal = si.sealed ? si.sealed.length : 0;
-          const sealedHave = si.sealed ? si.sealed.filter(s => fSealedSet.has(s.id)).length : 0;
-          const gradientFill = pct === 100 ? "linear-gradient(90deg,#4ade80,#22d3ee)" : "linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899)";
-          return '<div class="friend-set-card" data-friend-set="' + sid + '" style="cursor:pointer">' +
-            '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">' +
-            '<img src="' + si.logo + '" style="height:24px">' +
-            '<div style="flex:1"><div style="font-weight:700;font-size:14px;color:var(--text)">' + si.name + '</div>' +
-            '<div style="font-size:12px;color:var(--text3)">' + have + '/' + mainTotal + ' cartes' +
-            (secretTotal > 0 ? ' \u2022 ' + secretHave + '/' + secretTotal + ' secr\u00e8tes' : '') +
-            (sealedTotal > 0 ? ' \u2022 ' + sealedHave + '/' + sealedTotal + ' scell\u00e9s' : '') +
-            '</div></div>' +
-            '<span style="font-size:18px;font-weight:800;color:' + (pct === 100 ? '#4ade80' : '#60a5fa') + '">' + pct + '%</span></div>' +
-            '<div class="progress-bar" style="height:6px"><div class="progress-fill" style="width:' + pct + '%;background:' + gradientFill + '"></div></div>' +
-            '</div>';
+          return `<div class="card-row ${isOwned ? 'owned' : 'missing'}" style="pointer-events:none">
+            <div class="check ${isOwned ? 'checked' : ''}">${isOwned ? '✓' : ''}</div>
+            <span class="card-num">${c.n}</span>
+            <span class="card-icon">${c.typeIcon}</span>
+            <span class="card-name">${c.name}</span>
+            <span class="card-rarity" style="color:${getRarityColor(c.rarity)}">${getRarityShort(c.rarity)}</span>
+          </div>`;
         }).join('')}
       </div>`;
-    document.getElementById("back-btn").onclick = () => { friendViewSet = null; friendData_cache = {}; currentView = "friends"; renderApp(); };
+    document.getElementById("back-btn").onclick = () => { friendViewSetId = null; renderFriendCollectionPage(); };
+  } else {
+    // Show which sets the friend has data for
+    const setIds = Object.keys(friendSets).filter(k => friendSets[k] && friendSets[k].length > 0);
+    document.getElementById("app-screen").innerHTML = `
+      <div class="header"><div class="header-top"><div><div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt="" onerror="this.style.display='none'"><h1>PokéTracker</h1></div><div class="header-sub">Collection de ${viewingFriend.name}</div></div></div></div>
+      <div class="account-page">
+        <button class="account-back" id="back-btn">← Retour aux amis</button>
+        ${setIds.length === 0 ? '<div class="empty-state">Ce dresseur n\'a encore aucune collection</div>' :
+          setIds.map(sid => {
+            const count = friendSets[sid].length;
+            return `<div class="friend-set-card" data-friend-set="${sid}" style="cursor:pointer">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="font-size:20px">📦</div>
+                <div style="flex:1"><div style="font-weight:700;font-size:14px;color:var(--text)">${sid}</div>
+                <div style="font-size:12px;color:var(--text3)">${count} cartes collectées</div></div>
+              </div>
+            </div>`;
+          }).join('')}
+      </div>`;
+    document.getElementById("back-btn").onclick = () => { friendViewSetId = null; friendData_cache = {}; currentView = "friends"; renderApp(); };
     document.querySelectorAll("[data-friend-set]").forEach(el => {
-      el.onclick = () => { friendViewSet = el.dataset.friendSet; renderFriendCollectionPage(); };
+      el.onclick = () => { friendViewSetId = el.dataset.friendSet; renderFriendCollectionPage(); };
     });
   }
 }
-
-function renderAccountPage() {
-  const displayName = currentUser.displayName || "";
-  const email = currentUser.email || "";
-  const isGoogle = currentUser.providerData?.[0]?.providerId === "google.com";
-  
-  document.getElementById("app-screen").innerHTML = `
-    <div class="header">
-      <div class="header-top">
-        <div>
-          <div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt=""><h1>PokéTracker</h1></div>
-          <div class="header-sub">Mon compte</div>
-        </div>
-      </div>
-    </div>
-    <div class="account-page">
-      <button class="account-back" id="back-btn">← Retour au tracker</button>
-      
-      <div class="account-section">
-        <h3><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/town-map.png" style="width:18px;height:18px;image-rendering:pixelated;vertical-align:middle;margin-right:4px">Profil</h3>
-        <div class="account-label">Avatar</div>
-        <div class="avatar-grid" id="avatar-grid"></div>
-        <div class="account-msg" id="msg-avatar"></div>
-        <div class="account-label" style="margin-top:12px">Pseudo</div>
-        <input class="account-input" id="input-name" type="text" placeholder="Mon pseudo" value="${displayName}">
-        <button class="account-save" id="save-name">Enregistrer</button>
-        <div class="account-msg" id="msg-name"></div>
-      </div>
-
-      <div class="account-section">
-        <h3><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/rare-candy.png" style="width:18px;height:18px;image-rendering:pixelated;vertical-align:middle;margin-right:4px">Email</h3>
-        <div class="account-label">Adresse email</div>
-        <div class="account-value">${email}</div>
-        ${isGoogle ? '<div style="font-size:11px;color:var(--text4);margin-top:6px">Connecté via Google</div>' : ''}
-      </div>
-
-      ${!isGoogle ? `
-      <div class="account-section">
-        <h3><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/max-revive.png" style="width:18px;height:18px;image-rendering:pixelated;vertical-align:middle;margin-right:4px">Mot de passe</h3>
-        <div class="account-label">Mot de passe actuel</div>
-        <input class="account-input" id="input-old-pass" type="password" placeholder="Mot de passe actuel">
-        <div class="account-label">Nouveau mot de passe</div>
-        <input class="account-input" id="input-new-pass" type="password" placeholder="Nouveau mot de passe (6 car. min)">
-        <button class="account-save" id="save-pass">Changer le mot de passe</button>
-        <div class="account-msg" id="msg-pass"></div>
-      </div>
-      ` : ''}
-
-      <div class="account-section" style="border-color:rgba(248,113,113,0.15)">
-        <h3><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/flame-orb.png" style="width:18px;height:18px;image-rendering:pixelated;vertical-align:middle;margin-right:4px">Zone dangereuse</h3>
-        <button class="pm-item danger" id="btn-logout-account" style="padding:8px 0"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/escape-rope.png" style="width:18px;height:18px;image-rendering:pixelated;vertical-align:middle;margin-right:4px"> Se déconnecter</button>
-      </div>
-    </div>`;
-
-  document.getElementById("back-btn").onclick = () => { currentView = "tracker"; renderApp(); };
-  document.getElementById("btn-logout-account").onclick = () => signOut(auth);
-
-  // Render avatar grid
-  const avatarGrid = document.getElementById("avatar-grid");
-  avatarGrid.innerHTML = AVATARS.map(a => 
-    `<div class="avatar-opt ${userAvatar == a.pid ? 'selected' : ''}" data-pid="${a.pid}"><img src="${getAvatarUrl(a.pid)}" alt="${a.id}" loading="lazy"></div>`
-  ).join('');
-  avatarGrid.querySelectorAll('.avatar-opt').forEach(el => {
-    el.onclick = async () => {
-      const pid = Number(el.dataset.pid);
-      userAvatar = pid;
-      avatarGrid.querySelectorAll('.avatar-opt').forEach(e => e.classList.remove('selected'));
-      el.classList.add('selected');
-      const msg = document.getElementById("msg-avatar");
-      try {
-        await setDoc(doc(db, "collections", currentUser.uid), { avatar: pid }, { merge: true });
-        await updateUserProfile();
-        msg.className = "account-msg success"; msg.textContent = "✓ Avatar mis à jour !";
-        setTimeout(() => { msg.textContent = ""; }, 2000);
-      } catch(e) {
-        msg.className = "account-msg error"; msg.textContent = e.message;
-      }
-    };
-  });
-
-  // Save pseudo
-  document.getElementById("save-name").onclick = async () => {
-    const name = document.getElementById("input-name").value.trim();
-    const msg = document.getElementById("msg-name");
-    if (!name) { msg.className = "account-msg error"; msg.textContent = "Le pseudo ne peut pas être vide"; return; }
-    try {
-      await updateProfile(currentUser, { displayName: name });
-      msg.className = "account-msg success"; msg.textContent = "✓ Pseudo mis à jour !";
-      setTimeout(() => { msg.textContent = ""; }, 2000);
-    } catch(e) {
-      msg.className = "account-msg error"; msg.textContent = e.message;
-    }
-  };
-
-  // Change password
-  if (!isGoogle) {
-    document.getElementById("save-pass").onclick = async () => {
-      const oldPass = document.getElementById("input-old-pass").value;
-      const newPass = document.getElementById("input-new-pass").value;
-      const msg = document.getElementById("msg-pass");
-      if (!oldPass || !newPass) { msg.className = "account-msg error"; msg.textContent = "Remplis les deux champs"; return; }
-      if (newPass.length < 6) { msg.className = "account-msg error"; msg.textContent = "6 caractères minimum"; return; }
-      try {
-        const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
-        await reauthenticateWithCredential(currentUser, credential);
-        await updatePassword(currentUser, newPass);
-        msg.className = "account-msg success"; msg.textContent = "✓ Mot de passe mis à jour !";
-        document.getElementById("input-old-pass").value = "";
-        document.getElementById("input-new-pass").value = "";
-        setTimeout(() => { msg.textContent = ""; }, 2000);
-      } catch(e) {
-        const msgs = {"auth/wrong-password":"Mot de passe actuel incorrect","auth/invalid-credential":"Mot de passe actuel incorrect","auth/too-many-requests":"Trop de tentatives"};
-        msg.className = "account-msg error"; msg.textContent = msgs[e.code] || e.message;
-      }
-    };
-  }
-}
-
-// ==================== COLLECTIONS PAGE ====================
-function renderCollectionsPage() {
-  document.getElementById("app-screen").innerHTML = `
-    <div class="header">
-      <div class="header-top">
-        <div>
-          <div class="header-title"><img src="logo.png" style="width:28px;height:28px;border-radius:6px" alt=""><h1>PokéTracker</h1></div>
-          <div class="header-sub">Mes collections</div>
-        </div>
-      </div>
-    </div>
-    <div class="account-page">
-      <button class="account-back" id="back-btn">← Retour au tracker</button>
-      <div style="font-size:20px;font-weight:800;margin-bottom:20px;background:linear-gradient(135deg,#e2e8f0,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" style="width:22px;height:22px;image-rendering:pixelated;vertical-align:middle;margin-right:4px"> Collections</div>
-      ${Object.values(SETS).map(s => `
-        <div class="collection-card ${activeSet === s.id ? 'active' : ''}" data-set="${s.id}">
-          <img src="${s.logo}" alt="${s.name}" class="cc-logo">
-          <div class="cc-info">
-            <div class="cc-name">${s.name}</div>
-            <div class="cc-sub">${s.cards.length} cartes (${s.mainCount} + ${s.cards.length - s.mainCount} secrètes)</div>
-          </div>
-          <span class="cc-badge ${activeSet === s.id ? '' : 'soon'}">${activeSet === s.id ? '✓ Actif' : 'Ouvrir'}</span>
-        </div>
-      `).join('')}
-    </div>`;
-
-  document.getElementById("back-btn").onclick = () => { currentView = "tracker"; renderApp(); };
-  document.querySelectorAll(".collection-card").forEach(item => {
-    item.onclick = async () => {
-      const newSet = item.dataset.set;
-      if (newSet !== activeSet) {
-        activeSet = newSet;
-        filterType = "all";
-        filterStatus = "missing";
-        filterRarity = "all";
-        searchText = "";
-        await loadCollection(currentUser.uid);
-      }
-      currentView = "tracker";
-      renderApp();
-    };
-  });
-}
-
-// ==================== CARD PREVIEW ====================
-function showCardPreview(n) {
-  const card = getCards().find(c => c.n === n);
-  if (!card) return;
-  const modal = document.getElementById("card-modal");
-  const numPad = String(n).padStart(3, '0');
-  const si = getSetInfo();
-  
-  modal.style.display = "block";
-  modal.innerHTML = `
-    <div class="modal-overlay" id="modal-overlay">
-      <div class="modal-box">
-        <button class="modal-close" id="modal-close">✕</button>
-        <div class="modal-loading" id="modal-loading">⏳ Chargement...</div>
-        <div class="modal-info">${numPad} — ${card.name}</div>
-      </div>
-    </div>`;
-  
-  document.getElementById("modal-close").onclick = closeModal;
-  document.getElementById("modal-overlay").onclick = (e) => {
-    if (e.target.id === "modal-overlay") closeModal();
-  };
-  
-  // Build list of URLs to try (TCGdex FR, TCGdex EN, pokemontcg.io)
-  const urls = [];
-  for (const sid of si.tcgdexIds) {
-    urls.push({url: `https://api.tcgdex.net/v2/fr/sets/${sid}/${n}`, type: "tcgdex"});
-  }
-  for (const sid of si.tcgdexIds) {
-    urls.push({url: `https://api.tcgdex.net/v2/en/sets/${sid}/${n}`, type: "tcgdex"});
-  }
-  urls.push({url: `https://api.pokemontcg.io/v2/cards/${si.tcgId.toLowerCase()}-${n}`, type: "ptcgio"});
-  
-  async function tryUrls() {
-    for (const entry of urls) {
-      try {
-        const r = await fetch(entry.url);
-        if (!r.ok) continue;
-        const data = await r.json();
-        if (entry.type === "tcgdex" && data.image) {
-          insertImage(data.image + "/high.webp", card, numPad, modal);
-          return;
-        }
-        if (entry.type === "ptcgio") {
-          const imgUrl = data?.data?.images?.large || data?.data?.images?.small;
-          if (imgUrl) { insertImage(imgUrl, card, numPad, modal); return; }
-        }
-      } catch(e) { continue; }
-    }
-    showFallbackLink(modal);
-  }
-  tryUrls();
-}
-
-function insertImage(url, card, numPad, modal) {
-  const loadingEl = modal.querySelector("#modal-loading");
-  const img = new Image();
-  img.onload = () => {
-    if (loadingEl) loadingEl.remove();
-    const box = modal.querySelector(".modal-box");
-    if (box) {
-      const imgEl = document.createElement("img");
-      imgEl.src = url;
-      imgEl.className = "modal-img";
-      imgEl.alt = card.name;
-      box.insertBefore(imgEl, box.querySelector(".modal-info"));
-    }
-  };
-  img.onerror = () => showFallbackLink(modal);
-  img.src = url;
-}
-
-function showFallbackLink(modal) {
-  const setCode = getSetInfo().tcgId.toUpperCase();
-  const loadingEl = modal.querySelector("#modal-loading");
-  if (loadingEl) loadingEl.innerHTML = `
-    <div class="modal-error">
-      Image non disponible<br><br>
-      <a href="https://www.pokecardex.com/series/${setCode}" target="_blank">Voir sur Pokécardex →</a>
-    </div>`;
-}
-
-function closeModal() {
-  const modal = document.getElementById("card-modal");
-  modal.style.display = "none";
-  modal.innerHTML = "";
-}
-
-// Close modal on Escape
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeModal();
-});
 
 // ==================== AUTH STATE ====================
 onAuthStateChanged(auth, async (user) => {
@@ -1491,9 +1169,15 @@ onAuthStateChanged(auth, async (user) => {
     currentUser = user;
     document.getElementById("auth-screen").style.display = "none";
     document.getElementById("app-screen").style.display = "block";
-    await loadCollection(user.uid);
     await ensureFriendCode();
     await loadFriends();
+    // If we have an active set, load its collection
+    if (activeSetId) {
+      await loadCollection(user.uid);
+      currentView = "tracker";
+    } else {
+      currentView = "collections";
+    }
     renderApp();
   } else {
     currentUser = null;
