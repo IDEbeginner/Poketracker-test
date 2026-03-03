@@ -234,7 +234,27 @@ tcg-divider{display:flex;align-items:center;gap:12px;margin:28px 0 16px;color:va
 .tcg-set-count{font-size:10px;color:var(--text4);font-family:'JetBrains Mono',monospace}
 .tcg-loading{color:var(--text4);font-size:12px;padding:8px 10px}
 .inline-spin{width:12px;height:12px;border:2px solid var(--text4);border-top-color:var(--blue);border-radius:50%;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle;margin-right:6px}
-
+/* TCGdex dynamic sets */
+.tcg-divider{display:flex;align-items:center;gap:12px;margin:28px 0 16px;color:var(--text3);font-size:12px;font-weight:600;letter-spacing:.5px}
+.tcg-divider::before,.tcg-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.tcg-search{width:100%;padding:10px 16px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,0.08);color:#fff;font-size:13px;outline:none;margin-bottom:12px;-webkit-text-fill-color:#fff}
+.tcg-search::placeholder{color:#64748b;-webkit-text-fill-color:#64748b}
+.tcg-search:focus{border-color:rgba(255,255,255,0.2)}
+.tcg-series-block{margin-bottom:10px}
+.tcg-series-header{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:14px}
+.tcg-series-header:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.15)}
+.tcg-series-header.open{border-radius:12px 12px 0 0;border-bottom-color:transparent}
+.tcg-series-logo{width:56px;height:56px;object-fit:contain;border-radius:8px;background:rgba(255,255,255,0.06);padding:4px;flex-shrink:0}
+.tcg-series-logo.ph{display:flex;align-items:center;justify-content:center;font-size:28px}
+.tcg-series-info{flex:1;min-width:0}
+.tcg-series-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+.tcg-series-sub{font-size:11px;color:var(--text3)}
+.tcg-series-arrow{font-size:12px;color:var(--text3);transition:transform .2s;flex-shrink:0}
+.tcg-series-arrow.open{transform:rotate(90deg)}
+.tcg-sets-container{background:rgba(255,255,255,0.015);border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;padding:8px;display:none}
+.tcg-sets-container.open{display:block}
+.tcg-loading{color:var(--text4);font-size:12px;padding:16px;text-align:center}
+.inline-spin{width:14px;height:14px;border:2px solid var(--text4);border-top-color:var(--blue);border-radius:50%;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle;margin-right:6px}
 </style>
 
 </head>
@@ -265,6 +285,88 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 // ==================== TCGdex API ====================
+const TCGDEX = "https://api.tcgdex.net/v2/fr";
+const _tcgCache = {};
+async function tcgFetch(p) {
+  if (_tcgCache[p]) return _tcgCache[p];
+  const r = await fetch(TCGDEX + p);
+  if (!r.ok) throw new Error("TCGdex " + r.status);
+  const d = await r.json();
+  _tcgCache[p] = d;
+  return d;
+}
+let _allTcgSeries = null;
+let _tcgOpenSeries = new Set();
+let _tcgSeriesDetails = {};
+let _tcgSearchText = "";
+
+const TYPE_MAP_TCG = {
+  Grass:"grass", Fire:"fire", Water:"water", Lightning:"electric",
+  Psychic:"psychic", Fighting:"fighting", Darkness:"darkness",
+  Metal:"steel", Dragon:"dragon", Colorless:"colorless", Fairy:"psychic"
+};
+const RARITY_MAP_TCG = {
+  "Commune":"C", "Peu Commune":"U", "Rare":"R", "Double Rare":"RR",
+  "Ultra Rare":"UR", "Illustration Rare":"IR", "Special Art Rare":"SAR",
+  "Hyper Rare":"GOLD", "Secret Rare":"GOLD", "Art Rare":"IR",
+  "Shiny Rare":"IR", "Shiny Ultra Rare":"UR", "Crown Rare":"GOLD",
+  "ACE SPEC Rare":"R", "Amazing Rare":"R"
+};
+
+function tcgSetToLocal(d) {
+  if (!d || !d.cards) return null;
+  const cards = d.cards.map(c => {
+    const t = (c.types && c.types[0])
+      ? (TYPE_MAP_TCG[c.types[0]] || "colorless")
+      : (c.category === "Trainer" || c.category === "Dresseur"
+        ? "trainer"
+        : c.category === "Energy" || c.category === "\u00c9nergie"
+          ? "energy" : "colorless");
+    const r = c.rarity ? (RARITY_MAP_TCG[c.rarity] || "C") : "C";
+    return {
+      n: parseInt(c.localId) || c.localId,
+      name: c.name || "???",
+      type: t,
+      rarity: r,
+      _img: c.image || null
+    };
+  });
+  cards.sort((a, b) => {
+    const na = typeof a.n === 'number' ? a.n : 0;
+    const nb = typeof b.n === 'number' ? b.n : 0;
+    return na - nb;
+  });
+  const mainCount = cards.filter(c => !["IR","UR","SAR","MA","GOLD"].includes(c.rarity)).length;
+  const logo = d.logo ? d.logo + "/low.webp" : "";
+  return {
+    id: "tcg_" + d.id,
+    name: d.name || d.id,
+    icon: "\ud83c\udfb4",
+    logo: logo,
+    tcgId: d.id,
+    tcgdexIds: [d.id],
+    mainCount: mainCount,
+    cards: cards,
+    sealed: [],
+    _isDynamic: true
+  };
+}
+
+async function loadAndAddTcgSet(tcgSetId) {
+  const k = "tcg_" + tcgSetId;
+  if (SETS[k]) { activeSet = k; return true; }
+  try {
+    const d = await tcgFetch("/sets/" + tcgSetId);
+    const l = tcgSetToLocal(d);
+    if (!l) return false;
+    SETS[k] = l;
+    activeSet = k;
+    return true;
+  } catch(e) {
+    console.error("TCGdex load error:", e);
+    return false;
+  }
+}
 const TCGDEX = "https://api.tcgdex.net/v2/fr";
 const _tcgCache = {};
 async function tcgFetch(p) { if (_tcgCache[p]) return _tcgCache[p]; const r = await fetch(TCGDEX+p); if (!r.ok) throw new Error("TCGdex "+r.status); const d = await r.json(); _tcgCache[p] = d; return d; }
@@ -560,6 +662,30 @@ function renderApp() {
     // No set selected — show collections
     currentView = "collections";
     function renderCollectionsPage() {
+  // Build hardcoded sets HTML (same style as before)
+  let hardcodedHtml = Object.values(SETS).filter(s => !s._isDynamic).map(s => `
+    <div class="collection-card ${activeSet === s.id ? 'active' : ''}" data-set="${s.id}">
+      <img src="${s.logo}" alt="${s.name}" class="cc-logo">
+      <div class="cc-info">
+        <div class="cc-name">${s.name}</div>
+        <div class="cc-sub">${s.cards.length} cartes (${s.mainCount} + ${s.cards.length - s.mainCount} secrètes)</div>
+      </div>
+      <span class="cc-badge ${activeSet === s.id ? '' : 'soon'}">${activeSet === s.id ? '✓ Actif' : 'Ouvrir'}</span>
+    </div>
+  `).join('');
+
+  // Show currently active dynamic set (if any) among the top cards
+  let dynActiveHtml = Object.values(SETS).filter(s => s._isDynamic && activeSet === s.id).map(s => `
+    <div class="collection-card active" data-set="${s.id}">
+      ${s.logo ? '<img src="'+s.logo+'" alt="'+s.name+'" class="cc-logo" onerror="this.style.display=\'none\'">' : '<div class="cc-logo" style="display:flex;align-items:center;justify-content:center;font-size:28px">\ud83c\udfb4</div>'}
+      <div class="cc-info">
+        <div class="cc-name">${s.name}</div>
+        <div class="cc-sub">${s.cards.length} cartes (TCGdex)</div>
+      </div>
+      <span class="cc-badge">\u2713 Actif</span>
+    </div>
+  `).join('');
+
   document.getElementById("app-screen").innerHTML = `
     <div class="header">
       <div class="header-top">
@@ -570,39 +696,21 @@ function renderApp() {
       </div>
     </div>
     <div class="account-page">
-      <button class="account-back" id="back-btn">← Retour au tracker</button>
+      <button class="account-back" id="back-btn">\u2190 Retour au tracker</button>
       <div style="font-size:20px;font-weight:800;margin-bottom:20px;background:linear-gradient(135deg,#e2e8f0,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" style="width:22px;height:22px;image-rendering:pixelated;vertical-align:middle;margin-right:4px"> Collections</div>
-      ${Object.values(SETS).filter(s => !s._isDynamic).map(s => `
-        <div class="collection-card ${activeSet === s.id ? 'active' : ''}" data-set="${s.id}">
-          <img src="${s.logo}" alt="${s.name}" class="cc-logo">
-          <div class="cc-info">
-            <div class="cc-name">${s.name}</div>
-            <div class="cc-sub">${s.cards.length} cartes (${s.mainCount} + ${s.cards.length - s.mainCount} secrètes)</div>
-          </div>
-          <span class="cc-badge ${activeSet === s.id ? '' : 'soon'}">${activeSet === s.id ? '✓ Actif' : 'Ouvrir'}</span>
-        </div>
-      `).join('')}
-
-      ${Object.values(SETS).filter(s => s._isDynamic && activeSet === s.id).map(s => `
-        <div class="collection-card active" data-set="${s.id}">
-          ${s.logo ? `<img src="${s.logo}" alt="${s.name}" class="cc-logo" onerror="this.style.display='none'">` : '<div class="cc-logo" style="display:flex;align-items:center;justify-content:center;font-size:28px">🎴</div>'}
-          <div class="cc-info">
-            <div class="cc-name">${s.name}</div>
-            <div class="cc-sub">${s.cards.length} cartes (TCGdex)</div>
-          </div>
-          <span class="cc-badge">✓ Actif</span>
-        </div>
-      `).join('')}
-
-      <div class="tcg-divider">TOUS LES SETS TCGDEX</div>
-      <input class="tcg-search" id="tcg-search" type="text" placeholder="🔍 Rechercher un set..." value="${_tcgSearchText}">
+      ${hardcodedHtml}
+      ${dynActiveHtml}
+      <div class="tcg-divider">TOUS LES SETS \u2014 TCGDEX</div>
+      <input class="tcg-search" id="tcg-search" type="text" placeholder="\ud83d\udd0d Rechercher une série ou un set..." value="${_tcgSearchText}">
       <div id="tcg-series-list">
         ${_allTcgSeries === null ? '<div class="tcg-loading"><span class="inline-spin"></span> Chargement des séries...</div>' : ''}
       </div>
     </div>`;
 
+  // Back button
   document.getElementById("back-btn").onclick = () => { currentView = "tracker"; renderApp(); };
 
+  // Hardcoded + dynamic set clicks (same as original)
   document.querySelectorAll(".collection-card").forEach(item => {
     item.onclick = async () => {
       const newSet = item.dataset.set;
@@ -616,20 +724,132 @@ function renderApp() {
     };
   });
 
+  // TCGdex search
   const searchEl = document.getElementById("tcg-search");
   if (searchEl) searchEl.oninput = (e) => { _tcgSearchText = e.target.value; renderTcgSeriesList(); };
 
+  // Load series list from API (once)
   if (_allTcgSeries === null) {
     tcgFetch("/series").then(data => {
-      _allTcgSeries = data.reverse();
+      _allTcgSeries = data.reverse(); // newest first
       renderTcgSeriesList();
-    }).catch(e => {
+    }).catch(() => {
       const el = document.getElementById("tcg-series-list");
-      if (el) el.innerHTML = '<div class="tcg-loading" style="color:var(--red)">Erreur de chargement TCGdex</div>';
+      if (el) el.innerHTML = '<div class="tcg-loading" style="color:var(--red)">\u274c Erreur de chargement TCGdex</div>';
     });
   } else {
     renderTcgSeriesList();
   }
+}
+
+function renderTcgSeriesList() {
+  const container = document.getElementById("tcg-series-list");
+  if (!container || !_allTcgSeries) return;
+  const q = _tcgSearchText.toLowerCase();
+
+  // Filter series by name/id AND also check loaded set names
+  const filtered = _allTcgSeries.filter(s => {
+    if (!q) return true;
+    if (s.name.toLowerCase().includes(q) || s.id.toLowerCase().includes(q)) return true;
+    const detail = _tcgSeriesDetails[s.id];
+    if (detail && detail.sets) return detail.sets.some(st => st.name.toLowerCase().includes(q) || st.id.toLowerCase().includes(q));
+    return false;
+  });
+
+  let html = '';
+  for (const s of filtered) {
+    const isOpen = _tcgOpenSeries.has(s.id);
+    const detail = _tcgSeriesDetails[s.id];
+    const logoUrl = s.logo ? s.logo + "/low.webp" : "";
+    const setCount = detail && detail.sets ? detail.sets.length + ' sets' : 'Cliquer pour voir les sets';
+
+    html += '<div class="tcg-series-block">';
+
+    // Series header (same visual as collection-card)
+    html += '<div class="tcg-series-header' + (isOpen ? ' open' : '') + '" data-tcg-toggle="' + s.id + '">';
+    if (logoUrl) {
+      html += '<img class="tcg-series-logo" src="' + logoUrl + '" onerror="this.className=\'tcg-series-logo ph\';this.outerHTML=\'<div class=tcg-series-logo ph>\ud83c\udfb4</div>\'">';
+    } else {
+      html += '<div class="tcg-series-logo ph">\ud83c\udfb4</div>';
+    }
+    html += '<div class="tcg-series-info">';
+    html += '<div class="tcg-series-name">' + s.name + '</div>';
+    html += '<div class="tcg-series-sub">' + setCount + '</div>';
+    html += '</div>';
+    html += '<span class="tcg-series-arrow' + (isOpen ? ' open' : '') + '">\u25b6</span>';
+    html += '</div>';
+
+    // Sets container (cards inside accordion)
+    html += '<div class="tcg-sets-container' + (isOpen ? ' open' : '') + '">';
+    if (isOpen && detail && detail.sets) {
+      let sets = detail.sets;
+      if (q) sets = sets.filter(st => st.name.toLowerCase().includes(q) || st.id.toLowerCase().includes(q) || s.name.toLowerCase().includes(q));
+      for (const st of sets) {
+        const stLogo = st.logo ? st.logo + "/low.webp" : "";
+        const cnt = st.cardCount ? (st.cardCount.total || '?') : '?';
+        // Use collection-card style for each set!
+        html += '<div class="collection-card" data-tcg-set="' + st.id + '" style="margin-bottom:6px">';
+        if (stLogo) {
+          html += '<img src="' + stLogo + '" class="cc-logo" onerror="this.outerHTML=\'<div class=cc-logo style=display:flex;align-items:center;justify-content:center;font-size:28px>\ud83d\udce6</div>\'">';
+        } else {
+          html += '<div class="cc-logo" style="display:flex;align-items:center;justify-content:center;font-size:28px">\ud83d\udce6</div>';
+        }
+        html += '<div class="cc-info">';
+        html += '<div class="cc-name">' + st.name + '</div>';
+        html += '<div class="cc-sub">' + cnt + ' cartes</div>';
+        html += '</div>';
+        html += '<span class="cc-badge soon">Ouvrir</span>';
+        html += '</div>';
+      }
+      if (sets.length === 0) html += '<div class="tcg-loading">Aucun set trouvé</div>';
+    } else if (isOpen) {
+      html += '<div class="tcg-loading"><span class="inline-spin"></span> Chargement des sets...</div>';
+    }
+    html += '</div></div>';
+  }
+
+  if (filtered.length === 0) {
+    html += '<div class="empty-state" style="padding:30px"><span class="empty-icon">\ud83d\udd0d</span>Aucune série trouvée</div>';
+  }
+
+  container.innerHTML = html;
+
+  // Bind series toggle (expand/collapse)
+  container.querySelectorAll("[data-tcg-toggle]").forEach(el => {
+    el.onclick = async () => {
+      const sid = el.dataset.tcgToggle;
+      if (_tcgOpenSeries.has(sid)) {
+        _tcgOpenSeries.delete(sid);
+      } else {
+        _tcgOpenSeries.add(sid);
+        if (!_tcgSeriesDetails[sid]) {
+          renderTcgSeriesList(); // show loading spinner
+          try { _tcgSeriesDetails[sid] = await tcgFetch("/series/" + sid); }
+          catch(e) { _tcgSeriesDetails[sid] = { sets: [] }; }
+        }
+      }
+      renderTcgSeriesList();
+    };
+  });
+
+  // Bind set selection (load set → switch to tracker)
+  container.querySelectorAll("[data-tcg-set]").forEach(el => {
+    el.onclick = async (ev) => {
+      ev.stopPropagation();
+      const setId = el.dataset.tcgSet;
+      const badge = el.querySelector(".cc-badge");
+      if (badge) { badge.textContent = "\u23f3"; badge.style.color = "var(--blue)"; }
+      const ok = await loadAndAddTcgSet(setId);
+      if (ok) {
+        filterType = "all"; filterStatus = "missing"; filterRarity = "all"; searchText = "";
+        await loadCollection(currentUser.uid);
+        currentView = "tracker";
+        renderApp();
+      } else {
+        if (badge) { badge.textContent = "\u274c Erreur"; badge.style.color = "var(--red)"; }
+      }
+    };
+  });
 }
 
 function renderTcgSeriesList() {
